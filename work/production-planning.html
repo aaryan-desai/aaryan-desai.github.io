@@ -50,7 +50,7 @@
         Excel workflow that took a planner most of a shift.</p>
       </div>
       <div class="titleblock">
-        <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Designed and built end to end</span></div>
+        <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Architecture &amp; allocation engine</span></div>
         <div class="tb-cell"><span class="tb-label">Stack</span><span class="tb-value">Python, PyInstaller, local web UI</span></div>
         <div class="tb-cell"><span class="tb-label">Scope</span><span class="tb-value">P10 paint operation</span></div>
         <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">In use &middot; source private</span></div>
@@ -174,12 +174,16 @@
         no service and no database &mdash; and reads Plex reports exported into a shared folder tree. It is
         versioned on SemVer and currently at <strong>V2.2.2</strong>, having grown from a read-only dashboard
         through the floor runlist build to features like overdue detection and inventory-age warnings.</p>
+        <p>I architected the system and built the allocation engine, working from feedback with the planners
+        and production managers who use it. The front end was built with AI assistance; I have no frontend
+        background, and the interface was not the part of this problem worth learning on.</p>
+        <p>That feedback loop is also why iterating on a live line was practical &mdash; the people who would
+        catch a wrong answer fastest were the ones sitting next to me while it was built.</p>
         <p><strong>It was validated in production, which the architecture made safe.</strong> There is no
         automated test suite; the tool was tested by running it against live data with the planners who use it.
         That is defensible here specifically because the allocation view is <em>read-only over ERP data</em>
         &mdash; the worst case for a wrong answer is a suggestion the planner rejects, not a corrupted record.
-        The read-only trust model was chosen for other reasons, but it is what made iterating on a live line a
-        reasonable thing to do.</p>
+        The trust model was chosen for other reasons, but it is what kept that approach reasonable.</p>
         <p>It is documented for handoff rather than for show: the repository carries a behaviour spec, a build log
         and an IT-facing README explicit about the rough edges. The manual ERP export is a <em>choice</em> &mdash;
         the automated alternative was tried, depended on browser automation, and was less reliable than the person
