@@ -52,8 +52,8 @@
       <div class="titleblock">
         <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Designed and built end to end</span></div>
         <div class="tb-cell"><span class="tb-label">Stack</span><span class="tb-value">Python, PyInstaller, local web UI</span></div>
-        <div class="tb-cell"><span class="tb-label">Scope</span><span class="tb-value">P6 &amp; P10 paint operations</span></div>
-        <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">In use &middot; <a href="https://github.com/aa-desai/Production-Planning">source</a></span></div>
+        <div class="tb-cell"><span class="tb-label">Scope</span><span class="tb-value">P10 paint operation</span></div>
+        <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">In use &middot; source private</span></div>
       </div>
     </section>
 
@@ -63,11 +63,16 @@
         <p>Planning paint meant holding four things in your head at once. A planner kept a &ldquo;hot parts&rdquo;
         sheet in Excel, transcribed by hand into a second Excel workbook, then went hunting for the actual
         containers &mdash; first through Plex, across separate Demand, Inventory and Subcomponents screens, then
-        physically on the floor. Twice over, because <strong>two facilities</strong> run paint.</p>
+        physically on the floor &mdash; and twice over, because the material moves across a site boundary before it
+        is finished.</p>
         <p>The structural problem underneath: a painted part cannot run until every painted sub-component it
         depends on has run. That dependency lives in the BOM, but nothing put it next to on-hand inventory and
         open demand at the same time. So the planner re-derived it by hand, every shift, from three screens that
         never agreed on when they were last refreshed.</p>
+        <p>It is harder than one plant's scheduling problem because the graph crosses a company boundary. P6 is
+        both a <strong>supplier and a customer</strong> &mdash; material arrives from them and finished goods go
+        back to them &mdash; so a dependency chain can leave the site, come back, and still gate a release. The
+        planner was tracking inventory on both sides of that boundary in separate screens.</p>
         <p>It cost what you would expect &mdash; <strong>rushed jobs and missed deadlines</strong> &mdash; and it
         cost most on the shifts where the floor deviated from plan, which is precisely when re-deriving it by
         hand is slowest.</p>
@@ -79,7 +84,7 @@
       <div class="metrics">
         <div class="metric"><div class="metric-value">30&ndash;45<span style="font-size:.55em"> min</span></div><div class="metric-label">Planning per shift<br>down from most of one</div></div>
         <div class="metric"><div class="metric-value">3 &rarr; 1</div><div class="metric-label">ERP screens<br>collapsed into one view</div></div>
-        <div class="metric"><div class="metric-value">2</div><div class="metric-label">Facilities<br>P6 and P10, one tool</div></div>
+        <div class="metric"><div class="metric-value">2</div><div class="metric-label">Sites in one graph<br>across the supplier boundary</div></div>
         <div class="metric"><div class="metric-value">~15s</div><div class="metric-label">Floor refresh<br>runlist poll interval</div></div>
       </div>
       <div class="prose" style="margin-top:22px">
@@ -167,9 +172,10 @@
       </div>
       <div class="revnote">
         <span class="rev-tag">Check before sending</span>
-        <p>Written from your notes and the repository. Two things to verify: the 2025&ndash;2026 date range,
-        and whether naming Plex and the P6/P10 plant codes publicly is acceptable to Modineer &mdash; every
-        other page here stays vendor-generic about employers.</p>
+        <p>Written from your notes and the repository, which is private &mdash; nothing here quotes code, and
+        the source link has been removed rather than left to 404. Verify the 2025&ndash;2026 date range. Plex,
+        P10 and the P6 supplier relationship are named with your go-ahead; the rest of the site stays
+        vendor-generic about employers, so this page is deliberately the exception.</p>
       </div>
     </section>
   </div>
