@@ -117,6 +117,8 @@ dashboards and screenshots. Always write a real `alt`.
 - [ ] Confirm Tesla image clearance before adding `universal-eoat.png`.
 - [ ] Verify the 2025–2026 date range on the planning tool page.
 - [ ] Update `Status` in the landing title block each application season.
+- [ ] **Graduation (May 2028):** remove `aaryand@andrew.cmu.edu` from the contact table in
+      `index.html` — the address stops working and becomes a dead link on a live site.
 - [ ] Re-export `assets/AaryanDesai-Resume.pdf` when the résumé changes.
 
 ## Notes
