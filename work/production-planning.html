@@ -174,11 +174,18 @@
         no service and no database &mdash; and reads Plex reports exported into a shared folder tree. It is
         versioned on SemVer and currently at <strong>V2.2.2</strong>, having grown from a read-only dashboard
         through the floor runlist build to features like overdue detection and inventory-age warnings.</p>
-        <p>It is documented for handoff rather than for show: the repository carries a behaviour spec, a build
-        log and an IT-facing README explicit about the rough edges. The absence of an automated test suite is the
-        one I would fix first if this outgrew being an internal tool. The manual ERP export is the other, but that
-        one is a <em>choice</em> &mdash; the automated alternative was tried, depended on browser automation, and
-        was less reliable than the person doing it by hand.</p>
+        <p><strong>It was validated in production, which the architecture made safe.</strong> There is no
+        automated test suite; the tool was tested by running it against live data with the planners who use it.
+        That is defensible here specifically because the allocation view is <em>read-only over ERP data</em>
+        &mdash; the worst case for a wrong answer is a suggestion the planner rejects, not a corrupted record.
+        The read-only trust model was chosen for other reasons, but it is what made iterating on a live line a
+        reasonable thing to do.</p>
+        <p>It is documented for handoff rather than for show: the repository carries a behaviour spec, a build log
+        and an IT-facing README explicit about the rough edges. The manual ERP export is a <em>choice</em> &mdash;
+        the automated alternative was tried, depended on browser automation, and was less reliable than the person
+        doing it by hand. The missing test suite is a genuine gap: production testing proves the behaviour today,
+        but it gives whoever inherits this no safety net against regressions tomorrow. That is the first thing I
+        would add if it outgrew being an internal tool.</p>
       </div>
       <div class="revnote">
         <span class="rev-tag">Check before sending</span>
