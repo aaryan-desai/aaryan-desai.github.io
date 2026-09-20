@@ -43,78 +43,133 @@
     <section class="hero">
       <a class="backlink" href="index.html">&larr; Work</a>
       <div class="hero-body">
-        <p class="eyebrow">Modineer &middot; 2025 &middot; Software &amp; scheduling</p>
-        <h1>Production Planning Tool</h1>
-        <p class="lede">A UI-complete planning tool that allocates production through the E-Coat and Powder-Coat
-        lines by FIFO, on a dependency graph of parts and their subparts &mdash; and pushes the planner's
-        decisions to a live view on the floor.</p>
+        <p class="eyebrow">Modineer &middot; 2025&ndash;2026 &middot; Software &amp; scheduling</p>
+        <h1>Paint Allocation<br>&amp; Floor Runlists</h1>
+        <p class="lede">A planning tool that models routing and BOM as a single directed graph, allocates
+        painted stock against ship-date FIFO, and publishes a runlist the floor works from. It replaced an
+        Excel workflow that took a planner most of a shift.</p>
       </div>
       <div class="titleblock">
         <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Designed and built end to end</span></div>
-        <div class="tb-cell"><span class="tb-label">Disciplines</span><span class="tb-value">Software, data</span></div>
-        <div class="tb-cell"><span class="tb-label">Lines</span><span class="tb-value">E-Coat, Powder-Coat</span></div>
-        <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">In use on the floor</span></div>
+        <div class="tb-cell"><span class="tb-label">Stack</span><span class="tb-value">Python, PyInstaller, local web UI</span></div>
+        <div class="tb-cell"><span class="tb-label">Scope</span><span class="tb-value">P6 &amp; P10 paint operations</span></div>
+        <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">In use &middot; <a href="https://github.com/aa-desai/Production-Planning">source</a></span></div>
       </div>
     </section>
 
     <section class="section">
       <div class="section-head"><h2 class="section-title">The problem</h2></div>
       <div class="prose">
-        <p>Coating lines are a scheduling bottleneck of a particular kind: a part cannot go through until every
-        subpart it depends on has been through, and the planner is the only person holding that dependency
-        structure &mdash; usually in their head, or in a spreadsheet that goes stale the moment the floor
-        deviates from it.</p>
-        <p>That makes the plan fragile in exactly the situation where it matters. When the line goes down or an
-        order jumps the queue, re-deriving what can now run means walking the whole part tree again by hand.</p>
-      </div>
-      <div class="revnote">
-        <span class="rev-tag">Needs your input</span>
-        <p>This framing is my reconstruction from your description, not from anything you wrote. What was the
-        actual process before the tool &mdash; a spreadsheet, an ERP screen, a whiteboard? And what did it
-        cost when it went wrong?</p>
+        <p>Planning paint meant holding four things in your head at once. A planner kept a &ldquo;hot parts&rdquo;
+        sheet in Excel, transcribed by hand into a second Excel workbook, then went hunting for the actual
+        containers &mdash; first through Plex, across separate Demand, Inventory and Subcomponents screens, then
+        physically on the floor. Twice over, because <strong>two facilities</strong> run paint.</p>
+        <p>The structural problem underneath: a painted part cannot run until every painted sub-component it
+        depends on has run. That dependency lives in the BOM, but nothing put it next to on-hand inventory and
+        open demand at the same time. So the planner re-derived it by hand, every shift, from three screens that
+        never agreed on when they were last refreshed.</p>
+        <p>It cost what you would expect &mdash; <strong>rushed jobs and missed deadlines</strong> &mdash; and it
+        cost most on the shifts where the floor deviated from plan, which is precisely when re-deriving it by
+        hand is slowest.</p>
       </div>
     </section>
 
     <section class="section">
       <div class="section-head"><h2 class="section-title">Results</h2></div>
-      <div class="prose">
-        <p>The tool is UI-complete and in use: a planner can see the current state of both lines, review
-        suggested allocations, adjust them, and push the result to a live view the floor works from.</p>
+      <div class="metrics">
+        <div class="metric"><div class="metric-value">30&ndash;45<span style="font-size:.55em"> min</span></div><div class="metric-label">Planning per shift<br>down from most of one</div></div>
+        <div class="metric"><div class="metric-value">3 &rarr; 1</div><div class="metric-label">ERP screens<br>collapsed into one view</div></div>
+        <div class="metric"><div class="metric-value">2</div><div class="metric-label">Facilities<br>P6 and P10, one tool</div></div>
+        <div class="metric"><div class="metric-value">~15s</div><div class="metric-label">Floor refresh<br>runlist poll interval</div></div>
       </div>
-      <div class="revnote">
-        <span class="rev-tag">Needs your numbers</span>
-        <p>Every other page here leads with a measured result &mdash; 43%, 12%, 1.7s to 1.1s. This page has
-        none yet, and it is the weakest thing about it. Planning time per shift, throughput, missed-dependency
-        incidents, WIP sitting in front of the line: anything measured beats anything described.</p>
+      <div class="prose" style="margin-top:22px">
+        <p>The planner now looks at two things: the tool, and the floor. The Demand / Inventory / Subcomponents
+        round trip is gone, and so is the second Excel workbook &mdash; the runlist the floor works from is
+        published straight out of the allocation the planner just approved.</p>
+        <p>The floor view is a runlist in the terms the floor actually uses: <strong>part number, quantity,
+        colour, container serial and location</strong>, including how many parts to take from each container.
+        Not a plan to interpret &mdash; a list to work.</p>
       </div>
       <figure class="plate">
         <div class="plate-empty">
           <span class="slot">Plate 1</span>
-          <span class="hint">assets/planning-tool-ui.png</span>
+          <span class="hint">assets/planning-queue.png</span>
         </div>
-        <figcaption>Planner view &mdash; queue state, suggested allocation, and the push to the floor.</figcaption>
+        <figcaption>Planner queue &mdash; releases with coverage bars and concern tiers.</figcaption>
+      </figure>
+      <figure class="plate">
+        <div class="plate-empty">
+          <span class="slot">Plate 2</span>
+          <span class="hint">assets/planning-runlist.png</span>
+        </div>
+        <figcaption>Floor runlist &mdash; part, quantity, colour, container serial and location.</figcaption>
       </figure>
     </section>
 
     <section class="section">
       <div class="section-head"><h2 class="section-title">Approach</h2></div>
       <div class="prose">
-        <p><strong>A graph, not a list.</strong> Parts and subparts form a dependency graph, so allocation is a
-        traversal problem rather than a sorting one. Modelling it explicitly is what makes "what can run right
-        now" a query the tool answers instead of a question the planner re-derives.</p>
-        <p><strong>FIFO as the default, not the verdict.</strong> First-in-first-out is the allocation rule, but
-        the tool <em>suggests</em> and the planner disposes. That split matters: a scheduler that overrides the
-        person who can see the floor gets switched off within a week, and one that hides its reasoning never
-        gets trusted in the first place.</p>
-        <p><strong>Two surfaces, one state.</strong> The planner works in a review UI; the floor gets a live view
-        of what was actually committed. Keeping those as views of one state is what stops the plan and the floor
-        drifting apart &mdash; which is the failure the whole tool exists to prevent.</p>
+        <p><strong>One graph, not two data structures.</strong> Routing and BOM are usually held separately and
+        reconciled by a human. <span class="mono">graph_allocator_V2</span> models both as a single directed
+        graph: nodes are <span class="mono">(part, operation)</span> pairs from the process routings, routing
+        edges join consecutive operations of a part, and component edges join a parent operation to the
+        components consumed at it, quantity-scaled from the exploded BOM. On-hand containers attach to the node
+        they are sitting at. The BOM is asserted to be a DAG, so the walk terminates.</p>
+        <p>Once it is one graph, &ldquo;what can run now&rdquo; stops being a question the planner re-derives and
+        becomes a traversal. Each release walks <strong>upstream</strong> from its part's final operation,
+        consuming on-hand stock at each step and exploding whatever demand is left into painted sub-components as
+        <em>internal releases</em>, stopping when the demand is met or the routing runs out.</p>
+
+        <p><strong>FIFO because old stock costs twice.</strong> Releases are processed in ship-date FIFO order,
+        and the reason is a process constraint rather than an administrative preference. Bare steel sitting in
+        inventory oxidises, so material ages toward scrap. It also <strong>gathers dust</strong> &mdash; and in a
+        coating process that is not cosmetic, it is time: every dusty part needs surface cleaning before it can
+        run, and a part that skips it risks <strong>contaminating the baths</strong>, which is a problem for
+        everything painted after it. Clearing the oldest material first avoids both, so the scheduling rule is
+        really a contamination-control rule.</p>
+        <p>When a push exceeds a release's balance, the surplus <strong>cascades to later releases of the same
+        part</strong> rather than being dropped &mdash; FIFO all the way down, so nothing falls out of the plan
+        silently.</p>
+
+        <p><strong>Refusing to allocate is most of the logic.</strong> Only Ecoat and Powdercoat material is
+        allocated; rework and MRB containers are set aside and never allocated at all. A push only takes
+        containers still <em>upstream</em> of the target paint operation, so the tool cannot schedule a repaint,
+        and anything ineligible is reported as skipped rather than quietly omitted. A Powdercoat push that
+        exceeds available e-coated feedstock auto-adds the EC items it implies, flagged amber for the planner to
+        acknowledge &mdash; the tool surfaces the dependency instead of allowing a run that would stall.</p>
+
+        <p><strong>Two audiences, two trust models.</strong> The planner dashboard is strictly read-only over ERP
+        data &mdash; it re-runs the pipeline in memory and writes only its own derived files. The floor view
+        reads one published <span class="mono">runlist_live.json</span>. Exactly one planner instance holds a
+        write lock, enforced by heartbeat; every other instance, planner or floor, is a read-only consumer. That
+        constraint came from experience: an earlier design allowed shared writable state and produced conflicts,
+        so the rebuild kept shared state but reduced it to a single writer.</p>
+
+        <p><strong>Suggests, does not decide.</strong> The engine proposes; the planner selects, adjusts
+        quantities and publishes. Coverage is shown per release &mdash; past-paint, paintable, pipeline or short
+        &mdash; so the planner can see <em>why</em> something is ranked where it is. A scheduler that overrides
+        the person who can see the floor gets switched off in a week; one that hides its reasoning never gets
+        trusted at all.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2 class="section-title">Where it stands</h2></div>
+      <div class="prose">
+        <p>The system runs entirely locally &mdash; PyInstaller executables on <span class="mono">127.0.0.1</span>,
+        no service and no database &mdash; and reads Plex reports exported into a shared folder tree. It is
+        versioned on SemVer and currently at <strong>V2.2.2</strong>, having grown from a read-only dashboard
+        through the floor runlist build to features like overdue detection and inventory-age warnings.</p>
+        <p>It is documented for handoff rather than for show: the repository carries a behaviour spec, a build
+        log and an IT-facing README that is explicit about the rough edges, including the absence of an automated
+        test suite and the manual ERP export step. Those are the two things I would fix first if it were to
+        outgrow being an internal tool.</p>
       </div>
       <div class="revnote">
-        <span class="rev-tag">Needs your input</span>
-        <p>I have written the reasoning I would expect behind these choices. Tell me where it is wrong, and what
-        the stack actually is &mdash; the pages here name Pycomm3 and Power BI specifically, and this one should
-        be equally concrete about how it is built and where it runs.</p>
+        <span class="rev-tag">Check before sending</span>
+        <p>Written from your notes and the repository. Two things to verify: the 2025&ndash;2026 date range,
+        and whether naming Plex and the P6/P10 plant codes publicly is acceptable to Modineer &mdash; every
+        other page here stays vendor-generic about employers.</p>
       </div>
     </section>
   </div>
