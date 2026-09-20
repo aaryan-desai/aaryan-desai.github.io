@@ -314,6 +314,9 @@ p { margin: 0; max-width: 68ch; }
   grid-template-columns: repeat(4, 1fr);
 }
 
+.titleblock-3 { grid-template-columns: 1.4fr 1fr 1fr; }
+@media (max-width: 720px) { .titleblock-3 { grid-template-columns: 1fr; } }
+
 .tb-cell {
   padding: 12px clamp(20px, 4vw, 44px) 14px;
   border-right: 1px solid var(--rule);
