@@ -16,8 +16,8 @@
   <div class="topbar-inner">
     <a class="wordmark" href="index.html">Aaryan Desai</a>
     <nav>
-      <a href="#work">Work</a>
-      <a href="#experience">Experience</a>
+      <a href="work/index.html">Work</a>
+      <a href="#timeline">Timeline</a>
       <a href="#capabilities">Capabilities</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -72,168 +72,113 @@
       </div>
     </section>
 
-    <section class="section" id="work">
+    <section class="section" id="about">
       <div class="section-head">
-        <p class="eyebrow">Selected work</p>
-        <span class="count">05 entries</span>
+        <p class="eyebrow">About</p>
       </div>
+      <div class="about-grid">
+        <div class="about-prose">
+          <p class="first">Most of my work has happened on a factory floor, where a design is only as good as the
+          cycle time it holds on a bad shift.</p>
+          <p>I came to automation through mechanical design &mdash; dies, fixtures, tooling &mdash; and kept going
+          until I owned the controls and the data as well. That turns out to be the useful combination: the reason
+          a robot cell misses its target is rarely in one discipline. A transfer that arrives with jitter is a
+          motion-profile problem and a fixturing problem at once, and you cannot fix it from either side alone.</p>
+          <p>At <strong>Modineer</strong> I consolidated a robotic weld cell, re-profiled the die transfer that was
+          gating it, and built the telemetry pipeline that made the constraint visible in the first place. At
+          <strong>Tesla</strong> I spent two terms on production control equipment during a vehicle ramp, which is
+          the fastest way I know to learn what modular actually means.</p>
+          <p>I'm now at <strong>Carnegie Mellon</strong> in the MRSD program, working on the autonomy side &mdash;
+          perception, planning and control &mdash; with the intention of pointing it back at manufacturing.</p>
+        </div>
 
-      <div class="index-list">
-
-        <a class="index-row" href="projects/vision-inspection.html">
-          <div class="index-main">
-            <span class="index-title">Automated Vision Inspection System</span>
-            <span class="index-sub">Multi-feature part inspection combining vision, proximity and laser sensing,
-            with the fixture, control panel and relay logic designed around it. Cycle time 83s &rarr; 47s.</span>
+        <aside class="about-aside">
+          <div class="aside-row">
+            <span class="aside-k">Now</span>
+            <span class="aside-v">M.S. Robotic Systems Development, Carnegie Mellon</span>
           </div>
-          <div class="index-meta">
-            <span class="index-year">2025 &middot; Modineer</span>
-            <span class="tags">
-              <span class="tag" data-d="MECH">MECH</span>
-              <span class="tag">CTRL</span>
-              <span class="tag">SENSING</span>
-            </span>
+          <div class="aside-row">
+            <span class="aside-k">Looking for</span>
+            <span class="aside-v">Summer 2027 internship &mdash; robotics, manufacturing automation, controls</span>
           </div>
-        </a>
-
-        <a class="index-row" href="projects/weld-cell.html">
-          <div class="index-main">
-            <span class="index-title">Robotic Weld Cell Consolidation</span>
-            <span class="index-sub">Merged separate weld operations into a consolidated cell and re-profiled the
-            die transfer motion, cutting transfer time 1.7s &rarr; 1.1s and eliminating end-of-move jitter.</span>
+          <div class="aside-row">
+            <span class="aside-k">Based in</span>
+            <span class="aside-v">Pittsburgh, PA</span>
           </div>
-          <div class="index-meta">
-            <span class="index-year">2024&ndash;25 &middot; Modineer</span>
-            <span class="tags">
-              <span class="tag" data-d="MECH">MECH</span>
-              <span class="tag">ROBOTICS</span>
-              <span class="tag">CTRL</span>
-            </span>
+          <div class="aside-row">
+            <span class="aside-k">Work</span>
+            <span class="aside-v"><a href="work/index.html">Six projects &rarr;</a></span>
           </div>
-        </a>
-
-        <a class="index-row" href="projects/plc-telemetry.html">
-          <div class="index-main">
-            <span class="index-title">PLC Telemetry &amp; Fault Analytics Pipeline</span>
-            <span class="index-sub">Raspberry Pi bridge polling PLC tags over Pycomm3, landing cycle-time and
-            fault data in a Power BI model that gives the floor real-time visibility.</span>
-          </div>
-          <div class="index-meta">
-            <span class="index-year">2024&ndash;25 &middot; Modineer</span>
-            <span class="tags">
-              <span class="tag">DATA</span>
-              <span class="tag">SW</span>
-              <span class="tag">CTRL</span>
-            </span>
-          </div>
-        </a>
-
-        <a class="index-row" href="projects/material-handling.html">
-          <div class="index-main">
-            <span class="index-title">Production Ramp Material Handling</span>
-            <span class="index-sub">24+ material handling solutions and automated data collection supporting a ramp
-            from 5,600 to 12,000 vehicles per week, plus a universal robotic end-of-arm tool concept.</span>
-          </div>
-          <div class="index-meta">
-            <span class="index-year">2022&ndash;23 &middot; Tesla</span>
-            <span class="tags">
-              <span class="tag" data-d="MECH">MECH</span>
-              <span class="tag">CTRL</span>
-              <span class="tag">DATA</span>
-            </span>
-          </div>
-        </a>
-
-        <a class="index-row" href="projects/mars-rover.html">
-          <div class="index-main">
-            <span class="index-title">ME 588 Autonomous Mars Rover</span>
-            <span class="index-sub">Team rover for autonomous navigation and object manipulation. Led electronics,
-            sensor integration and programming; 95% success rate on foam-cube detection and placement in arena trials.</span>
-          </div>
-          <div class="index-meta">
-            <span class="index-year">2023 &middot; Purdue</span>
-            <span class="tags">
-              <span class="tag">ROBOTICS</span>
-              <span class="tag">SW</span>
-              <span class="tag" data-d="MECH">MECH</span>
-            </span>
-          </div>
-        </a>
-
+        </aside>
       </div>
     </section>
 
-    <section class="section" id="numbers">
+    <section class="section" id="timeline">
       <div class="section-head">
-        <p class="eyebrow">Outcomes on the floor</p>
-      </div>
-      <div class="metrics">
-        <div class="metric">
-          <div class="metric-value">+12%</div>
-          <div class="metric-label">Production capacity<br>weld cell consolidation</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">&minus;35%</div>
-          <div class="metric-label">Die transfer cycle<br>1.7s &rarr; 1.1s</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">&minus;43%</div>
-          <div class="metric-label">Inspection cycle<br>83s &rarr; 47s</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">$300K</div>
-          <div class="metric-label">Projected 2-yr saving<br>universal EOAT concept</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">2.1&times;</div>
-          <div class="metric-label">Weekly vehicle output<br>5,600 &rarr; 12,000</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="experience">
-      <div class="section-head">
-        <p class="eyebrow">Experience</p>
+        <p class="eyebrow">Timeline</p>
+        <span class="count">Education &amp; experience</span>
       </div>
 
-      <div class="roles">
+      <div class="timeline">
 
-        <div class="role">
-          <div class="role-when">Apr 2024 &ndash; Present</div>
-          <div>
-            <div class="role-title">Manufacturing Engineer</div>
-            <div class="role-org">Modineer &middot; Niles, MI</div>
-            <ul>
-              <li>Led robotic weld cell consolidation, raising workflow efficiency and production capacity <strong>12%</strong>.</li>
-              <li>Optimized the die transfer motion profile, cutting cycle time <strong>35%</strong> and eliminating jitter.</li>
-              <li>Built a Raspberry Pi and PLC data acquisition pipeline on Pycomm3; surfaced cycle times and fault analytics in Power BI for real-time visibility.</li>
-              <li>Designed die components, precision fixtures and tooling for repeatable robotic operation on complex geometries.</li>
-            </ul>
+        <div class="tl-item" data-kind="edu">
+          <div class="tl-when">2026 &ndash; 2028</div>
+          <div class="tl-rail"></div>
+          <div class="tl-body">
+            <div class="tl-kind">Education</div>
+            <div class="tl-title">M.S. Robotic Systems Development</div>
+            <div class="tl-org">Carnegie Mellon University &middot; Pittsburgh, PA</div>
+            <p class="tl-note">MRSD. Autonomy, mobility and deep learning coursework alongside a year-long
+            team project.</p>
           </div>
         </div>
 
-        <div class="role">
-          <div class="role-when">May 2023 &ndash; Aug 2023</div>
-          <div>
-            <div class="role-title">Production Control Equipment Engineering Intern</div>
-            <div class="role-org">Tesla &middot; Austin, TX</div>
-            <ul>
-              <li>Designed mechanical racks and dollies to streamline equipment setup and material flow on the production floor.</li>
-              <li>Standardized team equipment selection and design, establishing modular, reusable production systems.</li>
-            </ul>
+        <div class="tl-item" data-kind="work">
+          <div class="tl-when">Apr 2024 &ndash; Present</div>
+          <div class="tl-rail"></div>
+          <div class="tl-body">
+            <div class="tl-kind">Manufacturing Engineer</div>
+            <div class="tl-title">Modineer</div>
+            <div class="tl-org">Niles, MI</div>
+            <p class="tl-note">Robotic weld cell consolidation, die transfer motion profiling, PLC telemetry,
+            and the dies, fixtures and tooling underneath all of it.</p>
+            <div class="tl-links">
+              <a href="work/weld-cell.html">Weld cell &rarr;</a>
+              <a href="work/die-transfer.html">Motion profile &rarr;</a>
+              <a href="work/plc-telemetry.html">Telemetry &rarr;</a>
+              <a href="work/vision-inspection.html">Vision inspection &rarr;</a>
+            </div>
           </div>
         </div>
 
-        <div class="role">
-          <div class="role-when">May 2022 &ndash; Nov 2022</div>
-          <div>
-            <div class="role-title">Production Control Equipment Engineering Intern</div>
-            <div class="role-org">Tesla &middot; Fremont, CA</div>
-            <ul>
-              <li>Delivered <strong>24+</strong> material handling solutions and automated data collection systems supporting a ramp from 5,600 to 12,000 vehicles per week.</li>
-              <li>Prototyped a low-fidelity universal robotic end-of-arm tool projected to save <strong>$300K</strong> over two years.</li>
-              <li>Integrated Siemens and Allen-Bradley PLCs over Ethernet/PROFINET; the setup was later used to train Controls Technicians on cross-network troubleshooting.</li>
-            </ul>
+        <div class="tl-item" data-kind="work">
+          <div class="tl-when">2022 &ndash; 2023</div>
+          <div class="tl-rail"></div>
+          <div class="tl-body">
+            <div class="tl-kind">Production Control Equipment Engineering Intern &middot; 2 terms</div>
+            <div class="tl-title">Tesla</div>
+            <div class="tl-org">Fremont, CA &middot; Austin, TX</div>
+            <p class="tl-note">Material handling and automated data collection through a ramp from 5,600 to
+            12,000 vehicles per week, a universal end-of-arm tool concept, and cross-vendor PLC integration.</p>
+            <div class="tl-links">
+              <a href="work/tesla-internships.html">Both internships &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item" data-kind="edu">
+          <div class="tl-when">2020 &ndash; Dec 2023</div>
+          <div class="tl-rail"></div>
+          <div class="tl-body">
+            <div class="tl-kind">Education</div>
+            <div class="tl-title">B.S. Mechanical Engineering, Minor in Computer Science</div>
+            <div class="tl-org">Purdue University &middot; West Lafayette, IN</div>
+            <p class="tl-note">GPA 3.45 / 4.0, major 3.7. Dean's List Spring 2020 &ndash; Spring 2022;
+            Semester Honors Spring 2021, Fall 2021, Fall 2023. Coursework in autonomous systems, mechatronics,
+            control systems and machine design.</p>
+            <div class="tl-links">
+              <a href="work/mars-rover.html">ME 588 Mars rover &rarr;</a>
+            </div>
           </div>
         </div>
 
@@ -264,44 +209,20 @@
       </div>
     </section>
 
-    <section class="section" id="education">
-      <div class="section-head">
-        <p class="eyebrow">Education</p>
-      </div>
-      <div class="roles">
-        <div class="role">
-          <div class="role-when">Expected May 2028</div>
-          <div>
-            <div class="role-title">M.S. Robotic Systems Development</div>
-            <div class="role-org">Carnegie Mellon University &middot; Pittsburgh, PA</div>
-          </div>
-        </div>
-        <div class="role">
-          <div class="role-when">Dec 2023</div>
-          <div>
-            <div class="role-title">B.S. Mechanical Engineering, Minor in Computer Science</div>
-            <div class="role-org">Purdue University &middot; West Lafayette, IN</div>
-            <ul>
-              <li>GPA 3.45 / 4.0 (major 3.7). Dean's List Spring 2020 &ndash; Spring 2022; Semester Honors Spring 2021, Fall 2021, Fall 2023.</li>
-              <li>Coursework: autonomous systems, mechatronics, control systems, machine design, data structures, senior design.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section" id="contact">
       <div class="section-head">
         <p class="eyebrow">Contact</p>
       </div>
       <div class="prose">
         <p>Open to Summer 2027 internships in robotics, manufacturing automation and controls &mdash; and to
-        conversations about anything on this page.</p>
+        conversations about anything on this site.</p>
         <div class="table-scroll">
           <table class="spec">
             <tbody>
               <tr><th>Email</th><td><a href="mailto:aaryandesai.00@gmail.com">aaryandesai.00@gmail.com</a></td></tr>
               <tr><th>LinkedIn</th><td><a href="https://linkedin.com/in/aaryan-desai">linkedin.com/in/aaryan-desai</a></td></tr>
+              <tr><th>GitHub</th><td><a href="https://github.com/aaryan-desai">github.com/aaryan-desai</a></td></tr>
+              <tr><th>Handshake</th><td><a href="https://app.joinhandshake.com/profiles/aaryandesai">app.joinhandshake.com/profiles/aaryandesai</a></td></tr>
               <tr><th>Résumé</th><td><a href="assets/AaryanDesai-Resume.pdf">AaryanDesai-Resume.pdf</a></td></tr>
             </tbody>
           </table>
@@ -316,7 +237,6 @@
   <span>Aaryan Desai</span>
   <span class="spacer">Pittsburgh, PA</span>
 </footer>
-
 
 <script>
 (function () {
@@ -348,7 +268,6 @@
     paint();
   });
 
-  // follow the OS while the visitor has expressed no preference of their own
   mq.addEventListener('change', function () { if (!stored()) paint(); });
 })();
 </script>

@@ -677,3 +677,155 @@ p { margin: 0; max-width: 68ch; }
   .flow { flex-direction: column; }
   .flow-arrow { flex: 0 0 24px; transform: rotate(90deg); }
 }
+
+/* ---------- about ---------------------------------------- */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.55fr 1fr;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: start;
+}
+@media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; } }
+
+.about-prose { display: grid; gap: 14px; }
+.about-prose p { font-size: 15.5px; line-height: 1.7; color: var(--ink-soft); max-width: 62ch; }
+.about-prose p strong { color: var(--ink); font-weight: 600; }
+.about-prose p.first { font-size: 17px; color: var(--ink); line-height: 1.6; }
+
+.about-aside {
+  border: 1px solid var(--rule-firm);
+  background: var(--sunk);
+  padding: 16px 18px 18px;
+  display: grid;
+  gap: 13px;
+}
+.aside-row { display: grid; gap: 3px; }
+.aside-k {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.aside-v { font-size: 14px; color: var(--ink); line-height: 1.45; }
+.aside-v a { color: var(--accent); text-decoration: none; }
+.aside-v a:hover { text-decoration: underline; }
+
+/* ---------- timeline ------------------------------------- */
+
+.timeline { border-top: 1px solid var(--rule-firm); }
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 150px 22px 1fr;
+  gap: 4px 0;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+
+.tl-when {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12.5px;
+  color: var(--ink-faint);
+  letter-spacing: 0.04em;
+  padding-top: 4px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* the rail: a marker whose shape encodes what kind of entry this is */
+.tl-rail { position: relative; }
+.tl-rail::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 0;
+  bottom: -20px;
+  width: 1px;
+  background: var(--rule-firm);
+}
+.tl-item:last-child .tl-rail::before { bottom: auto; height: 10px; }
+.tl-rail::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 7px;
+  height: 7px;
+  background: var(--paper);
+  border: 1px solid var(--accent);
+}
+/* education gets a filled marker, work an open one - a real distinction */
+.tl-item[data-kind="edu"] .tl-rail::after {
+  background: var(--head);
+  border-color: var(--head);
+}
+
+.tl-body { padding-left: 4px; }
+.tl-title { font-weight: 600; font-size: 1.04rem; color: var(--ink); line-height: 1.25; }
+.tl-org { color: var(--ink-soft); font-size: 14.5px; margin-top: 2px; }
+.tl-note { color: var(--ink-soft); font-size: 14.5px; line-height: 1.55; margin-top: 8px; max-width: 58ch; }
+.tl-kind {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 4px;
+}
+.tl-links { margin-top: 9px; display: flex; gap: 14px; flex-wrap: wrap; }
+.tl-links a {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  text-decoration: none;
+}
+.tl-links a:hover { text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .tl-item { grid-template-columns: 18px 1fr; }
+  .tl-when { grid-column: 2; padding-top: 0; margin-bottom: 4px; }
+  .tl-rail { grid-row: 1 / span 2; grid-column: 1; }
+  .tl-body { grid-column: 2; }
+}
+
+/* ---------- work index filters --------------------------- */
+
+.filters {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.filter {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px 11px;
+  background: none;
+  border: 1px solid var(--rule-firm);
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: border-color 120ms ease, color 120ms ease, background 120ms ease;
+}
+.filter:hover { border-color: var(--accent); color: var(--accent); }
+.filter[aria-pressed="true"] {
+  background: var(--accent-wash);
+  border-color: var(--accent);
+  color: var(--accent-on);
+}
+.filter .fc { color: var(--ink-faint); margin-left: 6px; }
+.filter[aria-pressed="true"] .fc { color: var(--accent-on); opacity: 0.75; }
+
+.index-row[hidden] { display: none !important; }
+
+.filter-empty {
+  padding: 26px 0;
+  color: var(--ink-faint);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+}

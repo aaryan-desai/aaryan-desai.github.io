@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Work &middot; Aaryan Desai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="wordmark" href="../index.html">Aaryan Desai</a>
+    <nav>
+      <a href="index.html">Work</a>
+      <a href="../index.html#timeline">Timeline</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <button class="theme-switch" id="theme-toggle" type="button" role="switch"
+            aria-checked="false" aria-label="Dark mode">
+      <span class="ts-track">
+        <span class="ts-icon ts-sun" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path
+               d="M12 1.6v2.6M12 19.8v2.6M4.3 4.3l1.9 1.9M17.8 17.8l1.9 1.9M1.6 12h2.6M19.8 12h2.6M4.3 19.7l1.9-1.9M17.8 6.2l1.9-1.9"/></svg>
+        </span>
+        <span class="ts-icon ts-moon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path
+               d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8z"/></svg>
+        </span>
+        <span class="ts-knob" aria-hidden="true"></span>
+      </span>
+    </button>
+  </div>
+</header>
+
+<main class="sheet">
+  <div class="frame">
+
+    <section class="hero">
+      <div class="hero-body">
+        <p class="eyebrow">Selected work</p>
+        <h1>Work</h1>
+        <p class="lede">Six projects across mechanical design, industrial controls, data capture and autonomy.
+        Most of them span more than one of those &mdash; filter by discipline to narrow the list.</p>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="section-head">
+        <p class="eyebrow">Filter by discipline</p>
+        <span class="count" id="entry-count">6 entries</span>
+      </div>
+
+      <div class="filters">
+        <button class="filter" type="button" data-f="all" aria-pressed="true">All<span class="fc">6</span></button>
+        <button class="filter" type="button" data-f="MECH" aria-pressed="false">Mechanical<span class="fc">4</span></button>
+        <button class="filter" type="button" data-f="CTRL" aria-pressed="false">Controls<span class="fc">5</span></button>
+        <button class="filter" type="button" data-f="ROBOTICS" aria-pressed="false">Robotics<span class="fc">3</span></button>
+        <button class="filter" type="button" data-f="DATA" aria-pressed="false">Data<span class="fc">2</span></button>
+        <button class="filter" type="button" data-f="SW" aria-pressed="false">Software<span class="fc">2</span></button>
+        <button class="filter" type="button" data-f="SENSING" aria-pressed="false">Sensing<span class="fc">1</span></button>
+      </div>
+
+      <div class="index-list">
+        <a class="index-row" href="vision-inspection.html" data-tags="MECH CTRL SENSING">
+          <div class="index-main">
+            <span class="index-title">Automated Vision Inspection System</span>
+            <span class="index-sub">Multi-feature part inspection combining vision, proximity and laser sensing, with the fixture, control panel and relay logic designed around it. Cycle time 83s &rarr; 47s.</span>
+          </div>
+          <div class="index-meta">
+            <span class="index-year">2025 &middot; Modineer</span>
+            <span class="tags"><span class="tag" data-d="MECH">MECH</span><span class="tag">CTRL</span><span class="tag">SENSING</span></span>
+          </div>
+        </a>
+        <a class="index-row" href="weld-cell.html" data-tags="MECH ROBOTICS CTRL">
+          <div class="index-main">
+            <span class="index-title">Robotic Weld Cell Consolidation</span>
+            <span class="index-sub">Merged separate weld operations into a single cell and designed the dies, fixtures and tooling that made robotic operation repeatable. +12% production capacity.</span>
+          </div>
+          <div class="index-meta">
+            <span class="index-year">2024&ndash;25 &middot; Modineer</span>
+            <span class="tags"><span class="tag" data-d="MECH">MECH</span><span class="tag">ROBOTICS</span><span class="tag">CTRL</span></span>
+          </div>
+        </a>
+        <a class="index-row" href="die-transfer.html" data-tags="ROBOTICS CTRL">
+          <div class="index-main">
+            <span class="index-title">Die Transfer Motion Profile</span>
+            <span class="index-sub">Re-profiled the transfer move that was gating the cell &mdash; 1.7s &rarr; 1.1s with the end-of-move jitter eliminated, by shaping the profile rather than commanding more speed.</span>
+          </div>
+          <div class="index-meta">
+            <span class="index-year">2024&ndash;25 &middot; Modineer</span>
+            <span class="tags"><span class="tag" data-d="MECH">ROBOTICS</span><span class="tag">CTRL</span></span>
+          </div>
+        </a>
+        <a class="index-row" href="plc-telemetry.html" data-tags="DATA SW CTRL">
+          <div class="index-main">
+            <span class="index-title">PLC Telemetry &amp; Fault Analytics</span>
+            <span class="index-sub">Raspberry Pi bridge polling PLC tags over Pycomm3, landing cycle-time and fault data in a Power BI model that gives the floor real-time visibility.</span>
+          </div>
+          <div class="index-meta">
+            <span class="index-year">2024&ndash;25 &middot; Modineer</span>
+            <span class="tags"><span class="tag" data-d="MECH">DATA</span><span class="tag">SW</span><span class="tag">CTRL</span></span>
+          </div>
+        </a>
+        <a class="index-row" href="tesla-internships.html" data-tags="MECH CTRL DATA">
+          <div class="index-main">
+            <span class="index-title">Tesla &mdash; Production Control Equipment</span>
+            <span class="index-sub">Two internship terms across Fremont and Austin: 24+ material handling solutions through a vehicle ramp, a universal end-of-arm tool concept, and cross-vendor PLC integration.</span>
+          </div>
+          <div class="index-meta">
+            <span class="index-year">2022&ndash;23 &middot; Tesla</span>
+            <span class="tags"><span class="tag" data-d="MECH">MECH</span><span class="tag">CTRL</span><span class="tag">DATA</span></span>
+          </div>
+        </a>
+        <a class="index-row" href="mars-rover.html" data-tags="ROBOTICS SW MECH">
+          <div class="index-main">
+            <span class="index-title">ME 588 Autonomous Mars Rover</span>
+            <span class="index-sub">Team rover for autonomous navigation and object manipulation. Led electronics, sensor integration and programming; 95% success rate on foam-cube detection and placement in arena trials.</span>
+          </div>
+          <div class="index-meta">
+            <span class="index-year">2023 &middot; Purdue</span>
+            <span class="tags"><span class="tag" data-d="MECH">ROBOTICS</span><span class="tag">SW</span><span class="tag">MECH</span></span>
+          </div>
+        </a>
+      </div>
+      <p class="filter-empty" id="filter-empty" hidden>No projects match that discipline.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <span><a href="../index.html">&larr; Aaryan Desai</a></span>
+  <span class="spacer"><a href="mailto:aaryandesai.00@gmail.com">aaryandesai.00@gmail.com</a></span>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var btn  = document.getElementById('theme-toggle');
+  var mq   = window.matchMedia('(prefers-color-scheme: dark)');
+  function stored() { try { return localStorage.getItem('ad-theme'); } catch (e) { return null; } }
+  function resolved() {
+    var s = stored();
+    return (s === 'dark' || s === 'light') ? s : (mq.matches ? 'dark' : 'light');
+  }
+  function paint() {
+    var mode = resolved();
+    btn.setAttribute('aria-checked', mode === 'dark' ? 'true' : 'false');
+    btn.setAttribute('aria-label', mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+  var s = stored();
+  if (s === 'dark' || s === 'light') root.setAttribute('data-theme', s);
+  paint();
+  btn.addEventListener('click', function () {
+    var next = resolved() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('ad-theme', next); } catch (e) {}
+    paint();
+  });
+  mq.addEventListener('change', function () { if (!stored()) paint(); });
+})();
+</script>
+<script>
+(function () {
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.filter'));
+  var rows  = Array.prototype.slice.call(document.querySelectorAll('.index-row'));
+  var empty = document.getElementById('filter-empty');
+  var count = document.getElementById('entry-count');
+
+  function apply(f) {
+    var shown = 0;
+    rows.forEach(function (row) {
+      var hit = f === 'all' || row.dataset.tags.split(' ').indexOf(f) !== -1;
+      row.hidden = !hit;
+      if (hit) shown++;
+    });
+    chips.forEach(function (c) {
+      c.setAttribute('aria-pressed', c.dataset.f === f ? 'true' : 'false');
+    });
+    empty.hidden = shown !== 0;
+    count.textContent = shown + (shown === 1 ? ' entry' : ' entries');
+  }
+
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      apply(c.getAttribute('aria-pressed') === 'true' ? 'all' : c.dataset.f);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
