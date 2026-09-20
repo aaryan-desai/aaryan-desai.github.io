@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Production Planning Tool &middot; Aaryan Desai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="wordmark" href="../index.html">Aaryan Desai</a>
+    <nav>
+      <a href="index.html">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#skills">Skills</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <button class="theme-switch" id="theme-toggle" type="button" role="switch"
+            aria-checked="false" aria-label="Dark mode">
+      <span class="ts-track">
+        <span class="ts-icon ts-sun" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path
+               d="M12 1.6v2.6M12 19.8v2.6M4.3 4.3l1.9 1.9M17.8 17.8l1.9 1.9M1.6 12h2.6M19.8 12h2.6M4.3 19.7l1.9-1.9M17.8 6.2l1.9-1.9"/></svg>
+        </span>
+        <span class="ts-icon ts-moon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path
+               d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8z"/></svg>
+        </span>
+        <span class="ts-knob" aria-hidden="true"></span>
+      </span>
+    </button>
+  </div>
+</header>
+<main class="sheet">
+  <div class="frame">
+    
+    <section class="hero">
+      <a class="backlink" href="index.html">&larr; Work</a>
+      <div class="hero-body">
+        <p class="eyebrow">Modineer &middot; 2025 &middot; Software &amp; scheduling</p>
+        <h1>Production Planning Tool</h1>
+        <p class="lede">A UI-complete planning tool that allocates production through the E-Coat and Powder-Coat
+        lines by FIFO, on a dependency graph of parts and their subparts &mdash; and pushes the planner's
+        decisions to a live view on the floor.</p>
+      </div>
+      <div class="titleblock">
+        <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Designed and built end to end</span></div>
+        <div class="tb-cell"><span class="tb-label">Disciplines</span><span class="tb-value">Software, data</span></div>
+        <div class="tb-cell"><span class="tb-label">Lines</span><span class="tb-value">E-Coat, Powder-Coat</span></div>
+        <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">In use on the floor</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2 class="section-title">The problem</h2></div>
+      <div class="prose">
+        <p>Coating lines are a scheduling bottleneck of a particular kind: a part cannot go through until every
+        subpart it depends on has been through, and the planner is the only person holding that dependency
+        structure &mdash; usually in their head, or in a spreadsheet that goes stale the moment the floor
+        deviates from it.</p>
+        <p>That makes the plan fragile in exactly the situation where it matters. When the line goes down or an
+        order jumps the queue, re-deriving what can now run means walking the whole part tree again by hand.</p>
+      </div>
+      <div class="revnote">
+        <span class="rev-tag">Needs your input</span>
+        <p>This framing is my reconstruction from your description, not from anything you wrote. What was the
+        actual process before the tool &mdash; a spreadsheet, an ERP screen, a whiteboard? And what did it
+        cost when it went wrong?</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2 class="section-title">Results</h2></div>
+      <div class="prose">
+        <p>The tool is UI-complete and in use: a planner can see the current state of both lines, review
+        suggested allocations, adjust them, and push the result to a live view the floor works from.</p>
+      </div>
+      <div class="revnote">
+        <span class="rev-tag">Needs your numbers</span>
+        <p>Every other page here leads with a measured result &mdash; 43%, 12%, 1.7s to 1.1s. This page has
+        none yet, and it is the weakest thing about it. Planning time per shift, throughput, missed-dependency
+        incidents, WIP sitting in front of the line: anything measured beats anything described.</p>
+      </div>
+      <figure class="plate">
+        <div class="plate-empty">
+          <span class="slot">Plate 1</span>
+          <span class="hint">assets/planning-tool-ui.png</span>
+        </div>
+        <figcaption>Planner view &mdash; queue state, suggested allocation, and the push to the floor.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2 class="section-title">Approach</h2></div>
+      <div class="prose">
+        <p><strong>A graph, not a list.</strong> Parts and subparts form a dependency graph, so allocation is a
+        traversal problem rather than a sorting one. Modelling it explicitly is what makes "what can run right
+        now" a query the tool answers instead of a question the planner re-derives.</p>
+        <p><strong>FIFO as the default, not the verdict.</strong> First-in-first-out is the allocation rule, but
+        the tool <em>suggests</em> and the planner disposes. That split matters: a scheduler that overrides the
+        person who can see the floor gets switched off within a week, and one that hides its reasoning never
+        gets trusted in the first place.</p>
+        <p><strong>Two surfaces, one state.</strong> The planner works in a review UI; the floor gets a live view
+        of what was actually committed. Keeping those as views of one state is what stops the plan and the floor
+        drifting apart &mdash; which is the failure the whole tool exists to prevent.</p>
+      </div>
+      <div class="revnote">
+        <span class="rev-tag">Needs your input</span>
+        <p>I have written the reasoning I would expect behind these choices. Tell me where it is wrong, and what
+        the stack actually is &mdash; the pages here name Pycomm3 and Power BI specifically, and this one should
+        be equally concrete about how it is built and where it runs.</p>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="footer">
+  <span><a href="index.html">&larr; All work</a></span>
+  <span class="spacer"><a href="mailto:aaryandesai.00@gmail.com">aaryandesai.00@gmail.com</a></span>
+</footer>
+<script>
+(function () {
+  var root = document.documentElement;
+  var btn  = document.getElementById('theme-toggle');
+  var mq   = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function stored() {
+    try { return localStorage.getItem('ad-theme'); } catch (e) { return null; }
+  }
+  function resolved() {
+    var s = stored();
+    return (s === 'dark' || s === 'light') ? s : (mq.matches ? 'dark' : 'light');
+  }
+  function paint() {
+    var mode = resolved();
+    btn.setAttribute('aria-checked', mode === 'dark' ? 'true' : 'false');
+    btn.setAttribute('aria-label', mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  }
+
+  var s = stored();
+  if (s === 'dark' || s === 'light') root.setAttribute('data-theme', s);
+  paint();
+
+  btn.addEventListener('click', function () {
+    var next = resolved() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('ad-theme', next); } catch (e) {}
+    paint();
+  });
+
+  // follow the OS while the visitor has expressed no preference of their own
+  mq.addEventListener('change', function () { if (!stored()) paint(); });
+})();
+</script>
+
+</body>
+</html>

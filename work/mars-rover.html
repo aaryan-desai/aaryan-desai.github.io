@@ -15,7 +15,8 @@
     <a class="wordmark" href="../index.html">Aaryan Desai</a>
     <nav>
       <a href="index.html">Work</a>
-      <a href="../index.html#timeline">Timeline</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#skills">Skills</a>
       <a href="../index.html#contact">Contact</a>
     </nav>
     <button class="theme-switch" id="theme-toggle" type="button" role="switch"
@@ -51,11 +52,12 @@
         <div class="tb-cell"><span class="tb-label">Course</span><span class="tb-value">ME 588 Mechatronics</span></div>
         <div class="tb-cell"><span class="tb-label">Task</span><span class="tb-value">Detect, pick, place foam cubes</span></div>
         <div class="tb-cell"><span class="tb-label">Trial result</span><span class="tb-value">95% success rate</span></div>
+        <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">Course project, completed</span></div>
       </div>
     </section>
 
     <section class="section">
-      <div class="section-head"><p class="eyebrow">The task</p></div>
+      <div class="section-head"><h2 class="section-title">The problem</h2></div>
       <div class="prose">
         <p>An arena, a set of foam cubes, and a rover that had to find them, pick them up and place them &mdash;
         with no operator in the loop. Fully autonomous operation was the requirement, not a stretch goal, which
@@ -64,18 +66,11 @@
     </section>
 
     <section class="section">
-      <div class="section-head"><p class="eyebrow">What I owned</p></div>
-      <div class="prose">
-        <ul>
-          <li><strong>Electronics.</strong> Power distribution, motor drive and the sensor wiring that everything
-          else depended on.</li>
-          <li><strong>Sensor integration.</strong> Getting detection reliable enough that the autonomy above it
-          could assume its inputs &mdash; which is where most of the debugging time actually went.</li>
-          <li><strong>Autonomy software.</strong> The detection, approach, pickup and placement sequence, including
-          the recovery behaviors that turn a 70% success rate into a 95% one.</li>
-        </ul>
-        <p>The mechanical design and control system integration were collaborative &mdash; the arm geometry and the
-        software that drove it were developed against each other rather than in sequence.</p>
+      <div class="section-head"><h2 class="section-title">Results</h2></div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-value">95%</div><div class="metric-label">Success rate<br>across arena trials</div></div>
+        <div class="metric"><div class="metric-value">0</div><div class="metric-label">Operator input<br>fully autonomous</div></div>
+        <div class="metric"><div class="metric-value">3</div><div class="metric-label">Stages chained<br>detect, pick, place</div></div>
       </div>
       <figure class="plate">
         <div class="plate-empty">
@@ -84,22 +79,32 @@
         </div>
         <figcaption>Rover assembly &mdash; chassis, manipulator and sensor placement.</figcaption>
       </figure>
+      <div class="revnote">
+        <span class="rev-tag">Fill in</span>
+        <p>A short GIF of a completed pick-and-place would be the strongest asset on this site. If any teammate
+        has phone video from the trials, three seconds is enough &mdash; robotics recruiters watch those before
+        they read anything.</p>
+      </div>
     </section>
 
     <section class="section">
-      <div class="section-head"><p class="eyebrow">Why it hit 95%</p></div>
+      <div class="section-head"><h2 class="section-title">Approach</h2></div>
       <div class="prose">
-        <p>The gap between a rover that works in a demo and one that works in trials is almost entirely in the
-        failure handling. A cube detected at a bad angle, a grasp that slips, an approach that overshoots &mdash;
-        each needs a defined recovery rather than a stall. Most of the final push from a working pipeline to a
-        <strong>95% success rate across arena trials</strong> came from enumerating those cases and giving each one
-        a behavior.</p>
-      </div>
-      <div class="revnote">
-        <span class="rev-tag">Fill in</span>
-        <p>A short GIF of the rover completing a pick-and-place would be the single strongest asset on this site.
-        If any teammate has phone video from the trials, a 3&ndash;4 second clip is enough &mdash; robotics
-        recruiters watch those before they read anything.</p>
+        <p>I led electronics, sensor integration and the autonomy software; the mechanical design and control
+        system integration were collaborative, with the arm geometry and the software driving it developed
+        against each other rather than in sequence.</p>
+        <ul>
+          <li><strong>Electronics.</strong> Power distribution, motor drive and the sensor wiring everything
+          else depended on.</li>
+          <li><strong>Sensor integration.</strong> Getting detection reliable enough that the autonomy above it
+          could trust its inputs &mdash; where most of the debugging time actually went.</li>
+          <li><strong>Autonomy.</strong> The detect, approach, grasp and place sequence, plus the recovery
+          behaviours around it.</li>
+        </ul>
+        <p><strong>The last 25 points came from failure handling, not from the happy path.</strong> A cube
+        detected at a bad angle, a grasp that slips, an approach that overshoots &mdash; each needs a defined
+        recovery rather than a stall. Enumerating those cases and giving each one a behaviour is what moved a
+        working pipeline to a 95% success rate.</p>
       </div>
     </section>
   </div>

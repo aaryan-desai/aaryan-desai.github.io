@@ -15,7 +15,8 @@
     <a class="wordmark" href="../index.html">Aaryan Desai</a>
     <nav>
       <a href="index.html">Work</a>
-      <a href="../index.html#timeline">Timeline</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#skills">Skills</a>
       <a href="../index.html#contact">Contact</a>
     </nav>
     <button class="theme-switch" id="theme-toggle" type="button" role="switch"
@@ -51,11 +52,12 @@
         <div class="tb-cell"><span class="tb-label">Stack</span><span class="tb-value">Python, Pycomm3, Raspberry Pi, Power BI</span></div>
         <div class="tb-cell"><span class="tb-label">Source</span><span class="tb-value">Allen-Bradley PLC tags</span></div>
         <div class="tb-cell"><span class="tb-label">Output</span><span class="tb-value">Real-time cycle &amp; fault analytics</span></div>
+        <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">In use on the floor</span></div>
       </div>
     </section>
 
     <section class="section">
-      <div class="section-head"><p class="eyebrow">The problem</p></div>
+      <div class="section-head"><h2 class="section-title">The problem</h2></div>
       <div class="prose">
         <p>The PLCs already knew everything worth knowing &mdash; cycle times, fault codes, state transitions &mdash;
         but none of it left the controller. Downtime got reconstructed after the fact from operator recollection,
@@ -63,9 +65,17 @@
         actually costing us the most hours this month" without someone standing at the machine with a clipboard.</p>
       </div>
     </section>
-
     <section class="section">
-      <div class="section-head"><p class="eyebrow">Architecture</p></div>
+      <div class="section-head"><h2 class="section-title">Results</h2></div>
+      <div class="prose">
+        <p>The floor got real-time visibility into cycle times and fault analytics, which changed what improvement
+        conversations could be about. The die transfer optimization on the
+        <a href="weld-cell.html">weld cell project</a> is a direct consequence &mdash; the 1.7-second transfer was
+        identifiable as the constraint because the pipeline was measuring it.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section-head"><h2 class="section-title">Approach</h2></div>
       <div class="prose">
         <p>A Raspberry Pi sits on the plant network and polls PLC tags over EtherNet/IP using <span class="mono">Pycomm3</span>.
         It is a read-only bridge by design &mdash; it never writes to the controller, so it cannot affect the process
@@ -116,16 +126,6 @@
         <p>This is the page where a screenshot does the most work &mdash; a real dashboard proves the data viz half
         of your profile in a way prose cannot. If the live one shows anything proprietary, rebuild one view with
         sanitized labels and screenshot that instead.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head"><p class="eyebrow">Result</p></div>
-      <div class="prose">
-        <p>The floor got real-time visibility into cycle times and fault analytics, which changed what improvement
-        conversations could be about. The die transfer optimization on the
-        <a href="weld-cell.html">weld cell project</a> is a direct consequence &mdash; the 1.7-second transfer was
-        identifiable as the constraint because the pipeline was measuring it.</p>
       </div>
     </section>
   </div>

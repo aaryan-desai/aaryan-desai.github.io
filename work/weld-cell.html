@@ -15,7 +15,8 @@
     <a class="wordmark" href="../index.html">Aaryan Desai</a>
     <nav>
       <a href="index.html">Work</a>
-      <a href="../index.html#timeline">Timeline</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#skills">Skills</a>
       <a href="../index.html#contact">Contact</a>
     </nav>
     <button class="theme-switch" id="theme-toggle" type="button" role="switch"
@@ -50,19 +51,47 @@
         <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Project lead</span></div>
         <div class="tb-cell"><span class="tb-label">Disciplines</span><span class="tb-value">Robotics, tooling, controls</span></div>
         <div class="tb-cell"><span class="tb-label">Capacity</span><span class="tb-value">+12%</span></div>
-        <div class="tb-cell"><span class="tb-label">Related</span><span class="tb-value"><a href="die-transfer.html">Motion profile &rarr;</a></span></div>
+        <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">Deployed in production</span></div>
       </div>
     </section>
 
     <section class="section">
-      <div class="section-head"><p class="eyebrow">Consolidation</p></div>
+      <div class="section-head"><h2 class="section-title">The problem</h2></div>
       <div class="prose">
-        <p>Weld operations were split across stations, which meant parts moved between cells, each cell carried its
+        <p>Weld operations were split across separate stations. Parts moved between cells, each cell carried its
         own setup and changeover overhead, and the handoffs added queue time that never showed up as anyone's
-        cycle time. Consolidating the operations into one cell removed the inter-cell transfers entirely.</p>
-        <p>The work was as much layout and tooling as it was robot programming: reach envelope, fixture placement
-        and part presentation all had to be resolved before a consolidated sequence was even feasible. The result
-        was a <strong>12% increase in workflow efficiency and production capacity</strong>.</p>
+        cycle time &mdash; it sat between the numbers, which is the worst place for waste to hide.</p>
+        <p>Consolidating into a single cell was the obvious answer and the hard one: everything depends on whether
+        one robot can actually reach and present every part the old stations handled between them.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2 class="section-title">Results</h2></div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-value">+12%</div><div class="metric-label">Workflow efficiency<br>and production capacity</div></div>
+        <div class="metric"><div class="metric-value">0</div><div class="metric-label">Inter-cell transfers<br>eliminated entirely</div></div>
+        <div class="metric"><div class="metric-value">1</div><div class="metric-label">Cell<br>replacing separate stations</div></div>
+      </div>
+      <div class="prose" style="margin-top:22px">
+        <p>Beyond the capacity number, consolidation removed a whole class of scheduling problem. One cell means
+        one queue, one changeover to plan and one place to look when the line is behind.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2 class="section-title">Approach</h2></div>
+      <div class="prose">
+        <p><strong>Layout before programming.</strong> Reach envelope, fixture placement and part presentation all
+        had to be resolved before a consolidated sequence was even feasible. A robot that can reach every fixture
+        but only at the edge of its envelope will hold the pose badly and wear unevenly &mdash; so the layout work
+        is really about keeping every weld inside the range where the arm is stiff.</p>
+        <p><strong>Tooling built for a robot, not a person.</strong> I designed the die components, precision
+        fixtures and tooling specifically for repeatable robotic operation on complex geometries. A human
+        compensates for a loose fixture without noticing; a robot cannot. Tight, well-datumed fixturing is what
+        makes a fast cycle survive a bad shift rather than just a good demo.</p>
+        <p>That fixturing is also what made the <a href="die-transfer.html">die transfer re-profiling</a> usable
+        in production rather than merely achievable once.</p>
       </div>
       <figure class="plate">
         <div class="plate-empty">
@@ -71,17 +100,6 @@
         </div>
         <figcaption>Consolidated cell layout &mdash; robot reach envelope and fixture placement.</figcaption>
       </figure>
-    </section>
-
-
-    <section class="section">
-      <div class="section-head"><p class="eyebrow">Tooling &amp; die design</p></div>
-      <div class="prose">
-        <p>Alongside the cell work, I designed die components, precision fixtures and tooling specifically for
-        repeatable robotic operation on complex geometries &mdash; parts where a human can compensate for a loose
-        fixture and a robot simply cannot. Tight, well-datumed fixturing is what makes the faster motion profile
-        usable in production rather than just achievable on a good day.</p>
-      </div>
       <figure class="plate">
         <div class="plate-empty">
           <span class="slot">Plate 2</span>

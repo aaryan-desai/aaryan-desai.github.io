@@ -15,7 +15,8 @@
     <a class="wordmark" href="../index.html">Aaryan Desai</a>
     <nav>
       <a href="index.html">Work</a>
-      <a href="../index.html#timeline">Timeline</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#skills">Skills</a>
       <a href="../index.html#contact">Contact</a>
     </nav>
     <button class="theme-switch" id="theme-toggle" type="button" role="switch"
@@ -52,12 +53,12 @@
         <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Owned end to end</span></div>
         <div class="tb-cell"><span class="tb-label">Discipline</span><span class="tb-value">Motion control, robotics</span></div>
         <div class="tb-cell"><span class="tb-label">Result</span><span class="tb-value">1.7s &rarr; 1.1s (&minus;35%)</span></div>
-        <div class="tb-cell"><span class="tb-label">Related</span><span class="tb-value"><a href="weld-cell.html">Weld cell &rarr;</a></span></div>
+        <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">Deployed in production</span></div>
       </div>
     </section>
 
     <section class="section">
-      <div class="section-head"><p class="eyebrow">Why jitter is expensive twice</p></div>
+      <div class="section-head"><h2 class="section-title">The problem</h2></div>
       <div class="prose">
         <p>The die transfer move was taking 1.7 seconds and arriving with visible jitter at the end of travel.
         Jitter at the end of a move costs you twice over: it adds settling time before the next operation can
@@ -66,9 +67,20 @@
         quality indirectly. Either alone would have justified the work.</p>
       </div>
     </section>
-
     <section class="section">
-      <div class="section-head"><p class="eyebrow">Shaping rather than rushing</p></div>
+      <div class="section-head"><h2 class="section-title">Results</h2></div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-value">&minus;35%</div><div class="metric-label">Transfer time<br>1.7s &rarr; 1.1s</div></div>
+        <div class="metric"><div class="metric-value">0</div><div class="metric-label">End-of-move jitter<br>eliminated</div></div>
+        <div class="metric"><div class="metric-value">0</div><div class="metric-label">Hardware changed<br>same cell, same arm</div></div>
+      </div>
+      <div class="prose" style="margin-top:22px">
+        <p>Worth stressing the third number: nothing was replaced. The 35% came out of the move's shape, not out
+        of a faster machine, which is why it cost a tuning session rather than a capital request.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section-head"><h2 class="section-title">Approach</h2></div>
       <div class="prose">
         <p>The obvious move &mdash; command a faster transfer &mdash; makes the problem worse. A higher velocity
         into the same deceleration produces more overshoot, more settling and more jitter, so the cycle time you
@@ -91,9 +103,8 @@
         they will read this paragraph.</p>
       </div>
     </section>
-
     <section class="section">
-      <div class="section-head"><p class="eyebrow">How it was found</p></div>
+      <div class="section-head"><h2 class="section-title">How it was found</h2></div>
       <div class="prose">
         <p>Worth saying plainly: this move was identifiable as the constraint because the
         <a href="plc-telemetry.html">telemetry pipeline</a> was measuring it. Before that, the cell was slow

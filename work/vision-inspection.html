@@ -15,7 +15,8 @@
     <a class="wordmark" href="../index.html">Aaryan Desai</a>
     <nav>
       <a href="index.html">Work</a>
-      <a href="../index.html#timeline">Timeline</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#skills">Skills</a>
       <a href="../index.html#contact">Contact</a>
     </nav>
     <button class="theme-switch" id="theme-toggle" type="button" role="switch"
@@ -55,7 +56,7 @@
     </section>
 
     <section class="section">
-      <div class="section-head"><p class="eyebrow">The problem</p></div>
+      <div class="section-head"><h2 class="section-title">The problem</h2></div>
       <div class="prose">
         <p>Part inspection was manual and serial: an operator checked several features one at a time, which made
         the station both the slowest step and the least repeatable one. Inspection quality varied by operator and
@@ -64,9 +65,21 @@
         without a second look.</p>
       </div>
     </section>
-
     <section class="section">
-      <div class="section-head"><p class="eyebrow">Approach</p></div>
+      <div class="section-head"><h2 class="section-title">Results</h2></div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-value">&minus;43%</div><div class="metric-label">Cycle time<br>83s &rarr; 47s</div></div>
+        <div class="metric"><div class="metric-value">3</div><div class="metric-label">Sensing modalities<br>vision / proximity / laser</div></div>
+        <div class="metric"><div class="metric-value">1</div><div class="metric-label">Automated pass<br>replacing serial manual check</div></div>
+      </div>
+      <div class="prose" style="margin-top:22px">
+        <p>Beyond the cycle time, the station removed operator-to-operator variation from the inspection result
+        and gave the line a consistent pass/fail record. It also served as a template: the fixture-plus-relay-panel
+        pattern is straightforward to replicate for other parts with similar feature sets.</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section-head"><h2 class="section-title">Approach</h2></div>
       <div class="prose">
         <p><strong>Sensing stack.</strong> No single sensor covered every feature, so I combined three: machine
         vision for presence and geometry checks, proximity sensing for seating and part-present confirmation, and
@@ -104,20 +117,6 @@
         <span class="rev-tag">Fill in</span>
         <p>Swap the two plates above for your CATIA or SOLIDWORKS renders. The fixture render is the highest-value
         image on this page &mdash; it is the piece that proves the mechanical design, not just the integration.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head"><p class="eyebrow">Result</p></div>
-      <div class="metrics">
-        <div class="metric"><div class="metric-value">&minus;43%</div><div class="metric-label">Cycle time<br>83s &rarr; 47s</div></div>
-        <div class="metric"><div class="metric-value">3</div><div class="metric-label">Sensing modalities<br>vision / proximity / laser</div></div>
-        <div class="metric"><div class="metric-value">1</div><div class="metric-label">Automated pass<br>replacing serial manual check</div></div>
-      </div>
-      <div class="prose" style="margin-top:22px">
-        <p>Beyond the cycle time, the station removed operator-to-operator variation from the inspection result
-        and gave the line a consistent pass/fail record. It also served as a template: the fixture-plus-relay-panel
-        pattern is straightforward to replicate for other parts with similar feature sets.</p>
       </div>
     </section>
   </div>
