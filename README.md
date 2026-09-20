@@ -121,7 +121,8 @@ dashboards and screenshots. Always write a real `alt`.
 
 ## Notes
 
-- The planning tool's source lives at `github.com/aa-desai/Production-Planning` — a
-  different account from the one serving this site. Worth consolidating.
+- The planning tool's source lives at `github.com/aa-desai/Production-Planning`, a separate
+  account. The link is off the site until that repo is transferred here; add it back to the
+  Status cell in `work/production-planning.html` once it is.
 - `work/tesla-internships.html` is the one page not on the Problem/Results/Approach
   spine; it covers two internship terms, so it's organised by site instead.

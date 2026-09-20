@@ -876,13 +876,9 @@ p { margin: 0; max-width: 68ch; }
 .mx:last-child { border-right: 0; }
 
 .mx[data-on="1"] {
-  background: var(--accent-wash);
-  color: var(--accent-on);
-  font-weight: 600;
-}
-.mx[data-on="1"][data-lead="1"] {
   background: var(--signal-wash);
   color: var(--signal-on);
+  font-weight: 600;
 }
 
 .mx-label {
