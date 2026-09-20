@@ -114,6 +114,15 @@
     <section class="section">
       <div class="section-head"><h2 class="section-title">Approach</h2></div>
       <div class="prose">
+        <p><strong>Three attempts, and the third one retreated.</strong> The first iterations were in Excel &mdash;
+        naive, and they did not survive contact with the real BOM depth. The second was a VBA script that still
+        took too long to run, and leaned on Power Automate to scrape the data out of the ERP through browser
+        automation. That last part was the problem: browser automation against an ERP UI is a dependency on
+        someone else's markup not changing, and it was <strong>not reliable enough to plan a shift around</strong>.</p>
+        <p>So the current tool deliberately gave that up. It reads Plex reports the planner exports into a folder
+        tree &mdash; a manual step, and the honest rough edge in the system. But a manual export that always works
+        beats an automated pull that fails on the shift you needed it most, and moving the complexity out of data
+        acquisition left it available for the part that actually earns it.</p>
         <p><strong>One graph, not two data structures.</strong> Routing and BOM are usually held separately and
         reconciled by a human. <span class="mono">graph_allocator_V2</span> models both as a single directed
         graph: nodes are <span class="mono">(part, operation)</span> pairs from the process routings, routing
@@ -166,9 +175,10 @@
         versioned on SemVer and currently at <strong>V2.2.2</strong>, having grown from a read-only dashboard
         through the floor runlist build to features like overdue detection and inventory-age warnings.</p>
         <p>It is documented for handoff rather than for show: the repository carries a behaviour spec, a build
-        log and an IT-facing README that is explicit about the rough edges, including the absence of an automated
-        test suite and the manual ERP export step. Those are the two things I would fix first if it were to
-        outgrow being an internal tool.</p>
+        log and an IT-facing README explicit about the rough edges. The absence of an automated test suite is the
+        one I would fix first if this outgrew being an internal tool. The manual ERP export is the other, but that
+        one is a <em>choice</em> &mdash; the automated alternative was tried, depended on browser automation, and
+        was less reliable than the person doing it by hand.</p>
       </div>
       <div class="revnote">
         <span class="rev-tag">Check before sending</span>
