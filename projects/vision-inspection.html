@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Automated Vision Inspection System &middot; Aaryan Desai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="wordmark" href="../index.html">Aaryan Desai</a>
+    <nav>
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+  </div>
+</header>
+<main class="sheet">
+  <div class="frame">
+    <section class="hero">
+      <a class="backlink" href="../index.html#work">&larr; Index</a>
+      <div class="hero-body">
+        <p class="eyebrow">Modineer &middot; May &ndash; Aug 2025 &middot; Mechatronic design</p>
+        <h1>Automated Vision Inspection System</h1>
+        <p class="lede">A multi-feature inspection station built from scratch &mdash; sensing stack, fixture,
+        control panel and relay logic &mdash; that cut inspection cycle time from 83 seconds to 47.</p>
+      </div>
+      <div class="titleblock">
+        <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Design &amp; build lead</span></div>
+        <div class="tb-cell"><span class="tb-label">Disciplines</span><span class="tb-value">Mechanical, controls, sensing</span></div>
+        <div class="tb-cell"><span class="tb-label">Cycle time</span><span class="tb-value">83s &rarr; 47s (&minus;43%)</span></div>
+        <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">Deployed in production</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">The problem</p></div>
+      <div class="prose">
+        <p>Part inspection was manual and serial: an operator checked several features one at a time, which made
+        the station both the slowest step and the least repeatable one. Inspection quality varied by operator and
+        by shift, and the 83-second cycle set the ceiling for the whole line.</p>
+        <p>The goal was to check every feature in a single automated pass, with a result the line could trust
+        without a second look.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">Approach</p></div>
+      <div class="prose">
+        <p><strong>Sensing stack.</strong> No single sensor covered every feature, so I combined three: machine
+        vision for presence and geometry checks, proximity sensing for seating and part-present confirmation, and
+        laser measurement for dimensional features where vision alone was not repeatable enough. Each feature was
+        assigned to the sensor with the best signal-to-noise for that geometry rather than forcing one modality
+        across the part.</p>
+        <p><strong>Fixture.</strong> The fixture had to locate the part repeatably enough that fixed-position
+        sensors stayed valid part to part &mdash; otherwise every sensor needs its own search routine and the cycle
+        time goes back up. I designed it around hard datums with positive part seating, so load position is
+        deterministic and sensor windows can be tight.</p>
+        <p><strong>Controls.</strong> The station runs on relay-based logic with a purpose-built control panel.
+        Relay logic was the right call here: the sequence is deterministic, the I/O count is modest, and the
+        maintenance team on the floor can troubleshoot it without a laptop and a software license.</p>
+        <p><strong>Parallelism.</strong> Most of the 43% cycle reduction came from checking features concurrently
+        rather than serially, which the fixed-sensor layout made possible.</p>
+      </div>
+
+      <figure class="plate">
+        <div class="plate-empty">
+          <span class="slot">Plate 1</span>
+          <span class="hint">assets/vision-fixture.jpg</span>
+        </div>
+        <figcaption>Inspection fixture &mdash; datum scheme and sensor mounting positions.</figcaption>
+      </figure>
+
+      <figure class="plate">
+        <div class="plate-empty">
+          <span class="slot">Plate 2</span>
+          <span class="hint">assets/vision-panel.jpg</span>
+        </div>
+        <figcaption>Control panel layout and relay logic schematic.</figcaption>
+      </figure>
+
+      <div class="revnote">
+        <span class="rev-tag">Fill in</span>
+        <p>Swap the two plates above for your CATIA or SOLIDWORKS renders. The fixture render is the highest-value
+        image on this page &mdash; it is the piece that proves the mechanical design, not just the integration.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">Result</p></div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-value">&minus;43%</div><div class="metric-label">Cycle time<br>83s &rarr; 47s</div></div>
+        <div class="metric"><div class="metric-value">3</div><div class="metric-label">Sensing modalities<br>vision / proximity / laser</div></div>
+        <div class="metric"><div class="metric-value">1</div><div class="metric-label">Automated pass<br>replacing serial manual check</div></div>
+      </div>
+      <div class="prose" style="margin-top:22px">
+        <p>Beyond the cycle time, the station removed operator-to-operator variation from the inspection result
+        and gave the line a consistent pass/fail record. It also served as a template: the fixture-plus-relay-panel
+        pattern is straightforward to replicate for other parts with similar feature sets.</p>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="footer">
+  <span><a href="../index.html">&larr; All work</a></span>
+  <span class="spacer"><a href="mailto:aaryandesai.00@gmail.com">aaryandesai.00@gmail.com</a></span>
+</footer>
+<script>
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById('theme-toggle');
+  var stored = null;
+  try { stored = localStorage.getItem('ad-theme'); } catch (e) {}
+  if (stored === 'dark' || stored === 'light') root.setAttribute('data-theme', stored);
+  btn.addEventListener('click', function () {
+    var current = root.getAttribute('data-theme');
+    if (!current) current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('ad-theme', next); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>

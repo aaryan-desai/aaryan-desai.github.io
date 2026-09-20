@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Production Ramp Material Handling &middot; Aaryan Desai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="wordmark" href="../index.html">Aaryan Desai</a>
+    <nav>
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+  </div>
+</header>
+<main class="sheet">
+  <div class="frame">
+    <section class="hero">
+      <a class="backlink" href="../index.html#work">&larr; Index</a>
+      <div class="hero-body">
+        <p class="eyebrow">Tesla &middot; 2022&ndash;2023 &middot; Equipment engineering</p>
+        <h1>Production Ramp Material Handling</h1>
+        <p class="lede">24+ material handling solutions and automated data collection systems supporting a ramp from
+        5,600 to 12,000 vehicles per week &mdash; plus a universal end-of-arm tool concept projected to save $300K.</p>
+      </div>
+      <div class="titleblock">
+        <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Production Control Equipment Eng. Intern</span></div>
+        <div class="tb-cell"><span class="tb-label">Sites</span><span class="tb-value">Fremont, CA &middot; Austin, TX</span></div>
+        <div class="tb-cell"><span class="tb-label">Ramp</span><span class="tb-value">5,600 &rarr; 12,000 vehicles / week</span></div>
+        <div class="tb-cell"><span class="tb-label">Delivered</span><span class="tb-value">24+ solutions</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">Fremont &mdash; scaling material flow</p></div>
+      <div class="prose">
+        <p>A production ramp of that size does not fail on the big machines; it fails on the hundred small ways
+        material does not get where it needs to be. I delivered <strong>24+ material handling solutions</strong>
+        alongside automated data collection systems, each targeting a specific flow constraint on the floor.</p>
+        <p>Designing for a ramp means designing for a moving target: the layout you build for today's rate has to
+        survive the rate six months out, which pushes every decision toward modularity over point solutions.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">Universal robotic end-of-arm tool</p></div>
+      <div class="prose">
+        <p>Dedicated end-of-arm tooling means a new tool, a new design cycle and new spares for every part family.
+        I prototyped a low-fidelity <strong>universal EOAT</strong> intended to cover a range of parts with one
+        tool, taking it far enough to prove the concept and cost it out &mdash; <strong>$300K projected savings
+        over two years</strong>.</p>
+        <p>The engineering question was where to put the flexibility: a tool that adapts to everything grips nothing
+        well. The prototype was about finding the part-family boundary where one tool is still better than three.</p>
+      </div>
+      <figure class="plate">
+        <div class="plate-empty">
+          <span class="slot">Plate 1</span>
+          <span class="hint">assets/universal-eoat.png &mdash; verify clearance</span>
+        </div>
+        <figcaption>Universal end-of-arm tool &mdash; concept prototype.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">Controls integration</p></div>
+      <div class="prose">
+        <p>I integrated <strong>Siemens and Allen-Bradley PLCs across Ethernet and PROFINET</strong> &mdash; two
+        vendor ecosystems that do not naturally cooperate. The resulting cross-network setup was adopted afterward
+        as a <strong>training rig for Controls Technicians</strong>, used to teach troubleshooting of cross-network
+        devices such as conveyor VFDs.</p>
+        <p>That second life is the part I am proudest of: the setup outlived the immediate problem and became
+        infrastructure other people learned on.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">Austin &mdash; standardization</p></div>
+      <div class="prose">
+        <p>At the Austin site the work shifted from individual solutions to the system that produces them. I designed
+        mechanical racks and dollies to streamline equipment setup and material flow, then
+        <strong>standardized how the team selected and designed equipment</strong> &mdash; establishing modular,
+        reusable production systems so the next engineer starts from a catalog rather than a blank sheet.</p>
+      </div>
+      <div class="revnote">
+        <span class="rev-tag">Clearance check</span>
+        <p>This page is written metrics-only and vendor-generic on purpose. Before adding any plate here, confirm
+        the specific render is cleared &mdash; a recruiter will not penalize a page without images, but a former
+        employer will notice one with the wrong image.</p>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="footer">
+  <span><a href="../index.html">&larr; All work</a></span>
+  <span class="spacer"><a href="mailto:aaryandesai.00@gmail.com">aaryandesai.00@gmail.com</a></span>
+</footer>
+<script>
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById('theme-toggle');
+  var stored = null;
+  try { stored = localStorage.getItem('ad-theme'); } catch (e) {}
+  if (stored === 'dark' || stored === 'light') root.setAttribute('data-theme', stored);
+  btn.addEventListener('click', function () {
+    var current = root.getAttribute('data-theme');
+    if (!current) current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('ad-theme', next); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>

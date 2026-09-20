@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Robotic Weld Cell Consolidation &middot; Aaryan Desai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="wordmark" href="../index.html">Aaryan Desai</a>
+    <nav>
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+  </div>
+</header>
+<main class="sheet">
+  <div class="frame">
+    <section class="hero">
+      <a class="backlink" href="../index.html#work">&larr; Index</a>
+      <div class="hero-body">
+        <p class="eyebrow">Modineer &middot; 2024&ndash;2025 &middot; Robotics &amp; tooling</p>
+        <h1>Robotic Weld Cell Consolidation</h1>
+        <p class="lede">Consolidated separate weld operations into a single robotic cell and re-profiled the die
+        transfer motion &mdash; 12% more capacity, and a 35% faster transfer with the end-of-move jitter gone.</p>
+      </div>
+      <div class="titleblock">
+        <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Project lead</span></div>
+        <div class="tb-cell"><span class="tb-label">Disciplines</span><span class="tb-value">Robotics, tooling, controls</span></div>
+        <div class="tb-cell"><span class="tb-label">Capacity</span><span class="tb-value">+12%</span></div>
+        <div class="tb-cell"><span class="tb-label">Transfer</span><span class="tb-value">1.7s &rarr; 1.1s</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">Consolidation</p></div>
+      <div class="prose">
+        <p>Weld operations were split across stations, which meant parts moved between cells, each cell carried its
+        own setup and changeover overhead, and the handoffs added queue time that never showed up as anyone's
+        cycle time. Consolidating the operations into one cell removed the inter-cell transfers entirely.</p>
+        <p>The work was as much layout and tooling as it was robot programming: reach envelope, fixture placement
+        and part presentation all had to be resolved before a consolidated sequence was even feasible. The result
+        was a <strong>12% increase in workflow efficiency and production capacity</strong>.</p>
+      </div>
+      <figure class="plate">
+        <div class="plate-empty">
+          <span class="slot">Plate 1</span>
+          <span class="hint">assets/weld-cell-layout.png</span>
+        </div>
+        <figcaption>Consolidated cell layout &mdash; robot reach envelope and fixture placement.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">Motion profile optimization</p></div>
+      <div class="prose">
+        <p>The die transfer move was taking 1.7 seconds and arriving with visible jitter at the end of travel.
+        Jitter at the end of a move is expensive twice over: it costs settling time before the next operation can
+        start, and it degrades placement repeatability, which shows up downstream as scrap.</p>
+        <p>Re-profiling the move &mdash; tuning the acceleration and deceleration ramps and the blend through the
+        path rather than simply commanding a faster move &mdash; brought the transfer to <strong>1.1 seconds</strong>
+        and removed the jitter. A naive speed increase would have made the settling worse, not better; the gain came
+        from shaping the profile so the arm arrives already settled.</p>
+      </div>
+      <div class="revnote">
+        <span class="rev-tag">Fill in</span>
+        <p>If you have before/after motion traces or a Power BI cycle-time chart showing the 1.7s &rarr; 1.1s shift,
+        that plot belongs here. A real trace is far more convincing to a controls interviewer than the number alone.
+        Drop it in as <span class="mono">assets/die-transfer-profile.png</span>.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">Tooling &amp; die design</p></div>
+      <div class="prose">
+        <p>Alongside the cell work, I designed die components, precision fixtures and tooling specifically for
+        repeatable robotic operation on complex geometries &mdash; parts where a human can compensate for a loose
+        fixture and a robot simply cannot. Tight, well-datumed fixturing is what makes the faster motion profile
+        usable in production rather than just achievable on a good day.</p>
+      </div>
+      <figure class="plate">
+        <div class="plate-empty">
+          <span class="slot">Plate 2</span>
+          <span class="hint">assets/die-components.png</span>
+        </div>
+        <figcaption>Die components and precision fixturing &mdash; CAD.</figcaption>
+      </figure>
+    </section>
+  </div>
+</main>
+<footer class="footer">
+  <span><a href="../index.html">&larr; All work</a></span>
+  <span class="spacer"><a href="mailto:aaryandesai.00@gmail.com">aaryandesai.00@gmail.com</a></span>
+</footer>
+<script>
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById('theme-toggle');
+  var stored = null;
+  try { stored = localStorage.getItem('ad-theme'); } catch (e) {}
+  if (stored === 'dark' || stored === 'light') root.setAttribute('data-theme', stored);
+  btn.addEventListener('click', function () {
+    var current = root.getAttribute('data-theme');
+    if (!current) current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('ad-theme', next); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>

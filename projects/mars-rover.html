@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ME 588 Autonomous Mars Rover &middot; Aaryan Desai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="wordmark" href="../index.html">Aaryan Desai</a>
+    <nav>
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+  </div>
+</header>
+<main class="sheet">
+  <div class="frame">
+    <section class="hero">
+      <a class="backlink" href="../index.html#work">&larr; Index</a>
+      <div class="hero-body">
+        <p class="eyebrow">Purdue University &middot; Jan &ndash; May 2023 &middot; Autonomy</p>
+        <h1>ME 588 Autonomous Mars Rover</h1>
+        <p class="lede">A team-built rover for autonomous navigation and object manipulation. I led electronics,
+        sensor integration and programming; 95% success on foam-cube detection, pickup and placement in arena trials.</p>
+      </div>
+      <div class="titleblock">
+        <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Electronics, sensing &amp; software lead</span></div>
+        <div class="tb-cell"><span class="tb-label">Course</span><span class="tb-value">ME 588 Mechatronics</span></div>
+        <div class="tb-cell"><span class="tb-label">Task</span><span class="tb-value">Detect, pick, place foam cubes</span></div>
+        <div class="tb-cell"><span class="tb-label">Trial result</span><span class="tb-value">95% success rate</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">The task</p></div>
+      <div class="prose">
+        <p>An arena, a set of foam cubes, and a rover that had to find them, pick them up and place them &mdash;
+        with no operator in the loop. Fully autonomous operation was the requirement, not a stretch goal, which
+        meant every failure mode had to be handled on the rover rather than recovered by a human.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">What I owned</p></div>
+      <div class="prose">
+        <ul>
+          <li><strong>Electronics.</strong> Power distribution, motor drive and the sensor wiring that everything
+          else depended on.</li>
+          <li><strong>Sensor integration.</strong> Getting detection reliable enough that the autonomy above it
+          could assume its inputs &mdash; which is where most of the debugging time actually went.</li>
+          <li><strong>Autonomy software.</strong> The detection, approach, pickup and placement sequence, including
+          the recovery behaviors that turn a 70% success rate into a 95% one.</li>
+        </ul>
+        <p>The mechanical design and control system integration were collaborative &mdash; the arm geometry and the
+        software that drove it were developed against each other rather than in sequence.</p>
+      </div>
+      <figure class="plate">
+        <div class="plate-empty">
+          <span class="slot">Plate 1</span>
+          <span class="hint">assets/rover-cad.png</span>
+        </div>
+        <figcaption>Rover assembly &mdash; chassis, manipulator and sensor placement.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">Why it hit 95%</p></div>
+      <div class="prose">
+        <p>The gap between a rover that works in a demo and one that works in trials is almost entirely in the
+        failure handling. A cube detected at a bad angle, a grasp that slips, an approach that overshoots &mdash;
+        each needs a defined recovery rather than a stall. Most of the final push from a working pipeline to a
+        <strong>95% success rate across arena trials</strong> came from enumerating those cases and giving each one
+        a behavior.</p>
+      </div>
+      <div class="revnote">
+        <span class="rev-tag">Fill in</span>
+        <p>A short GIF of the rover completing a pick-and-place would be the single strongest asset on this site.
+        If any teammate has phone video from the trials, a 3&ndash;4 second clip is enough &mdash; robotics
+        recruiters watch those before they read anything.</p>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="footer">
+  <span><a href="../index.html">&larr; All work</a></span>
+  <span class="spacer"><a href="mailto:aaryandesai.00@gmail.com">aaryandesai.00@gmail.com</a></span>
+</footer>
+<script>
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById('theme-toggle');
+  var stored = null;
+  try { stored = localStorage.getItem('ad-theme'); } catch (e) {}
+  if (stored === 'dark' || stored === 'light') root.setAttribute('data-theme', stored);
+  btn.addEventListener('click', function () {
+    var current = root.getAttribute('data-theme');
+    if (!current) current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('ad-theme', next); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>

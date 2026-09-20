@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PLC Telemetry &amp; Fault Analytics &middot; Aaryan Desai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="wordmark" href="../index.html">Aaryan Desai</a>
+    <nav>
+      <a href="../index.html#work">Work</a>
+      <a href="../index.html#experience">Experience</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button">Theme</button>
+  </div>
+</header>
+<main class="sheet">
+  <div class="frame">
+    <section class="hero">
+      <a class="backlink" href="../index.html#work">&larr; Index</a>
+      <div class="hero-body">
+        <p class="eyebrow">Modineer &middot; 2024&ndash;2025 &middot; Data capture &amp; visualization</p>
+        <h1>PLC Telemetry &amp; Fault Analytics</h1>
+        <p class="lede">A Raspberry Pi bridge that polls PLC tags over Pycomm3 and lands cycle-time and fault data
+        in Power BI &mdash; turning a floor that ran on guesswork into one with real-time visibility.</p>
+      </div>
+      <div class="titleblock">
+        <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Designed &amp; built end to end</span></div>
+        <div class="tb-cell"><span class="tb-label">Stack</span><span class="tb-value">Python, Pycomm3, Raspberry Pi, Power BI</span></div>
+        <div class="tb-cell"><span class="tb-label">Source</span><span class="tb-value">Allen-Bradley PLC tags</span></div>
+        <div class="tb-cell"><span class="tb-label">Output</span><span class="tb-value">Real-time cycle &amp; fault analytics</span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">The problem</p></div>
+      <div class="prose">
+        <p>The PLCs already knew everything worth knowing &mdash; cycle times, fault codes, state transitions &mdash;
+        but none of it left the controller. Downtime got reconstructed after the fact from operator recollection,
+        and improvement work was argued from anecdote instead of data. There was no way to answer "which fault is
+        actually costing us the most hours this month" without someone standing at the machine with a clipboard.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">Architecture</p></div>
+      <div class="prose">
+        <p>A Raspberry Pi sits on the plant network and polls PLC tags over EtherNet/IP using <span class="mono">Pycomm3</span>.
+        It is a read-only bridge by design &mdash; it never writes to the controller, so it cannot affect the process
+        it is measuring, which is the property that made it acceptable to put on production equipment at all.</p>
+      </div>
+
+      <div class="flow">
+        <div class="flow-node">
+          <span class="n-name">PLC</span>
+          <span class="n-desc">Allen-Bradley. Cycle timers, fault words, state bits.</span>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-node">
+          <span class="n-name">Raspberry Pi</span>
+          <span class="n-desc">Python poller on Pycomm3. Read-only, tag-scheduled.</span>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-node">
+          <span class="n-name">Store</span>
+          <span class="n-desc">Timestamped records: cycle durations, fault events.</span>
+        </div>
+        <div class="flow-arrow">&rarr;</div>
+        <div class="flow-node">
+          <span class="n-name">Power BI</span>
+          <span class="n-desc">Cycle-time trend and fault Pareto for the floor.</span>
+        </div>
+      </div>
+
+      <div class="prose" style="margin-top:22px">
+        <p><strong>Polling design.</strong> Tags are polled at a rate matched to what they actually represent &mdash;
+        a cycle timer and a fault word do not need the same interval, and over-polling a controller on a production
+        network is a good way to get your project switched off.</p>
+        <p><strong>Event extraction.</strong> Raw tag values are not analytics. The poller turns tag transitions into
+        discrete events with durations, which is what makes a fault Pareto or a cycle-time distribution possible
+        downstream.</p>
+      </div>
+
+      <figure class="plate">
+        <div class="plate-empty">
+          <span class="slot">Plate 1</span>
+          <span class="hint">assets/powerbi-cycle-dashboard.png</span>
+        </div>
+        <figcaption>Power BI dashboard &mdash; cycle time trend and fault analytics.</figcaption>
+      </figure>
+
+      <div class="revnote">
+        <span class="rev-tag">Fill in</span>
+        <p>This is the page where a screenshot does the most work &mdash; a real dashboard proves the data viz half
+        of your profile in a way prose cannot. If the live one shows anything proprietary, rebuild one view with
+        sanitized labels and screenshot that instead.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><p class="eyebrow">Result</p></div>
+      <div class="prose">
+        <p>The floor got real-time visibility into cycle times and fault analytics, which changed what improvement
+        conversations could be about. The die transfer optimization on the
+        <a href="weld-cell.html">weld cell project</a> is a direct consequence &mdash; the 1.7-second transfer was
+        identifiable as the constraint because the pipeline was measuring it.</p>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="footer">
+  <span><a href="../index.html">&larr; All work</a></span>
+  <span class="spacer"><a href="mailto:aaryandesai.00@gmail.com">aaryandesai.00@gmail.com</a></span>
+</footer>
+<script>
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById('theme-toggle');
+  var stored = null;
+  try { stored = localStorage.getItem('ad-theme'); } catch (e) {}
+  if (stored === 'dark' || stored === 'light') root.setAttribute('data-theme', stored);
+  btn.addEventListener('click', function () {
+    var current = root.getAttribute('data-theme');
+    if (!current) current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    var next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('ad-theme', next); } catch (e) {}
+  });
+})();
+</script>
+</body>
+</html>
