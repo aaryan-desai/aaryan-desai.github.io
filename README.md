@@ -17,12 +17,22 @@ cd ~/portfolio
 git init -b main
 git add -A
 git commit -m "Portfolio site"
-gh repo create aaryan-desai.github.io --public --source=. --push
+gh repo create ad-cmu.github.io --public --source=. --push
 ```
 
-The repo **must** be named `aaryan-desai.github.io` for a user site. It goes live at
-`https://aaryan-desai.github.io` within a minute or two. If Pages doesn't turn on by
-itself: repo Settings → Pages → Source: `Deploy from a branch` → `main` / `(root)`.
+The repo **must** be named `ad-cmu.github.io` — GitHub only treats a repo as a *user
+site* (served at the root) when its name matches your username exactly. Any other name
+becomes a project site at `ad-cmu.github.io/<repo-name>/`.
+
+Then enable Pages:
+
+```bash
+gh api -X POST repos/ad-cmu/ad-cmu.github.io/pages \
+  -f 'source[branch]=main' -f 'source[path]=/'
+```
+
+Or: repo Settings → Pages → Source: `Deploy from a branch` → `main` / `(root)`.
+Live at `https://ad-cmu.github.io` a minute or two later.
 
 Every later change is just `git add -A && git commit -m "..." && git push`.
 
@@ -37,7 +47,7 @@ Every later change is just `git add -A && git commit -m "..." && git push`.
    | A     | `@`   | `185.199.109.153`                                |
    | A     | `@`   | `185.199.110.153`                                |
    | A     | `@`   | `185.199.111.153`                                |
-   | CNAME | `www` | `aaryan-desai.github.io`                         |
+   | CNAME | `www` | `ad-cmu.github.io`                               |
 
 3. `echo "aaryandesai.com" > CNAME`, then commit and push.
 4. Settings → Pages → Custom domain → enter it → tick **Enforce HTTPS** once the cert issues

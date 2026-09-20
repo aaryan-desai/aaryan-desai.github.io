@@ -106,14 +106,18 @@
   var stored = null;
   try { stored = localStorage.getItem('ad-theme'); } catch (e) {}
   if (stored === 'dark' || stored === 'light') root.setAttribute('data-theme', stored);
+
   btn.addEventListener('click', function () {
     var current = root.getAttribute('data-theme');
-    if (!current) current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    if (!current) {
+      current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
     var next = current === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
     try { localStorage.setItem('ad-theme', next); } catch (e) {}
   });
 })();
 </script>
+
 </body>
 </html>

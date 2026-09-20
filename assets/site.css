@@ -1,54 +1,93 @@
 /* ============================================================
    Aaryan Desai - portfolio
-   Drawing-sheet visual system. Tokens first; components below
-   only ever reference tokens, never literal colors.
+   Aenami "Lantern Glow" (dark) with an inverted Aenami light
+   counterpart. Three theme states are handled: bare :root is
+   light, the media query covers system-dark, and [data-theme]
+   lets the toggle win in both directions.
+
+   Ground family sampled from Alena Aenami, "In Search of Peace"
+   via ~/ubuntu-rice/aenami-theme/palette/aenami.json
    ============================================================ */
 
+/* ---- LIGHT: Aenami inverted. base #0c1a24 becomes the ink. ---- */
 :root {
-  /* light: mylar / vellum drawing film */
-  --paper:      #EDEFEE;
-  --surface:    #F7F8F7;
-  --sunk:       #E3E6E5;
-  --ink:        #14181A;
-  --ink-soft:   #5C666B;
-  --ink-faint:  #8A9497;
-  --rule:       #CBD2D2;
-  --rule-firm:  #A8B2B3;
-  --accent:     #00646E;
-  --accent-wash:#D9E6E7;
-  --signal:     #8F5006;
+  --paper:       #E7EDF1;
+  --surface:     #F5F9FB;
+  --sunk:        #D8E3EA;
+  --rule:        #C3D2DC;
+  --rule-firm:   #9FB4C2;
+
+  --ink:         #0C1A24;   /* Aenami base, verbatim */
+  --ink-soft:    #3E5666;
+  --ink-faint:   #506474;   /* holds 4.5 on --sunk   */
+
+  --accent:      #237188;   /* Aenami teal, verbatim */
+  --accent-wash: #CFE2E9;
+  --accent-on:   #20687D;
+  --signal:      #F84F41;
+  --signal-wash: #F6DCD4;
+  --signal-on:   #C21507;
+  --signal-lift: #C21507;
+  --head:        #974D21;
+
+  --glow-a:      rgba(249, 98, 86, 0.20);
+  --glow-b:      rgba(249, 98, 86, 0.00);
+
   color-scheme: light;
 }
 
+/* ---- DARK: Lantern Glow. ---- */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper:      #0E1213;
-    --surface:    #161B1C;
-    --sunk:       #1B2122;
-    --ink:        #E3E8E7;
-    --ink-soft:   #97A3A5;
-    --ink-faint:  #6B787A;
-    --rule:       #2A3234;
-    --rule-firm:  #3E4A4C;
-    --accent:     #4FB6C2;
-    --accent-wash:#15302F;
-    --signal:     #E0A340;
+    --paper:       #0C1A24;
+    --surface:     #142B3C;
+    --sunk:        #1B3B51;
+    --rule:        #1F4460;
+    --rule-firm:   #25516F;
+
+    --ink:         #F8FBFC;
+    --ink-soft:    #A3B8C4;
+    --ink-faint:   #90A6B2;
+
+    --accent:      #6FC9DC;
+    --accent-wash: #234456;
+    --accent-on:   #6FC9DC;
+    --signal:      #FF6B4F;
+    --signal-wash: #33272B;
+    --signal-on:   #FF6B4F;
+    --signal-lift: #FF7B62;
+    --head:        #F0B380;
+
+    --glow-a:      rgba(249, 98, 86, 0.50);
+    --glow-b:      rgba(249, 98, 86, 0.00);
+
     color-scheme: dark;
   }
 }
 
 :root[data-theme="dark"] {
-  --paper:      #0E1213;
-  --surface:    #161B1C;
-  --sunk:       #1B2122;
-  --ink:        #E3E8E7;
-  --ink-soft:   #97A3A5;
-  --ink-faint:  #6B787A;
-  --rule:       #2A3234;
-  --rule-firm:  #3E4A4C;
-  --accent:     #4FB6C2;
-  --accent-wash:#15302F;
-  --signal:     #E0A340;
+  --paper:       #0C1A24;
+  --surface:     #142B3C;
+  --sunk:        #1B3B51;
+  --rule:        #1F4460;
+  --rule-firm:   #25516F;
+
+  --ink:         #F8FBFC;
+  --ink-soft:    #A3B8C4;
+  --ink-faint:   #90A6B2;
+
+  --accent:      #6FC9DC;
+  --accent-wash: #234456;
+  --accent-on:   #6FC9DC;
+  --signal:      #FF6B4F;
+  --signal-wash: #33272B;
+  --signal-on:   #FF6B4F;
+  --signal-lift: #FF7B62;
+  --head:        #F0B380;
+
+  --glow-a:      rgba(249, 98, 86, 0.50);
+  --glow-b:      rgba(249, 98, 86, 0.00);
+
   color-scheme: dark;
 }
 
@@ -189,16 +228,23 @@ p { margin: 0; max-width: 68ch; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   background: none;
-  border: 1px solid var(--rule);
+  border: 1px solid var(--rule-firm);
   color: var(--ink-soft);
   padding: 4px 9px;
   cursor: pointer;
 }
 .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
+
 /* ---------- hero / title block --------------------------- */
 
-.hero { padding: clamp(32px, 6vw, 60px) clamp(20px, 4vw, 44px) 0; }
+.hero {
+  padding: clamp(32px, 6vw, 60px) clamp(20px, 4vw, 44px) 0;
+  background:
+    radial-gradient(ellipse 62% 105% at 16% -14%, var(--glow-a), var(--glow-b) 58%),
+    radial-gradient(ellipse 34% 52% at 13% -4%, var(--glow-a), var(--glow-b) 62%),
+    var(--surface);
+}
 
 .hero-body { display: grid; gap: 20px; }
 
@@ -286,6 +332,7 @@ p { margin: 0; max-width: 68ch; }
   font-size: clamp(1.18rem, 2.6vw, 1.45rem);
   font-weight: 600;
   line-height: 1.2;
+  color: var(--head);
   transition: color 120ms ease;
 }
 .index-sub { color: var(--ink-soft); font-size: 14.5px; line-height: 1.5; max-width: 62ch; }
@@ -312,12 +359,12 @@ p { margin: 0; max-width: 68ch; }
   font-size: 9.5px;
   font-weight: 500;
   letter-spacing: 0.1em;
-  padding: 2px 6px;
-  border: 1px solid var(--rule-firm);
-  color: var(--ink-soft);
+  padding: 3px 7px;
+  background: var(--accent-wash);
+  color: var(--accent-on);
   white-space: nowrap;
 }
-.tag[data-d="MECH"] { border-color: var(--accent); color: var(--accent); }
+.tag[data-d="MECH"] { background: var(--signal-wash); color: var(--signal-on); }
 
 @media (max-width: 640px) {
   .index-row { grid-template-columns: 1fr; }
@@ -440,6 +487,7 @@ p { margin: 0; max-width: 68ch; }
 .plate-empty {
   border: 1px dashed var(--rule-firm);
   background: var(--sunk);
+  background-image: radial-gradient(ellipse 70% 90% at 50% 120%, var(--glow-a), var(--glow-b) 70%);
   aspect-ratio: 16 / 9;
   max-width: 100%;
   display: grid;
@@ -502,7 +550,7 @@ p { margin: 0; max-width: 68ch; }
   font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--signal);
+  color: var(--signal-lift);
   display: block;
   margin-bottom: 4px;
 }
