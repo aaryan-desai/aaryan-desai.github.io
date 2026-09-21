@@ -314,8 +314,8 @@ p { margin: 0; max-width: 68ch; }
   grid-template-columns: repeat(4, 1fr);
 }
 
-.titleblock-3 { grid-template-columns: 1.4fr 1fr 1fr; }
-@media (max-width: 720px) { .titleblock-3 { grid-template-columns: 1fr; } }
+.titleblock-2 { grid-template-columns: 1.4fr 1fr; }
+@media (max-width: 720px) { .titleblock-2 { grid-template-columns: 1fr; } }
 
 .tb-cell {
   padding: 12px clamp(20px, 4vw, 44px) 14px;
@@ -900,4 +900,22 @@ p { margin: 0; max-width: 68ch; }
   letter-spacing: 0.04em;
   color: var(--ink-soft);
   white-space: nowrap;
+}
+
+/* the "currently" line: a status readout, not a sentence */
+.about-now {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0;
+  padding: 14px clamp(20px, 4vw, 44px) 0;
+  max-width: none;
+}
+.now-k {
+  display: inline-block;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--signal);
+  margin-right: 9px;
 }
