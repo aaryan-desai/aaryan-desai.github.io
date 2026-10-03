@@ -14,7 +14,8 @@
 
 <header class="topbar">
   <div class="topbar-inner">
-    <a class="wordmark" href="index.html">Aaryan Desai</a>
+    <p class="brand-tag">Mechanical &middot; Robotics &middot; Automation</p>
+    <h1 class="brand"><a class="wordmark" href="index.html">Aaryan <span class="surname">Desai</span></a></h1>
     <nav>
       <a href="work/index.html">Work</a>
       <a href="#experience">Experience</a>
@@ -43,28 +44,61 @@
 <main class="sheet">
   <div class="frame">
 
-    <section class="hero">
+    <section class="hero hero-open">
       <div class="hero-body">
-        <p class="eyebrow">Mechanical &middot; Robotics &middot; Automation</p>
-        <h1>Aaryan <span class="surname">Desai</span></h1>
         <p class="lede">I build the physical and control layers of automated systems, from weld cells to inspection
         fixtures to end-of-arm tooling, and the data pipelines that tell you whether they are actually working.
         Currently pursuing my Master's degree in Robotic Systems Development (MRSD) at Carnegie Mellon University.</p>
+        <p class="about-now"><span class="now-k">Currently</span> Failing to make my cat an Instagram sensation.
+        Trying to get platinum on Elden Ring.</p>
       </div>
+    </section>
 
-      <div class="titleblock titleblock-2">
-        <div class="tb-cell">
-          <span class="tb-label">Discipline</span>
-          <span class="tb-value">Robotics, from a mechanical engineering background</span>
-        </div>
-        <div class="tb-cell">
-          <span class="tb-label">Status</span>
-          <span class="tb-value">Seeking Summer 2027 internship</span>
-        </div>
+    <section class="section" id="work">
+      <div class="section-head">
+        <h2 class="section-title">Work</h2>
+        <a class="more" href="work/index.html">All projects &rarr;</a>
       </div>
-
-      <p class="about-now"><span class="now-k">Currently</span> Failing to make my cat an Instagram sensation.
-      Trying to get platinum on Elden Ring.</p>
+      <div class="tile-row" id="tile-row">
+      <button class="tile-step" id="tile-prev" type="button" aria-label="Previous project" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"
+             aria-hidden="true"><polyline points="16 3 7 12 16 21"/></svg>
+      </button>
+      <div class="tile-strip" id="tile-strip">
+        <a class="tile" href="work/production-planning.html">
+          <span class="tile-thumb is-empty"><span class="hint">assets/thumbs/production-planning.jpg</span></span>
+          <span class="tile-title">Paint Allocation &amp; Floor Runlists</span>
+        </a>
+        <a class="tile" href="work/vision-inspection.html">
+          <span class="tile-thumb is-empty"><span class="hint">assets/thumbs/vision-inspection.jpg</span></span>
+          <span class="tile-title">Automated Vision Inspection System</span>
+        </a>
+        <a class="tile" href="work/weld-cell.html">
+          <span class="tile-thumb is-empty"><span class="hint">assets/thumbs/weld-cell.jpg</span></span>
+          <span class="tile-title">Robotic Weld Cell Consolidation</span>
+        </a>
+        <a class="tile" href="work/die-transfer.html">
+          <span class="tile-thumb is-empty"><span class="hint">assets/thumbs/die-transfer.jpg</span></span>
+          <span class="tile-title">Die Transfer Motion Profile</span>
+        </a>
+        <a class="tile" href="work/plc-telemetry.html">
+          <span class="tile-thumb is-empty"><span class="hint">assets/thumbs/plc-telemetry.jpg</span></span>
+          <span class="tile-title">PLC Telemetry &amp; Fault Analytics</span>
+        </a>
+        <a class="tile" href="work/tesla-internships.html">
+          <span class="tile-thumb is-empty"><span class="hint">assets/thumbs/tesla-internships.jpg</span></span>
+          <span class="tile-title">Tesla &mdash; Production Control Equipment</span>
+        </a>
+        <a class="tile" href="work/mars-rover.html">
+          <span class="tile-thumb is-empty"><span class="hint">assets/thumbs/mars-rover.jpg</span></span>
+          <span class="tile-title">ME 588 Autonomous Mars Rover</span>
+        </a>
+      </div>
+      <button class="tile-step" id="tile-next" type="button" aria-label="Next project">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"
+             aria-hidden="true"><polyline points="8 3 17 12 8 21"/></svg>
+      </button>
+      </div>
     </section>
 
     <section class="section" id="about">
@@ -214,8 +248,8 @@
         <div class="table-scroll">
           <table class="spec">
             <tbody>
-              <tr><th>Email</th><td><a href="mailto:aaryandesai.00@gmail.com">aaryandesai.00@gmail.com</a></td></tr>
-              <tr><th>Email &middot; CMU</th><td><a href="mailto:aaryand@andrew.cmu.edu">aaryand@andrew.cmu.edu</a></td></tr>
+              <tr><th class="mid">Email</th><td><a href="mailto:aaryandesai.00@gmail.com">aaryandesai.00@gmail.com</a><br>
+                <a href="mailto:aaryand@andrew.cmu.edu">aaryand@andrew.cmu.edu</a></td></tr>
               <tr><th>LinkedIn</th><td><a href="https://linkedin.com/in/aaryan-desai">linkedin.com/in/aaryan-desai</a></td></tr>
               <tr><th>GitHub</th><td><a href="https://github.com/aaryan-desai">github.com/aaryan-desai</a></td></tr>
               <tr><th>Handshake</th><td><a href="https://app.joinhandshake.com/profiles/aaryandesai">app.joinhandshake.com/profiles/aaryandesai</a></td></tr>
@@ -265,6 +299,37 @@
   });
 
   mq.addEventListener('change', function () { if (!stored()) paint(); });
+})();
+</script>
+<script>
+(function () {
+  var row   = document.getElementById('tile-row');
+  var strip = document.getElementById('tile-strip');
+  var prev  = document.getElementById('tile-prev');
+  var next  = document.getElementById('tile-next');
+  var calm  = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  // one tile plus the gap beside it
+  function step() {
+    var tiles = strip.querySelectorAll('.tile');
+    return tiles.length > 1 ? tiles[1].offsetLeft - tiles[0].offsetLeft : strip.clientWidth;
+  }
+  function sync() {
+    var thumb = strip.querySelector('.tile-thumb');
+    if (thumb) row.style.setProperty('--thumb-h', thumb.offsetHeight + 'px');
+    var max = strip.scrollWidth - strip.clientWidth;
+    prev.disabled = strip.scrollLeft <= 1;
+    next.disabled = strip.scrollLeft >= max - 1;
+  }
+  function move(dir) {
+    strip.scrollBy({ left: dir * step(), behavior: calm.matches ? 'auto' : 'smooth' });
+  }
+
+  prev.addEventListener('click', function () { move(-1); });
+  next.addEventListener('click', function () { move(1); });
+  strip.addEventListener('scroll', sync, { passive: true });
+  window.addEventListener('resize', sync);
+  sync();
 })();
 </script>
 

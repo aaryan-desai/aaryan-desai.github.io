@@ -6,7 +6,7 @@ Edit the HTML, `git push`, it's live.
 **Live:** https://aaryan-desai.github.io
 
 ```
-index.html                  landing: about, experience timeline, skills, contact
+index.html                  landing: project tiles, about, experience timeline, skills, contact
 work/index.html             project index — discipline matrix + filters
 work/*.html                 one page per project (7)
 assets/site.css             the entire design system; tokens in the first ~80 lines
@@ -28,7 +28,7 @@ Pages serves it, including directory indexes.
 **Aenami "Lantern Glow"**, derived from the terminal palette in
 `~/ubuntu-rice/aenami-theme/palette/aenami.json` (sampled from Alena Aenami's
 *In Search of Peace*). Dark is the primary; the light theme is the same palette
-inverted, with `base #0c1a24` becoming the ink.
+inverted onto a beige ground, with `base #0c1a24` becoming the ink.
 
 Colours live only as custom properties at the top of `assets/site.css`, in three blocks
 that must be edited together:
@@ -56,6 +56,31 @@ fails contrast every time.
 3. Set `data-tags` on the row to any of `MECH CTRL DATA SW`, and mirror it in the
    four-cell `.matrix` with `data-on="1"` on the ones that apply.
 4. Bump the filter chip counts and the `entry-count` span.
+5. Add a `.tile` to the `.tile-strip` in `index.html`, in the same order as the work index.
+
+## Landing thumbnails
+
+One image per project, used twice: on the landing tile and on its row in `work/index.html`.
+Each has a labelled slot. On the landing page, replace:
+
+```html
+<span class="tile-thumb is-empty"><span class="hint">assets/thumbs/weld-cell.jpg</span></span>
+```
+
+with:
+
+```html
+<span class="tile-thumb"><img src="assets/thumbs/weld-cell.jpg" alt=""></span>
+```
+
+On the work index the slot is `<span class="tile-thumb is-empty index-thumb">`; swap it for
+`<span class="tile-thumb index-thumb"><img src="../assets/thumbs/weld-cell.jpg" alt=""></span>`
+(note the `../`). There the image crops to 16:9 on phones.
+
+Tiles are **4:3** and crop to fill, so keep the subject centred; ~800px wide is plenty.
+The strip shows three at a time (two on tablets, one on phones) and moves one tile per
+chevron click or swipe; `--per` on `.tile-strip` in `site.css` sets the count.
+`alt` stays empty because the title underneath is already the link text.
 
 ## Image slots
 
@@ -116,7 +141,9 @@ dashboards and screenshots. Always write a real `alt`.
 - [ ] Fill or delete all **10 `.plate-empty`** slots. An empty slot reads worse than no figure.
 - [ ] Confirm Tesla image clearance before adding `universal-eoat.png`.
 - [ ] Verify the 2025–2026 date range on the planning tool page.
-- [ ] Update `Status` in the landing title block each application season.
+- [ ] Fill all **14 `.tile-thumb.is-empty`** slots: 7 on the landing page, 7 on the work index.
+- [ ] Update the "Looking for" row in the landing About aside, and the Contact line, each
+      application season.
 - [ ] **Graduation (May 2028):** remove `aaryand@andrew.cmu.edu` from the contact table in
       `index.html` — the address stops working and becomes a dead link on a live site.
 - [ ] Re-export `assets/AaryanDesai-Resume.pdf` when the résumé changes.

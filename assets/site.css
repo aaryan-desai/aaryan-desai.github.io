@@ -9,26 +9,26 @@
    via ~/ubuntu-rice/aenami-theme/palette/aenami.json
    ============================================================ */
 
-/* ---- LIGHT: Aenami inverted. base #0c1a24 becomes the ink. ---- */
+/* ---- LIGHT: Aenami inverted, on beige. base #0c1a24 becomes the ink. ---- */
 :root {
-  --paper:       #E7EDF1;
-  --surface:     #F5F9FB;
-  --sunk:        #D8E3EA;
-  --rule:        #C3D2DC;
-  --rule-firm:   #9FB4C2;
+  --paper:       #E8DDC8;   /* beige ground; the ink stays Aenami */
+  --surface:     #F1E8D6;
+  --sunk:        #E0D3BA;
+  --rule:        #D2C3A6;
+  --rule-firm:   #A99A7A;
 
   --ink:         #0C1A24;   /* Aenami base, verbatim */
   --ink-soft:    #3E5666;
-  --ink-faint:   #506474;   /* holds 4.5 on --sunk   */
+  --ink-faint:   #4A5D6C;   /* holds 4.5 on --sunk   */
 
-  --accent:      #237188;   /* Aenami teal, verbatim */
+  --accent:      #1F677C;   /* Aenami teal, deepened for the beige */
   --accent-wash: #CFE2E9;
   --accent-on:   #20687D;
-  --signal:      #F84F41;
+  --signal:      #EE4033;
   --signal-wash: #F6DCD4;
   --signal-on:   #C21507;
-  --signal-lift: #C21507;
-  --head:        #974D21;
+  --signal-lift: #B31204;
+  --head:        #8C461D;
 
   --glow-a:      rgba(249, 98, 86, 0.20);
   --glow-b:      rgba(249, 98, 86, 0.00);
@@ -185,31 +185,72 @@ p { margin: 0; max-width: 68ch; }
   border-bottom: 1px solid var(--rule);
 }
 
+/* masthead: a small tag line over a large name on the left; the theme
+   switch over the nav on the right, nav sitting on the name's baseline */
 .topbar-inner {
   max-width: 1080px;
   margin: 0 auto;
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
+  padding: 14px 16px 14px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "tag  switch"
+    "name nav";
+  column-gap: 24px;
+  row-gap: 4px;
+  align-items: end;
 }
 
-.wordmark {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 15.5px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+.brand-tag {
+  grid-area: tag;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  color: var(--ink-faint);
+  max-width: none;
+  /* at tablet widths the nav narrows this column; the line may run on
+     under the theme switch's row rather than break in two */
+  white-space: nowrap;
+}
+
+.brand { grid-area: name; font-size: inherit; line-height: 1; }
+.topbar-inner > .wordmark { grid-area: name; }
+
+.wordmark {
+  display: block;
+  font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+  font-size: clamp(1.75rem, 4.6vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.015em;
   color: var(--ink);
   text-decoration: none;
 }
+.wordmark .surname { color: var(--ink-faint); }
+
+.topbar .theme-switch { grid-area: switch; justify-self: end; align-self: center; }
 
 .topbar nav {
-  margin-left: auto;
+  grid-area: nav;
   display: flex;
   gap: 18px;
   flex-wrap: wrap;
+  padding-bottom: 2px;
+}
+
+@media (max-width: 640px) {
+  .topbar-inner {
+    grid-template-areas:
+      "tag  tag"
+      "name switch"
+      "nav  nav";
+    row-gap: 6px;
+    padding-block: 10px;
+  }
+  .brand-tag { letter-spacing: 0.06em; white-space: normal; }
+  .topbar nav { padding-bottom: 0; }
 }
 
 .topbar nav a {
@@ -314,9 +355,6 @@ p { margin: 0; max-width: 68ch; }
   grid-template-columns: repeat(4, 1fr);
 }
 
-.titleblock-2 { grid-template-columns: 1.4fr 1fr; }
-@media (max-width: 720px) { .titleblock-2 { grid-template-columns: 1fr; } }
-
 .tb-cell {
   padding: 12px clamp(20px, 4vw, 44px) 14px;
   border-right: 1px solid var(--rule);
@@ -368,7 +406,7 @@ p { margin: 0; max-width: 68ch; }
 
 .index-row {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 160px minmax(0, 1fr) auto;
   gap: 6px 24px;
   align-items: start;
   padding: 20px 0;
@@ -384,6 +422,8 @@ p { margin: 0; max-width: 68ch; }
   padding-left: 12px;
 }
 .index-row:hover .index-title { color: var(--accent); }
+.index-row:hover .tile-thumb { border-color: var(--accent); }
+.index-row .index-thumb.is-empty { padding: 8px; }
 
 .index-main { display: grid; gap: 7px; }
 .index-title {
@@ -426,10 +466,20 @@ p { margin: 0; max-width: 68ch; }
 }
 .tag[data-d="MECH"] { background: var(--signal-wash); color: var(--signal-on); }
 
-@media (max-width: 640px) {
-  .index-row { grid-template-columns: 1fr; }
-  .index-meta { align-items: flex-start; text-align: left; }
+/* three columns stop fitting before the phone breakpoint: the thumbnail
+   and the matrix would squeeze the text between them. So the meta
+   drops under the text first, then everything stacks. */
+@media (max-width: 980px) {
+  .index-row { grid-template-columns: 140px minmax(0, 1fr); gap: 12px 20px; }
+  .index-row .index-thumb { grid-row: 1 / span 2; }
+  .index-meta { grid-column: 2; align-items: flex-start; text-align: left; }
   .tags { justify-content: flex-start; }
+}
+
+@media (max-width: 640px) {
+  .index-row { grid-template-columns: minmax(0, 1fr); }
+  .index-row .index-thumb { grid-row: auto; aspect-ratio: 16 / 9; }
+  .index-meta { grid-column: auto; }
 }
 
 /* ---------- metric strip --------------------------------- */
@@ -596,6 +646,8 @@ p { margin: 0; max-width: 68ch; }
   white-space: nowrap;
 }
 .spec td { color: var(--ink); }
+/* a label beside a multi-line value */
+.spec th.mid { vertical-align: middle; }
 .table-scroll { overflow-x: auto; }
 
 /* revision note - the "you fill this in" marker */
@@ -889,8 +941,11 @@ p { margin: 0; max-width: 68ch; }
   font-size: 15px;
 }
 
+/* four 8-character labels only fit a phone-width row with the cell
+   padding and tracking taken out */
 @media (max-width: 640px) {
   .matrix { min-width: 0; width: 100%; }
+  .mx { padding-inline: 0; letter-spacing: 0; }
 }
 
 /* work index meta: company/date and status carry real weight now */
@@ -909,7 +964,6 @@ p { margin: 0; max-width: 68ch; }
   line-height: 1.6;
   color: var(--ink-soft);
   margin: 0;
-  padding: 14px clamp(20px, 4vw, 44px) 0;
   max-width: none;
 }
 .now-k {
@@ -919,3 +973,116 @@ p { margin: 0; max-width: 68ch; }
   color: var(--signal);
   margin-right: 9px;
 }
+
+/* a hero with no title block closing it off: it needs its own bottom
+   edge, and the section below needs the rule the title block gave */
+.hero-open { padding-bottom: clamp(32px, 5vw, 48px); }
+.hero-open + .section { border-top: 1px solid var(--rule); }
+
+/* ---------- project tiles (landing) ---------------------- */
+
+.section-head .more {
+  margin-left: auto;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  text-decoration: none;
+}
+.section-head .more:hover { text-decoration: underline; }
+
+/* strip with a chevron either side */
+.tile-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  column-gap: 10px;
+  align-items: start;
+}
+
+/* --thumb-h is set from script so the chevron centres on the thumbnails
+   rather than on thumbnail-plus-title; the 4px matches the strip's inset */
+.tile-step {
+  width: 30px;
+  height: var(--thumb-h, 100%);
+  margin-top: 4px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--ink-faint);
+  cursor: pointer;
+  transition: color 120ms ease;
+}
+.tile-step svg { display: block; width: 26px; height: 26px; }
+.tile-step:hover:not(:disabled) { color: var(--accent); }
+.tile-step:disabled { opacity: 0.3; cursor: default; }
+
+/* a window exactly --per tiles wide. Every tile is a mandatory stop, so
+   a swipe, a wheel flick or an arrow all move by whole tiles and never
+   rest on a half. The 4px inset only keeps focus rings from clipping. */
+.tile-strip {
+  --per: 3;
+  --gap: 16px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - (var(--per) - 1) * var(--gap)) / var(--per));
+  gap: var(--gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin-inline: -4px;
+  padding: 4px 4px 14px;
+  scroll-padding-inline: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule-firm) transparent;
+}
+@media (max-width: 760px) { .tile-strip { --per: 2; } }
+@media (max-width: 480px) { .tile-strip { --per: 1; } }
+
+.tile {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  text-decoration: none;
+  color: inherit;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.tile-thumb {
+  display: block;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--rule-firm);
+  background: var(--sunk);
+  overflow: hidden;
+  transition: border-color 120ms ease;
+}
+.tile-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* thumbnail slot - same language as .plate-empty */
+.tile-thumb.is-empty {
+  border-style: dashed;
+  background-image: radial-gradient(ellipse 70% 90% at 50% 120%, var(--glow-a), var(--glow-b) 70%);
+  display: grid;
+  place-content: center;
+  text-align: center;
+  padding: 14px;
+}
+.tile-thumb .hint {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.tile-title {
+  font-family: "IBM Plex Sans Condensed", sans-serif;
+  font-size: 1.12rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--head);
+  transition: color 120ms ease;
+}
+.tile:hover .tile-thumb { border-color: var(--accent); }
+.tile:hover .tile-title { color: var(--accent); }
