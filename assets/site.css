@@ -9,29 +9,33 @@
    via ~/ubuntu-rice/aenami-theme/palette/aenami.json
    ============================================================ */
 
-/* ---- LIGHT: Aenami inverted, on beige. base #0c1a24 becomes the ink. ---- */
+/* ---- LIGHT: sage and cream. Five given colours - #F4EBDD cream,
+   #D8C7A6 tan, #AFC8B4 light sage, #6F8F7B sage, #3E5F4D deep green - used
+   verbatim where marked; the rest are derived from them so text clears
+   AA on every ground it sits on. ---- */
 :root {
-  --paper:       #E8DDC8;   /* beige ground; the ink stays Aenami */
-  --surface:     #F1E8D6;
-  --sunk:        #E0D3BA;
-  --rule:        #D2C3A6;
-  --rule-firm:   #A99A7A;
+  --paper:       #D8C7A6;   /* tan, verbatim: page and masthead */
+  --surface:     #F4EBDD;   /* cream, verbatim: the sheet */
+  --sunk:        #D2DAC9;   /* light sage cut 50/50 with the cream */
+  --rule:        #D8C7A6;   /* tan, verbatim */
+  --rule-firm:   #6F8F7B;   /* sage, verbatim */
 
-  --ink:         #0C1A24;   /* Aenami base, verbatim */
-  --ink-soft:    #3E5666;
-  --ink-faint:   #4A5D6C;   /* holds 4.5 on --sunk   */
+  --ink:         #1C2A23;
+  --ink-soft:    #33443B;
+  --ink-faint:   #3A5948;   /* holds 4.5 on --sunk and on --paper */
 
-  --accent:      #1F677C;   /* Aenami teal, deepened for the beige */
-  --accent-wash: #CFE2E9;
-  --accent-on:   #20687D;
-  --signal:      #EE4033;
-  --signal-wash: #F6DCD4;
-  --signal-on:   #C21507;
-  --signal-lift: #B31204;
-  --head:        #8C461D;
+  --accent:      #3E5F4D;   /* deep green, verbatim */
+  --accent-wash: #AFC8B4;   /* light sage, verbatim */
+  --accent-on:   #2C4638;
+  --signal:      #4A705C;   /* between sage and deep green */
+  --signal-wash: #AFC8B4;
+  --signal-on:   #2C4638;
+  --signal-lift: #2C4638;
+  --head:        #3E5F4D;   /* deep green, verbatim */
+  --mx-line:     #3E5F4D;   /* discipline-box outlines; dark mode leaves this unset */
 
-  --glow-a:      rgba(249, 98, 86, 0.20);
-  --glow-b:      rgba(249, 98, 86, 0.00);
+  --glow-a:      rgba(111, 143, 123, 0.34);
+  --glow-b:      rgba(111, 143, 123, 0.00);
 
   color-scheme: light;
 }
@@ -57,6 +61,7 @@
     --signal-on:   #FF6B4F;
     --signal-lift: #FF7B62;
     --head:        #F0B380;
+    --mx-line:     initial;
 
     --glow-a:      rgba(249, 98, 86, 0.50);
     --glow-b:      rgba(249, 98, 86, 0.00);
@@ -84,11 +89,25 @@
   --signal-on:   #FF6B4F;
   --signal-lift: #FF7B62;
   --head:        #F0B380;
+  --mx-line:     initial;
 
   --glow-a:      rgba(249, 98, 86, 0.50);
   --glow-b:      rgba(249, 98, 86, 0.00);
 
   color-scheme: dark;
+}
+
+/* ---- TYPE: three roles, set once. --font-accent is the "highlight"
+   face: labels, dates, figures. ---- */
+:root {
+  --font-body:   "League Spartan", ui-sans-serif, system-ui, sans-serif;
+  --font-head:   "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-accent: "League Spartan", ui-sans-serif, system-ui, sans-serif;
+
+  /* one size for all running content (the intro's size); --text-sm is the
+     single step below it. Labels and dates keep their own 15px. */
+  --text:    clamp(1.18rem, 2.3vw, 1.3rem);
+  --text-sm: clamp(1.08rem, 2.1vw, 1.18rem);
 }
 
 * { box-sizing: border-box; }
@@ -97,15 +116,18 @@ body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-  font-size: 17px;
+  font-family: var(--font-body);
+  font-size: var(--text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
 
 img { max-width: 100%; display: block; }
 
-a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+/* navigation and whole-card links show hover by colour, not underline */
+.wordmark:hover, .topbar nav a:hover, .backlink:hover, .tile:hover, .index-row:hover { text-decoration: none; }
 a:focus-visible, button:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
@@ -140,7 +162,7 @@ a:focus-visible, button:focus-visible {
 /* ---------- type roles ----------------------------------- */
 
 .eyebrow {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -150,7 +172,7 @@ a:focus-visible, button:focus-visible {
 }
 
 h1, h2, h3 {
-  font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+  font-family: var(--font-head);
   font-weight: 600;
   letter-spacing: -0.01em;
   text-wrap: balance;
@@ -164,12 +186,12 @@ h3 { font-size: 1.1rem; line-height: 1.3; }
 p { margin: 0; max-width: 68ch; }
 
 .mono {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-accent);
   font-variant-numeric: tabular-nums;
 }
 
 .lede {
-  font-size: clamp(1.08rem, 2.1vw, 1.18rem);
+  font-size: var(--text);
   color: var(--ink-soft);
   line-height: 1.62;
 }
@@ -203,7 +225,7 @@ p { margin: 0; max-width: 68ch; }
 
 .brand-tag {
   grid-area: tag;
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -220,7 +242,7 @@ p { margin: 0; max-width: 68ch; }
 
 .wordmark {
   display: block;
-  font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
+  font-family: var(--font-head);
   font-size: clamp(1.75rem, 4.6vw, 2.6rem);
   font-weight: 700;
   line-height: 1;
@@ -228,7 +250,6 @@ p { margin: 0; max-width: 68ch; }
   color: var(--ink);
   text-decoration: none;
 }
-.wordmark .surname { color: var(--ink-faint); }
 
 .topbar .theme-switch { grid-area: switch; justify-self: end; align-self: center; }
 
@@ -254,7 +275,7 @@ p { margin: 0; max-width: 68ch; }
 }
 
 .topbar nav a {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -345,7 +366,6 @@ p { margin: 0; max-width: 68ch; }
 
 .hero-body { display: grid; gap: 20px; }
 
-.hero h1 .surname { color: var(--ink-faint); }
 
 /* title block: the grid of label/value cells from a drawing sheet */
 .titleblock {
@@ -364,7 +384,7 @@ p { margin: 0; max-width: 68ch; }
 .tb-cell:last-child { border-right: 0; }
 
 .tb-label {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -372,7 +392,7 @@ p { margin: 0; max-width: 68ch; }
   display: block;
   margin-bottom: 3px;
 }
-.tb-value { font-size: 16.5px; font-weight: 500; line-height: 1.35; }
+.tb-value { font-size: var(--text); font-weight: 500; line-height: 1.35; }
 
 @media (max-width: 720px) {
   .titleblock { grid-template-columns: repeat(2, 1fr); }
@@ -382,7 +402,10 @@ p { margin: 0; max-width: 68ch; }
 
 /* ---------- generic section ------------------------------ */
 
-.section { padding: clamp(40px, 6vw, 68px) clamp(20px, 4vw, 44px); }
+.section {
+  padding: clamp(26px, 3.6vw, 38px) clamp(20px, 4vw, 44px) clamp(34px, 4.6vw, 50px);
+  scroll-margin-top: 112px;   /* clear the sticky masthead on #anchor jumps */
+}
 .section + .section { border-top: 1px solid var(--rule); }
 
 .section-head {
@@ -393,7 +416,7 @@ p { margin: 0; max-width: 68ch; }
   margin-bottom: 26px;
 }
 .section-head .count {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   color: var(--ink-faint);
   margin-left: auto;
@@ -427,14 +450,14 @@ p { margin: 0; max-width: 68ch; }
 
 .index-main { display: grid; gap: 7px; }
 .index-title {
-  font-family: "IBM Plex Sans Condensed", sans-serif;
+  font-family: var(--font-head);
   font-size: clamp(1.24rem, 2.6vw, 1.45rem);
   font-weight: 600;
   line-height: 1.2;
   color: var(--head);
   transition: color 120ms ease;
 }
-.index-sub { color: var(--ink-soft); font-size: 16.5px; line-height: 1.5; max-width: 62ch; }
+.index-sub { color: var(--ink-soft); font-size: var(--text); line-height: 1.5; max-width: 62ch; }
 
 .index-meta {
   display: flex;
@@ -445,7 +468,7 @@ p { margin: 0; max-width: 68ch; }
 }
 .index-year {
   font-weight: 500;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 16px;
   color: var(--ink-faint);
   font-variant-numeric: tabular-nums;
@@ -455,7 +478,7 @@ p { margin: 0; max-width: 68ch; }
 .tags { display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
 
 .tag {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -496,7 +519,7 @@ p { margin: 0; max-width: 68ch; }
   border-bottom: 1px solid var(--rule);
 }
 .metric-value {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: clamp(1.51rem, 3.6vw, 1.85rem);
   font-weight: 600;
   color: var(--signal);
@@ -505,7 +528,7 @@ p { margin: 0; max-width: 68ch; }
   letter-spacing: -0.02em;
 }
 .metric-label {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -526,7 +549,7 @@ p { margin: 0; max-width: 68ch; }
   border-bottom: 1px solid var(--rule);
 }
 .role-when {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15.5px;
   color: var(--ink-faint);
   letter-spacing: 0.04em;
@@ -559,7 +582,7 @@ p { margin: 0; max-width: 68ch; }
   border-bottom: 1px solid var(--rule);
 }
 .skill-block h3 {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -567,12 +590,12 @@ p { margin: 0; max-width: 68ch; }
   color: var(--ink-faint);
   margin-bottom: 9px;
 }
-.skill-block p { font-size: 16.5px; line-height: 1.55; color: var(--ink); }
+.skill-block p { font-size: var(--text); line-height: 1.55; color: var(--ink); }
 
 /* ---------- project page --------------------------------- */
 
 .backlink {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -584,10 +607,10 @@ p { margin: 0; max-width: 68ch; }
 .backlink:hover { color: var(--accent); }
 
 .prose { display: grid; gap: 14px; }
-.prose p { font-size: 17px; line-height: 1.68; color: var(--ink-soft); }
+.prose p { font-size: var(--text); line-height: 1.68; color: var(--ink-soft); }
 .prose p strong { color: var(--ink); font-weight: 600; }
 .prose ul { margin: 0; padding-left: 18px; display: grid; gap: 7px; }
-.prose li { font-size: 17px; line-height: 1.6; color: var(--ink-soft); }
+.prose li { font-size: var(--text); line-height: 1.6; color: var(--ink-soft); }
 .prose li strong { color: var(--ink); font-weight: 600; }
 
 /* image plate - drop a render or screenshot in */
@@ -607,20 +630,20 @@ p { margin: 0; max-width: 68ch; }
   padding: 20px;
 }
 .plate-empty .slot {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ink-faint);
 }
 .plate-empty .hint {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15.5px;
   color: var(--ink-soft);
 }
 
 .plate figcaption {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   color: var(--ink-faint);
   margin-top: 8px;
@@ -628,7 +651,7 @@ p { margin: 0; max-width: 68ch; }
 }
 
 /* spec table */
-.spec { width: 100%; border-collapse: collapse; font-size: 16.5px; }
+.spec { width: 100%; border-collapse: collapse; font-size: var(--text); }
 .spec th, .spec td {
   text-align: left;
   padding: 9px 12px 9px 0;
@@ -636,7 +659,7 @@ p { margin: 0; max-width: 68ch; }
   vertical-align: top;
 }
 .spec th {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -658,7 +681,7 @@ p { margin: 0; max-width: 68ch; }
   margin-top: 20px;
 }
 .revnote .rev-tag {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -666,7 +689,7 @@ p { margin: 0; max-width: 68ch; }
   display: block;
   margin-bottom: 4px;
 }
-.revnote p { font-size: 16px; color: var(--ink-soft); line-height: 1.55; }
+.revnote p { font-size: var(--text); color: var(--ink-soft); line-height: 1.55; }
 
 /* ---------- footer --------------------------------------- */
 
@@ -680,7 +703,7 @@ p { margin: 0; max-width: 68ch; }
   align-items: baseline;
 }
 .footer, .footer a {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15.5px;
   letter-spacing: 0.06em;
   color: var(--ink-faint);
@@ -714,19 +737,19 @@ p { margin: 0; max-width: 68ch; }
   align-content: start;
 }
 .flow-node .n-name {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15.5px;
   font-weight: 600;
   color: var(--ink);
   letter-spacing: 0.02em;
 }
-.flow-node .n-desc { font-size: 15.5px; color: var(--ink-soft); line-height: 1.45; }
+.flow-node .n-desc { font-size: var(--text); color: var(--ink-soft); line-height: 1.45; }
 .flow-arrow {
   flex: 0 0 34px;
   display: grid;
   place-content: center;
   color: var(--accent);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 17px;
 }
 @media (max-width: 680px) {
@@ -745,9 +768,9 @@ p { margin: 0; max-width: 68ch; }
 @media (max-width: 760px) { .about-grid { grid-template-columns: 1fr; } }
 
 .about-prose { display: grid; gap: 14px; }
-.about-prose p { font-size: 16.5px; line-height: 1.7; color: var(--ink-soft); max-width: 62ch; }
+.about-prose p { font-size: var(--text); line-height: 1.7; color: var(--ink-soft); max-width: 62ch; }
 .about-prose p strong { color: var(--ink); font-weight: 600; }
-.about-prose p.first { font-size: 17px; color: var(--ink); line-height: 1.6; }
+.about-prose p.first { font-size: var(--text); color: var(--ink); line-height: 1.6; }
 
 .about-aside {
   border: 1px solid var(--rule-firm);
@@ -758,37 +781,39 @@ p { margin: 0; max-width: 68ch; }
 }
 .aside-row { display: grid; gap: 3px; }
 .aside-k {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-faint);
 }
-.aside-v { font-size: 16px; color: var(--ink); line-height: 1.45; }
-.aside-v a { color: var(--accent); text-decoration: none; }
-.aside-v a:hover { text-decoration: underline; }
+.aside-v { font-size: var(--text); color: var(--ink); line-height: 1.45; }
 
 /* ---------- timeline ------------------------------------- */
+/* No rules between entries: the rail is the only line. Dates sit
+   right-aligned against it so the block reads from the middle out. */
 
-.timeline { border-top: 1px solid var(--rule-firm); }
+.timeline { max-width: 840px; margin-inline: auto; }
 
 .tl-item {
   display: grid;
-  grid-template-columns: 150px 22px 1fr;
-  gap: 4px 0;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--rule);
-  position: relative;
+  grid-template-columns: 190px 22px minmax(0, 1fr);
+  column-gap: 14px;
+  padding-bottom: 30px;
 }
+.tl-item:last-child { padding-bottom: 0; }
 
+/* date and the first line of the entry share a 22px line box, and the
+   marker is centred on it */
 .tl-when {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
+  line-height: 22px;
   color: var(--ink-faint);
   letter-spacing: 0.04em;
-  padding-top: 4px;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+  text-align: right;
 }
 
 /* the rail: a marker whose shape encodes what kind of entry this is */
@@ -796,21 +821,22 @@ p { margin: 0; max-width: 68ch; }
 .tl-rail::before {
   content: "";
   position: absolute;
-  left: 3px;
+  left: 10px;
   top: 0;
-  bottom: -20px;
+  bottom: -30px;
   width: 1px;
   background: var(--rule-firm);
 }
-.tl-item:last-child .tl-rail::before { bottom: auto; height: 10px; }
+.tl-item:first-child .tl-rail::before { top: 11px; }
+.tl-item:last-child .tl-rail::before { bottom: auto; height: 11px; }
 .tl-rail::after {
   content: "";
   position: absolute;
-  left: 0;
+  left: 6px;
   top: 7px;
   width: 7px;
   height: 7px;
-  background: var(--paper);
+  background: var(--surface);
   border: 1px solid var(--accent);
 }
 /* education gets a filled marker, work an open one - a real distinction */
@@ -819,31 +845,24 @@ p { margin: 0; max-width: 68ch; }
   border-color: var(--head);
 }
 
-.tl-body { padding-left: 4px; }
-.tl-title { font-weight: 600; font-size: 1.04rem; color: var(--ink); line-height: 1.25; }
-.tl-org { color: var(--ink-soft); font-size: 16px; margin-top: 2px; }
-.tl-note { color: var(--ink-soft); font-size: 16px; line-height: 1.55; margin-top: 8px; max-width: 58ch; }
+.tl-title { font-weight: 600; font-size: var(--text); color: var(--ink); line-height: 1.25; }
+.tl-org { color: var(--ink-soft); font-size: var(--text); margin-top: 2px; }
+.tl-note { color: var(--ink-soft); font-size: var(--text); line-height: 1.55; margin-top: 8px; max-width: 58ch; }
 .tl-kind {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
+  line-height: 22px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-faint);
   margin-bottom: 4px;
 }
-.tl-links { margin-top: 9px; display: flex; gap: 14px; flex-wrap: wrap; }
-.tl-links a {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 15px;
-  letter-spacing: 0.06em;
-  color: var(--accent);
-  text-decoration: none;
-}
-.tl-links a:hover { text-decoration: underline; }
+.tl-links { margin-top: 9px; display: flex; gap: 4px 18px; flex-wrap: wrap; }
+.tl-links a { font-size: var(--text); }
 
 @media (max-width: 640px) {
-  .tl-item { grid-template-columns: 18px 1fr; }
-  .tl-when { grid-column: 2; padding-top: 0; margin-bottom: 4px; }
+  .tl-item { grid-template-columns: 22px minmax(0, 1fr); column-gap: 8px; }
+  .tl-when { grid-column: 2; text-align: left; white-space: normal; }
   .tl-rail { grid-row: 1 / span 2; grid-column: 1; }
   .tl-body { grid-column: 2; }
 }
@@ -857,7 +876,7 @@ p { margin: 0; max-width: 68ch; }
   margin-bottom: 22px;
 }
 .filter {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -882,7 +901,7 @@ p { margin: 0; max-width: 68ch; }
 .filter-empty {
   padding: 26px 0;
   color: var(--ink-faint);
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15.5px;
 }
 
@@ -891,8 +910,8 @@ p { margin: 0; max-width: 68ch; }
    not captions, and were reading as subtitles at label size. */
 
 .section-title {
-  font-family: "IBM Plex Sans Condensed", "IBM Plex Sans", sans-serif;
-  font-size: clamp(1.4rem, 2.9vw, 1.75rem);
+  font-family: var(--font-head);
+  font-size: clamp(1.6rem, 3.3vw, 2.05rem);
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.012em;
@@ -903,8 +922,8 @@ p { margin: 0; max-width: 68ch; }
 
 .section-head {
   align-items: baseline;
-  margin-bottom: 30px;
-  padding-bottom: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--rule);
 }
 
@@ -913,15 +932,19 @@ p { margin: 0; max-width: 68ch; }
 .matrix {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border: 1px solid var(--rule-firm);
+  border: 1px solid var(--mx-line, var(--rule-firm));
   min-width: 232px;
 }
 
+/* League Spartan sits high in its line box (ascent 10, descent 3 at 15px),
+   so equal padding leaves the letters 2px above centre: the top padding
+   carries the difference. The extra 0.04em on the left balances the
+   letter-spacing that trails the last letter. */
 .mx {
-  padding: 7px 4px 8px;
+  padding: 9px 4px 6px calc(4px + 0.04em);
   text-align: center;
-  border-right: 1px solid var(--rule);
-  font-family: "IBM Plex Mono", monospace;
+  border-right: 1px solid var(--mx-line, var(--rule));
+  font-family: var(--font-accent);
   font-size: 15px;
   letter-spacing: 0.04em;
   color: var(--ink-faint);
@@ -950,7 +973,7 @@ p { margin: 0; max-width: 68ch; }
 
 /* work index meta: company/date and status carry real weight now */
 .index-status {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   letter-spacing: 0.04em;
   color: var(--ink-soft);
@@ -959,8 +982,8 @@ p { margin: 0; max-width: 68ch; }
 
 /* the "currently" line: a status readout, not a sentence */
 .about-now {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 15px;
+  font-family: var(--font-accent);
+  font-size: var(--text-sm);
   line-height: 1.6;
   color: var(--ink-soft);
   margin: 0;
@@ -968,6 +991,7 @@ p { margin: 0; max-width: 68ch; }
 }
 .now-k {
   display: inline-block;
+  font-size: 15px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--signal);
@@ -976,20 +1000,12 @@ p { margin: 0; max-width: 68ch; }
 
 /* a hero with no title block closing it off: it needs its own bottom
    edge, and the section below needs the rule the title block gave */
-.hero-open { padding-bottom: clamp(32px, 5vw, 48px); }
+.hero-open { padding-bottom: clamp(28px, 4vw, 40px); }
 .hero-open + .section { border-top: 1px solid var(--rule); }
 
 /* ---------- project tiles (landing) ---------------------- */
 
-.section-head .more {
-  margin-left: auto;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 15px;
-  letter-spacing: 0.06em;
-  color: var(--accent);
-  text-decoration: none;
-}
-.section-head .more:hover { text-decoration: underline; }
+.section-head .more { margin-left: auto; font-size: var(--text); }
 
 /* strip with a chevron either side */
 .tile-row {
@@ -1069,7 +1085,7 @@ p { margin: 0; max-width: 68ch; }
   padding: 14px;
 }
 .tile-thumb .hint {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-accent);
   font-size: 15px;
   line-height: 1.4;
   color: var(--ink-soft);
@@ -1077,8 +1093,8 @@ p { margin: 0; max-width: 68ch; }
 }
 
 .tile-title {
-  font-family: "IBM Plex Sans Condensed", sans-serif;
-  font-size: 1.12rem;
+  font-family: var(--font-head);
+  font-size: 1.28rem;
   font-weight: 600;
   line-height: 1.25;
   color: var(--head);
@@ -1086,3 +1102,45 @@ p { margin: 0; max-width: 68ch; }
 }
 .tile:hover .tile-thumb { border-color: var(--accent); }
 .tile:hover .tile-title { color: var(--accent); }
+
+/* ---------- project menu (project pages) ----------------- */
+
+.worknav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 20px;
+  padding: 12px clamp(20px, 4vw, 44px);
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--text);
+}
+.worknav-label {
+  font-family: var(--font-accent);
+  font-size: 15px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.worknav [aria-current] { color: var(--ink); font-weight: 600; }
+
+/* ---------- copy-on-click email -------------------------- */
+
+.copy[data-copied]::after {
+  content: "Copied";
+  display: inline-block;   /* keeps the link's hover underline off the label */
+  margin-left: 12px;
+  font-family: var(--font-accent);
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

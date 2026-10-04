@@ -7,7 +7,7 @@
 <meta name="description" content="Robotics software and systems integration, from a mechanical engineering background. CMU MRSD.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700&family=League+Spartan:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
 <header class="topbar">
   <div class="topbar-inner">
     <p class="brand-tag">Mechanical &middot; Robotics &middot; Automation</p>
-    <h1 class="brand"><a class="wordmark" href="index.html">Aaryan <span class="surname">Desai</span></a></h1>
+    <h1 class="brand"><a class="wordmark" href="index.html">Aaryan Desai</a></h1>
     <nav>
       <a href="work/index.html">Work</a>
       <a href="#experience">Experience</a>
@@ -151,7 +151,7 @@
       <div class="timeline">
 
         <div class="tl-item" data-kind="edu">
-          <div class="tl-when">2026 &ndash; 2028</div>
+          <div class="tl-when">Aug 2026 &ndash; May 2028</div>
           <div class="tl-rail"></div>
           <div class="tl-body">
             <div class="tl-kind">Education</div>
@@ -163,7 +163,7 @@
         </div>
 
         <div class="tl-item" data-kind="work">
-          <div class="tl-when">Apr 2024 &ndash; Present</div>
+          <div class="tl-when">Apr 2024 &ndash; Jul 2026</div>
           <div class="tl-rail"></div>
           <div class="tl-body">
             <div class="tl-kind">Manufacturing Engineer</div>
@@ -181,7 +181,7 @@
         </div>
 
         <div class="tl-item" data-kind="work">
-          <div class="tl-when">2022 &ndash; 2023</div>
+          <div class="tl-when">May 2023 &ndash; Aug 2023<br>May 2022 &ndash; Nov 2022</div>
           <div class="tl-rail"></div>
           <div class="tl-body">
             <div class="tl-kind">Production Control Equipment Engineering Intern &middot; 2 terms</div>
@@ -196,7 +196,7 @@
         </div>
 
         <div class="tl-item" data-kind="edu">
-          <div class="tl-when">2020 &ndash; Dec 2023</div>
+          <div class="tl-when">Aug 2019 &ndash; Dec 2023</div>
           <div class="tl-rail"></div>
           <div class="tl-body">
             <div class="tl-kind">Education</div>
@@ -248,8 +248,9 @@
         <div class="table-scroll">
           <table class="spec">
             <tbody>
-              <tr><th class="mid">Email</th><td><a href="mailto:aaryandesai.00@gmail.com">aaryandesai.00@gmail.com</a><br>
-                <a href="mailto:aaryand@andrew.cmu.edu">aaryand@andrew.cmu.edu</a></td></tr>
+              <tr><th class="mid">Email</th><td><a class="copy" href="mailto:aaryandesai.00@gmail.com" title="Copy address">aaryandesai.00@gmail.com</a><br>
+                <a class="copy" href="mailto:aaryand@andrew.cmu.edu" title="Copy address">aaryand@andrew.cmu.edu</a>
+                <span class="sr-only" id="copy-status" role="status"></span></td></tr>
               <tr><th>LinkedIn</th><td><a href="https://linkedin.com/in/aaryan-desai">linkedin.com/in/aaryan-desai</a></td></tr>
               <tr><th>GitHub</th><td><a href="https://github.com/aaryan-desai">github.com/aaryan-desai</a></td></tr>
               <tr><th>Handshake</th><td><a href="https://app.joinhandshake.com/profiles/aaryandesai">app.joinhandshake.com/profiles/aaryandesai</a></td></tr>
@@ -307,29 +308,87 @@
   var strip = document.getElementById('tile-strip');
   var prev  = document.getElementById('tile-prev');
   var next  = document.getElementById('tile-next');
+  var tiles = strip.querySelectorAll('.tile');
   var calm  = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var idx   = 0;      // the tile meant to be leftmost; moves on click, not on arrival
+  var settle;
 
-  // one tile plus the gap beside it
-  function step() {
-    var tiles = strip.querySelectorAll('.tile');
-    return tiles.length > 1 ? tiles[1].offsetLeft - tiles[0].offsetLeft : strip.clientWidth;
+  function left(i) { return tiles[i].offsetLeft - tiles[0].offsetLeft; }
+  function last() {
+    var per = Math.max(1, Math.round(strip.clientWidth / (left(1) || strip.clientWidth)));
+    return Math.max(0, tiles.length - per);
   }
-  function sync() {
+  function paint() {
     var thumb = strip.querySelector('.tile-thumb');
     if (thumb) row.style.setProperty('--thumb-h', thumb.offsetHeight + 'px');
-    var max = strip.scrollWidth - strip.clientWidth;
-    prev.disabled = strip.scrollLeft <= 1;
-    next.disabled = strip.scrollLeft >= max - 1;
+    prev.disabled = idx <= 0;
+    next.disabled = idx >= last();
   }
+  // Steps are counted, not measured: a click during the glide still adds
+  // a whole tile, where scrolling "by one width from here" lost it.
   function move(dir) {
-    strip.scrollBy({ left: dir * step(), behavior: calm.matches ? 'auto' : 'smooth' });
+    idx = Math.min(last(), Math.max(0, idx + dir));
+    strip.scrollTo({ left: left(idx), behavior: calm.matches ? 'auto' : 'smooth' });
+    paint();
+  }
+  // after a swipe or wheel, adopt wherever the strip came to rest
+  function adopt() {
+    var best = 0;
+    for (var i = 1; i < tiles.length; i++) {
+      if (Math.abs(left(i) - strip.scrollLeft) < Math.abs(left(best) - strip.scrollLeft)) best = i;
+    }
+    idx = Math.min(best, last());
+    paint();
   }
 
   prev.addEventListener('click', function () { move(-1); });
   next.addEventListener('click', function () { move(1); });
-  strip.addEventListener('scroll', sync, { passive: true });
-  window.addEventListener('resize', sync);
-  sync();
+  strip.addEventListener('scroll', function () {
+    clearTimeout(settle);
+    settle = setTimeout(adopt, 140);
+  }, { passive: true });
+  window.addEventListener('resize', adopt);
+  paint();
+})();
+</script>
+<script>
+(function () {
+  var status = document.getElementById('copy-status');
+  var links  = Array.prototype.slice.call(document.querySelectorAll('a.copy'));
+
+  function fallback(text) {
+    var t = document.createElement('textarea');
+    t.value = text;
+    t.setAttribute('readonly', '');
+    t.style.position = 'fixed';
+    t.style.opacity = '0';
+    document.body.appendChild(t);
+    t.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(t);
+    return ok;
+  }
+  function done(link, text) {
+    links.forEach(function (l) { l.removeAttribute('data-copied'); });
+    link.setAttribute('data-copied', '');
+    status.textContent = 'Copied ' + text;
+    setTimeout(function () { link.removeAttribute('data-copied'); status.textContent = ''; }, 1800);
+  }
+
+  links.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var text = link.textContent.trim();
+      e.preventDefault();
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(
+          function () { done(link, text); },
+          function () { if (fallback(text)) done(link, text); else location.href = link.href; }
+        );
+      } else if (fallback(text)) done(link, text);
+      else location.href = link.href;   // no clipboard at all: behave as a mail link
+    });
+  });
 })();
 </script>
 

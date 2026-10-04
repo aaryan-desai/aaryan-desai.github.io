@@ -25,10 +25,11 @@ Pages serves it, including directory indexes.
 
 ## Design system
 
-**Aenami "Lantern Glow"**, derived from the terminal palette in
+**Dark** is Aenami "Lantern Glow", derived from the terminal palette in
 `~/ubuntu-rice/aenami-theme/palette/aenami.json` (sampled from Alena Aenami's
-*In Search of Peace*). Dark is the primary; the light theme is the same palette
-inverted onto a beige ground, with `base #0c1a24` becoming the ink.
+*In Search of Peace*). **Light** is a separate sage-and-cream palette built on five colours:
+`#F4EBDD` cream, `#D8C7A6` tan, `#AFC8B4` light sage, `#6F8F7B` sage, `#3E5F4D` deep green.
+The text colours in light mode are darker greens derived from those, for contrast.
 
 Colours live only as custom properties at the top of `assets/site.css`, in three blocks
 that must be edited together:
@@ -42,6 +43,15 @@ that must be edited together:
 Token roles: `--signal` is the lantern (figures and metrics), `--accent` is cyan
 (anything clickable), `--head` is the warm neutral (project titles), `--glow-a`/`--glow-b`
 drive the hero luminosity gradient.
+
+Fonts are three tokens in one `:root` block just under the colour blocks: `--font-body`,
+`--font-head` (Hanken Grotesk), and `--font-accent` (labels, dates, figures); body and accent
+are both League Spartan. All running content is one size, `--text`; `--text-sm` is the one
+step below it, used only for the "Currently" line. Labels and dates stay at 15px. Changing a face means editing a
+token and the Google Fonts `<link>` in each page's `<head>`.
+
+Links have one style site-wide: accent colour, underline on hover only. Navigation and
+whole-card links (masthead, tiles, index rows) show hover by colour instead.
 
 **Two constraints worth keeping.** Nothing goes below **15px** — the floor was raised
 deliberately. And every colour pairing clears WCAG AA: body text ≥ 4.5:1, accents ≥ 3:1,
@@ -57,6 +67,8 @@ fails contrast every time.
    four-cell `.matrix` with `data-on="1"` on the ones that apply.
 4. Bump the filter chip counts and the `entry-count` span.
 5. Add a `.tile` to the `.tile-strip` in `index.html`, in the same order as the work index.
+6. Add the project to the `.worknav` menu at the top of **every** project page (and give the
+   new page its own copy, with itself as the `aria-current` span).
 
 ## Landing thumbnails
 
