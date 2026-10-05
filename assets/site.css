@@ -1144,3 +1144,32 @@ p { margin: 0; max-width: 68ch; }
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* ---------- picture-less project tile --------------------- */
+/* a project with no image shows its headline figure instead */
+.tile-thumb.is-stat {
+  background-image: radial-gradient(ellipse 70% 90% at 50% 120%, var(--glow-a), var(--glow-b) 70%);
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 6px;
+  padding: 12px;
+  text-align: center;
+}
+.tile-thumb .stat {
+  font-family: var(--font-head);
+  font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--signal);
+}
+.tile-thumb .stat-label {
+  font-family: var(--font-accent);
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.index-row .index-thumb.is-stat { padding: 6px; gap: 2px; }
+.index-row .index-thumb .stat { font-size: 1.15rem; }

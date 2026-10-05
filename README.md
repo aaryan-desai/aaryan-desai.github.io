@@ -76,18 +76,21 @@ One image per project, used twice: on the landing tile and on its row in `work/i
 Each has a labelled slot. On the landing page, replace:
 
 ```html
-<span class="tile-thumb is-empty"><span class="hint">assets/thumbs/weld-cell.jpg</span></span>
+<span class="tile-thumb is-empty"><span class="hint">assets/thumbs/weld-cell.png</span></span>
 ```
 
 with:
 
 ```html
-<span class="tile-thumb"><img src="assets/thumbs/weld-cell.jpg" alt=""></span>
+<span class="tile-thumb"><img src="assets/thumbs/weld-cell.png" alt=""></span>
 ```
 
 On the work index the slot is `<span class="tile-thumb is-empty index-thumb">`; swap it for
-`<span class="tile-thumb index-thumb"><img src="../assets/thumbs/weld-cell.jpg" alt=""></span>`
+`<span class="tile-thumb index-thumb"><img src="../assets/thumbs/weld-cell.png" alt=""></span>`
 (note the `../`). There the image crops to 16:9 on phones.
+
+A project with no picture (die transfer) uses `<span class="tile-thumb is-stat">` with its headline
+figure in a `.stat` span and a `.stat-label` under it, in both places.
 
 Tiles are **4:3** and crop to fill, so keep the subject centred; ~800px wide is plenty.
 The strip shows three at a time (two on tablets, one on phones) and moves one tile per
@@ -101,34 +104,27 @@ Each `.plate-empty` is a labelled slot. Replace:
 ```html
 <div class="plate-empty">
   <span class="slot">Plate 1</span>
-  <span class="hint">assets/vision-fixture.jpg</span>
+  <span class="hint">assets/vision-fixture.png</span>
 </div>
 ```
 
 with:
 
 ```html
-<img src="../assets/vision-fixture.jpg" alt="Inspection fixture, datum scheme and sensor positions">
+<img src="../assets/vision-fixture.png" alt="Inspection fixture, datum scheme and sensor positions">
 ```
 
-Keep the `<figcaption>`. Export ~1600px wide, JPG for photos and renders, PNG for
-dashboards and screenshots. Always write a real `alt`.
+Keep the `<figcaption>`. Export ~1600px wide, always as PNG (every image on the site is a
+PNG). Always write a real `alt`.
 
 ### Shot list, highest value first
 
 | Page | File | Why it matters |
 |---|---|---|
-| production-planning | `planning-queue.png` | The UI *is* the deliverable here, and it's currently only described |
-| production-planning | `planning-runlist.png` | What the floor actually works from |
-| plc-telemetry | `powerbi-cycle-dashboard.png` | The only proof of the data half of the profile |
-| vision-inspection | `vision-fixture.jpg` | Proves mechanical design, not just integration |
-| die-transfer | `die-transfer-profile.png` | Before/after trace of 1.7s → 1.1s |
+| vision-inspection | `vision-fixture.png` | Proves mechanical design, not just integration |
 | mars-rover | `rover-cad.png` | Plus a 3–4s pick-and-place GIF if any teammate has trial video |
-| straightener-holder | `straightener-holder-cad.png` | A pure design project is judged on its pictures |
-| straightener-holder | `straightener-holder-scales.jpg` | The verniers are the whole idea |
-| weld-cell | `weld-cell-layout.png` | Reach envelope and fixture placement |
-| weld-cell | `die-components.png` | Die components and precision fixturing |
-| vision-inspection | `vision-panel.jpg` | Control panel / relay schematic |
+| weld-cell | `weld-fixtures.png` | The weld fixtures; there is no image of the cell itself |
+| vision-inspection | `vision-panel.png` | Control panel / relay schematic |
 | tesla-internships | `universal-eoat.png` | **Verify clearance before adding** |
 
 ## Custom domain
