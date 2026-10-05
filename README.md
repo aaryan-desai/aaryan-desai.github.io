@@ -124,8 +124,6 @@ PNG). Always write a real `alt`.
 | vision-inspection | `vision-fixture.png` | Proves mechanical design, not just integration |
 | mars-rover | `rover-cad.png` | Plus a 3–4s pick-and-place GIF if any teammate has trial video |
 | weld-cell | `weld-fixtures.png` | The weld fixtures; there is no image of the cell itself |
-| vision-inspection | `vision-panel.png` | Control panel / relay schematic |
-| tesla-internships | `universal-eoat.png` | **Verify clearance before adding** |
 
 ## Custom domain
 
