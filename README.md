@@ -8,7 +8,7 @@ Edit the HTML, `git push`, it's live.
 ```
 index.html                  landing: project tiles, about, experience timeline, skills, contact
 work/index.html             project index — discipline matrix + filters
-work/*.html                 one page per project (7)
+work/*.html                 one page per project (8)
 assets/site.css             the entire design system; tokens in the first ~80 lines
 assets/AaryanDesai-Resume.pdf
 .nojekyll                   stops GitHub Pages running Jekyll
@@ -124,6 +124,8 @@ dashboards and screenshots. Always write a real `alt`.
 | vision-inspection | `vision-fixture.jpg` | Proves mechanical design, not just integration |
 | die-transfer | `die-transfer-profile.png` | Before/after trace of 1.7s → 1.1s |
 | mars-rover | `rover-cad.png` | Plus a 3–4s pick-and-place GIF if any teammate has trial video |
+| straightener-holder | `straightener-holder-cad.png` | A pure design project is judged on its pictures |
+| straightener-holder | `straightener-holder-scales.jpg` | The verniers are the whole idea |
 | weld-cell | `weld-cell-layout.png` | Reach envelope and fixture placement |
 | weld-cell | `die-components.png` | Die components and precision fixturing |
 | vision-inspection | `vision-panel.jpg` | Control panel / relay schematic |
@@ -148,7 +150,7 @@ dashboards and screenshots. Always write a real `alt`.
 
 ## Before sending the link
 
-- [ ] Fill or delete all **6 `.revnote`** blocks — they are notes to you, not to recruiters.
+- [ ] Fill or delete all **7 `.revnote`** blocks — they are notes to you, not to recruiters.
       `grep -rn revnote work/`
 - [ ] Fill or delete all **10 `.plate-empty`** slots. An empty slot reads worse than no figure.
 - [ ] Confirm Tesla image clearance before adding `universal-eoat.png`.
