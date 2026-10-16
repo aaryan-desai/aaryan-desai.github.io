@@ -1262,12 +1262,6 @@ p { margin: 0; max-width: 68ch; }
 }
 .sim-mode::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ink-faint); margin-top: -3px; }
 .sim-mode[data-mode="manual"]::before { background: var(--sim-enemy); }
-.sim-run {
-  position: absolute; inset: 0;
-  margin: auto;
-  width: max-content; height: max-content;
-  background: var(--surface);
-}
 @media (max-width: 600px) { .sim-field { aspect-ratio: 1 / 1; } }
 
 .sim-telemetry {

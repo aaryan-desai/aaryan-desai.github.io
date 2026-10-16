@@ -493,6 +493,7 @@
 
   // loop: fixed-step physics, render on rAF, paused off-screen and in background tabs
   var running = false, raf = 0, acc = 0, lastT = 0, onScreen = false;
+  // with reduced motion the field holds a still frame until the first click, tap or key press on it
   var held = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function frame(now) {
     raf = 0;
@@ -510,9 +511,7 @@
     if (on) { lastT = performance.now(); acc = 0; raf = requestAnimationFrame(frame); }
     else if (raf) { cancelAnimationFrame(raf); raf = 0; }
   }
-  var runBtn = q('[data-role="run"]');
-  function release() { if (held) { held = false; runBtn.hidden = true; sync(); } }
-  runBtn.addEventListener('click', function () { release(); canvas.focus(); });
+  function release() { if (held) { held = false; sync(); } }
 
   // pointer: the drone flies at ENEMY_Z, so un-project at that height to keep it under the cursor.
   // On touch the canvas only takes taps (touch-action: pan-y), so the page still scrolls past it.
@@ -578,6 +577,5 @@
   new ResizeObserver(resize).observe(canvas);
   new IntersectionObserver(function (es) { onScreen = es[0].isIntersecting; sync(); }).observe(canvas);
   document.addEventListener('visibilitychange', sync);
-  if (held) runBtn.hidden = false;
   draw(); telemetry();
 })();

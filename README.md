@@ -83,7 +83,7 @@ markup in `index.html` can move without touching the script.
   bullets, and `--sim-enemy` for the drone. `--sim-enemy` is the one sim-only token, defined in all three
   colour blocks. The script redraws when `data-theme` changes or the system theme flips.
 - **Cost:** the loop only runs while the canvas is on screen and the tab is visible. With
-  `prefers-reduced-motion` it shows a still frame and a *Run simulation* button.
+  `prefers-reduced-motion` it shows a still frame until the first click, tap or key press on the field.
 - **Touch:** the canvas is `touch-action: pan-y`, so a tap steers and fires but a vertical swipe still
   scrolls the page.
 - **Tuning:** defaults are the `P` object near the top of the script. The slider labels and descriptions
