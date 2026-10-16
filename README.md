@@ -6,10 +6,12 @@ Edit the HTML, `git push`, it's live.
 **Live:** https://aaryan-desai.github.io
 
 ```
-index.html                  landing: project tiles, about, experience timeline, skills, contact
+index.html                  landing: project tiles, playground sim, about, experience timeline, skills, contact
 work/index.html             project index — discipline matrix + filters
 work/*.html                 one page per project (8)
 assets/site.css             the entire design system; tokens in the first ~80 lines
+assets/sims/turret.js       the Playground sim (canvas, no dependencies)
+assets/sims/backdrop.js     the site-wide background: drone swarm + walking hexapod, on every page
 assets/AaryanDesai-Resume.pdf
 .nojekyll                   stops GitHub Pages running Jekyll
 ```
@@ -69,6 +71,42 @@ fails contrast every time.
 5. Add a `.tile` to the `.tile-strip` in `index.html`, in the same order as the work index.
 6. Add the project to the `.worknav` menu at the top of **every** project page (and give the
    new page its own copy, with itself as the `aria-current` span).
+
+## Playground
+
+The `#playground` section on the landing page hosts **Turret Walker**: a quadruped with IK legs and a
+lead-aiming turret, chasing a drone that follows the pointer. All of it lives in `assets/sims/turret.js`,
+which mounts on `[data-sim="turret"]` and finds its parts by `data-role` / `data-tm` attributes, so the
+markup in `index.html` can move without touching the script.
+
+- **Colours** come from the tokens at draw time: `--ink-soft` for the robot, `--accent` for the turret and
+  bullets, and `--sim-enemy` for the drone. `--sim-enemy` is the one sim-only token, defined in all three
+  colour blocks. The script redraws when `data-theme` changes or the system theme flips.
+- **Cost:** the loop only runs while the canvas is on screen and the tab is visible. With
+  `prefers-reduced-motion` it shows a still frame and a *Run simulation* button.
+- **Touch:** the canvas is `touch-action: pan-y`, so a tap steers and fires but a vertical swipe still
+  scrolls the page.
+- **Tuning:** defaults are the `P` object near the top of the script. The slider labels and descriptions
+  are in `SLIDERS` next to it.
+
+## Backdrop
+
+Every page loads `assets/sims/backdrop.js` (the last `<script>` before `</body>`; `../` on project pages).
+It inserts a fixed canvas at `z-index: -1` (the `.backdrop` rule in `site.css`), so it draws above the page
+colour and under everything else. The `.frame` sheet is `--glass`, which is `--surface` at 80% opacity,
+defined in all three colour blocks, so the backdrop reads faintly through the content. Set `.frame` back to
+`var(--surface)` and the backdrop only shows in the side margins.
+
+- **Swarm:** 64 agents flock using the boids rules (alignment, cohesion, separation) and scatter from the cursor.
+  When the cursor holds within 6 px for 1.1 s, they fly to slots on a ring around that spot. The ring holds until
+  the cursor moves 30 px from its centre. They keep 70 px clear of the walker at all times.
+- **Walker:** a hexapod on the bottom edge. Its target is the reader's scroll position across the width. It
+  follows on a critically damped spring (`WALK.k`) capped at `WALK.vmax` = 250 px/s. The tripod gait's phase
+  comes from distance walked, so the feet never slide.
+- **Cursor source:** the real pointer whenever it is over the page. A wandering autopilot cursor takes over when
+  the pointer leaves the window, and 8 s after the last tap on touch screens.
+- **Off** under `prefers-reduced-motion`, and paused while the tab is hidden.
+- All tunables are the `WALK` and `SW` objects at the top of the script.
 
 ## Landing thumbnails
 

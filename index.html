@@ -18,6 +18,7 @@
     <h1 class="brand"><a class="wordmark" href="index.html">Aaryan Desai</a></h1>
     <nav>
       <a href="work/index.html">Work</a>
+      <a href="#playground">Playground</a>
       <a href="#experience">Experience</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
@@ -102,6 +103,83 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"
              aria-hidden="true"><polyline points="8 3 17 12 8 21"/></svg>
       </button>
+      </div>
+    </section>
+
+    <section class="section" id="playground">
+      <div class="section-head">
+        <h2 class="section-title">Playground</h2>
+        <span class="count">Live simulation</span>
+      </div>
+      <div class="sim" data-sim="turret">
+        <p class="sim-lede">A four-legged turret robot, simulated and drawn in the browser. Move your pointer over
+        the field to fly the drone: the robot walks to hold its distance, the turret aims where the drone is going,
+        and every leg is solved with inverse kinematics each frame. Click to fire, or press D to see the working.
+        On a phone, tap to send the drone and fire.</p>
+
+        <div class="sim-controls">
+          <button class="sim-btn" data-role="debug" type="button" aria-pressed="false">Debug overlay <kbd>D</kbd></button>
+          <button class="sim-btn" data-role="lead" type="button" aria-pressed="true">Lead aim</button>
+          <button class="sim-btn" data-role="reset" type="button">Reset</button>
+        </div>
+
+        <div class="sim-field">
+          <canvas data-role="canvas" tabindex="0" aria-label="Turret robot simulation. Move the pointer to steer the drone; click, Space or Enter to fire; D toggles the debug overlay."></canvas>
+          <span class="sim-mode" data-role="mode" data-mode="auto">Autopilot</span>
+          <button class="sim-btn sim-run" data-role="run" type="button" hidden>Run simulation</button>
+        </div>
+
+        <dl class="sim-telemetry">
+          <div><dt>Range</dt><dd data-tm="range">0.00 m</dd></div>
+          <div><dt>Body yaw</dt><dd data-tm="yaw">0.0&deg;</dd></div>
+          <div><dt>Turret, rel. body</dt><dd data-tm="tur">0.0&deg;</dd></div>
+          <div><dt>Aim error</dt><dd data-tm="err">0.0&deg;</dd></div>
+          <div><dt>Lead time</dt><dd data-tm="lead">0.00 s</dd></div>
+          <div><dt>FL hip / knee</dt><dd data-tm="fl">0&deg; / 0&deg;</dd></div>
+          <div><dt>Feet in swing</dt><dd><span class="sim-feet" data-tm="feet"><span>FL</span><span>FR</span><span>RL</span><span>RR</span></span></dd></div>
+          <div><dt>Hits / shots</dt><dd data-tm="hits">0 / 0</dd></div>
+        </dl>
+
+        <details class="sim-more">
+          <summary>Tuning</summary>
+          <p class="sim-hint">Change how the robot and drone behave while it runs. Try making the bullets slower
+          than the drone: the turret can no longer catch it, so it stops aiming ahead and points straight at the drone.</p>
+          <div class="sim-sliders" data-role="sliders"></div>
+          <button class="sim-btn" data-role="defaults" type="button">Restore defaults</button>
+        </details>
+
+        <details class="sim-more">
+          <summary>How it works</summary>
+          <div class="sim-notes">
+            <div>
+              <h3>Lead aim</h3>
+              <p>The turret aims where the drone will be when the bullet arrives. It solves for the first time t
+              at which a bullet fired now meets the drone, with d the offset to the drone, v its velocity and s the
+              bullet speed. Switch off Lead aim to watch it miss a moving target.</p>
+              <pre>|d + v t| = s t
+(v.v - s^2) t^2 + 2 (d.v) t + d.d = 0</pre>
+            </div>
+            <div>
+              <h3>Two speeds of control</h3>
+              <p>The body turns slowly and walks forward or back to hold its distance. The turret runs a fast,
+              rate-limited loop on top of it, so the gun stays on target while the body is still coming round.</p>
+            </div>
+            <div>
+              <h3>Leg IK</h3>
+              <p>Each leg is solved analytically every frame. In the vertical plane through hip and foot, with r the
+              horizontal reach, dz the drop and D the hip-to-foot distance, the law of cosines places the knee.</p>
+              <pre>D    = sqrt(r^2 + dz^2)
+knee = acos((L1^2 + L2^2 - D^2) / (2 L1 L2))
+hip  = atan2(dz, r) + acos((L1^2 + D^2 - L2^2) / (2 L1 D))</pre>
+            </div>
+            <div>
+              <h3>Gait</h3>
+              <p>Feet stay planted in world space, so they never slide. When a foot drifts past the step distance
+              from its rest point, its diagonal pair lifts and steps ahead of the body. Only one pair is in the air at
+              a time, which makes it a trot.</p>
+            </div>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -395,6 +473,8 @@
   });
 })();
 </script>
+<script src="assets/sims/turret.js" defer></script>
+<script src="assets/sims/backdrop.js" defer></script>
 
 </body>
 </html>
