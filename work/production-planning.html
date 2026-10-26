@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Production Planning Tool &middot; Aaryan Desai</title>
+<title>Paint Allocation &amp; Floor Runlists &middot; Aaryan Desai</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700&family=League+Spartan:wght@400;500;600;700&display=swap">
@@ -16,6 +16,7 @@
     <a class="wordmark" href="../index.html">Aaryan Desai</a>
     <nav>
       <a href="index.html">Work</a>
+      <a href="../index.html#playground">Playground</a>
       <a href="../index.html#experience">Experience</a>
       <a href="../index.html#skills">Skills</a>
       <a href="../index.html#contact">Contact</a>
@@ -45,165 +46,44 @@
       <span aria-current="page">Planning tool</span>
       <a href="vision-inspection.html">Vision inspection</a>
       <a href="weld-cell.html">Weld cell</a>
-      <a href="die-transfer.html">Die transfer</a>
+      <a href="die-transfer.html">E-coat transfer</a>
       <a href="plc-telemetry.html">PLC telemetry</a>
       <a href="straightener-holder.html">Straightener holder</a>
       <a href="tesla-internships.html">Tesla</a>
       <a href="mars-rover.html">Mars rover</a>
     </nav>
-    
     <section class="hero">
       <a class="backlink" href="index.html">&larr; Work</a>
       <div class="hero-body">
-        <p class="eyebrow">Modineer &middot; 2025&ndash;26 &middot; Software &amp; scheduling</p>
-        <h1>Paint Allocation<br>&amp; Floor Runlists</h1>
-        <p class="lede">A planning tool that models routing and BOM as a single directed graph, allocates
-        painted stock against ship-date FIFO, and publishes a runlist the floor works from. It replaced an
-        Excel workflow that took a planner most of a shift.</p>
+        <p class="eyebrow">Modineer &middot; 2026 &middot; Software &amp; scheduling</p>
+        <h1>Paint Allocation &amp; Floor Runlists</h1>
+        <p class="lede">A planning tool for the paint line. Planning took at least 2&ndash;3 hours a shift, plus time hunting down containers; it now takes 30&ndash;45 minutes, with everything in one place.</p>
       </div>
       <div class="titleblock">
-        <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Architecture &amp; allocation engine</span></div>
-        <div class="tb-cell"><span class="tb-label">Stack</span><span class="tb-value">Python, PyInstaller, local web UI</span></div>
-        <div class="tb-cell"><span class="tb-label">Scope</span><span class="tb-value">P10 paint operation</span></div>
+        <div class="tb-cell"><span class="tb-label">Year</span><span class="tb-value">2026</span></div>
+        <div class="tb-cell"><span class="tb-label">Planning time</span><span class="tb-value">2&ndash;3+ h &rarr; 30&ndash;45 min</span></div>
+        <div class="tb-cell"><span class="tb-label">Stack</span><span class="tb-value"><span class="wip-chip">Under construction</span></span></div>
         <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">In use on the floor</span></div>
       </div>
     </section>
-
     <section class="section">
-      <div class="section-head"><h2 class="section-title">The problem</h2></div>
+      <div class="section-head"><h2 class="section-title">What it does</h2></div>
       <div class="prose">
-        <p>Planning paint meant holding four things in your head at once. A planner kept a &ldquo;hot parts&rdquo;
-        sheet in Excel, transcribed by hand into a second Excel workbook, then went hunting for the actual
-        containers &mdash; first through Plex, across separate Demand, Inventory and Subcomponents screens, then
-        physically on the floor &mdash; and twice over, because the material moves across a site boundary before it
-        is finished.</p>
-        <p>The structural problem underneath: a painted part cannot run until every painted sub-component it
-        depends on has run. That dependency lives in the BOM, but nothing put it next to on-hand inventory and
-        open demand at the same time. So the planner re-derived it by hand, every shift, from three screens that
-        never agreed on when they were last refreshed.</p>
-        <p>It is harder than one plant's scheduling problem because the graph crosses a company boundary. P6 is
-        both a <strong>supplier and a customer</strong> &mdash; material arrives from them and finished goods go
-        back to them &mdash; so a dependency chain can leave the site, come back, and still gate a release. The
-        planner was tracking inventory on both sides of that boundary in separate screens.</p>
-        <p>It cost what you would expect &mdash; <strong>rushed jobs and missed deadlines</strong> &mdash; and it
-        cost most on the shifts where the floor deviated from plan, which is precisely when re-deriving it by
-        hand is slowest.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head"><h2 class="section-title">Results</h2></div>
-      <div class="metrics">
-        <div class="metric"><div class="metric-value">30&ndash;45<span style="font-size:.55em"> min</span></div><div class="metric-label">Planning per shift<br>down from most of one</div></div>
-        <div class="metric"><div class="metric-value">3 &rarr; 1</div><div class="metric-label">ERP screens<br>collapsed into one view</div></div>
-        <div class="metric"><div class="metric-value">2</div><div class="metric-label">Sites in one graph<br>across the supplier boundary</div></div>
-        <div class="metric"><div class="metric-value">~15s</div><div class="metric-label">Floor refresh<br>runlist poll interval</div></div>
-      </div>
-      <div class="prose" style="margin-top:22px">
-        <p>The planner now looks at two things: the tool, and the floor. The Demand / Inventory / Subcomponents
-        round trip is gone, and so is the second Excel workbook &mdash; the runlist the floor works from is
-        published straight out of the allocation the planner just approved.</p>
-        <p>The floor view is a runlist in the terms the floor actually uses: <strong>part number, quantity,
-        colour, container serial and location</strong>, including how many parts to take from each container.
-        Not a plan to interpret &mdash; a list to work.</p>
+        <ul>
+          <li>Models routing and BOM as one directed graph.</li>
+          <li>Allocates painted stock by ship-date FIFO.</li>
+          <li>Publishes two floor runlists: one for powder coat (PC), one for e-coat (EC).</li>
+        </ul>
       </div>
       <figure class="plate">
-        <img src="../assets/planning-queue.png" alt="Planner view: the release queue with a coverage bar per release, and the selected release broken down by operation">
-        <figcaption>Planner queue &mdash; releases with coverage bars and concern tiers. The tool running on mock data.</figcaption>
+        <img src="../assets/planning-queue.png" alt="Planner dashboard with a release queue sorted by ship date and the selected release's allocation">
+        <figcaption>Planner dashboard: release queue by ship date, with the selected release&rsquo;s allocation. Mock data.</figcaption>
       </figure>
       <figure class="plate">
-        <img src="../assets/planning-runlist.png" alt="Floor runlist grouped by powder colour, listing part number, container serial, location and quantity">
-        <figcaption>Floor runlist &mdash; part, quantity, colour, container serial and location. Mock data.</figcaption>
+        <img src="../assets/planning-runlist.png" alt="Powder coat runlist grouped by colour, listing part, serial, location and quantity">
+        <figcaption>PC floor runlist: part, serial, location and quantity, grouped by colour. Mock data.</figcaption>
       </figure>
-    </section>
-
-    <section class="section">
-      <div class="section-head"><h2 class="section-title">Approach</h2></div>
-      <div class="prose">
-        <p><strong>Three attempts, and the third one retreated.</strong> The first iterations were in Excel &mdash;
-        naive, and they did not survive contact with the real BOM depth. The second was a VBA script that still
-        took too long to run, and leaned on Power Automate to scrape the data out of the ERP through browser
-        automation. That last part was the problem: browser automation against an ERP UI is a dependency on
-        someone else's markup not changing, and it was <strong>not reliable enough to plan a shift around</strong>.</p>
-        <p>So the current tool deliberately gave that up. It reads Plex reports the planner exports into a folder
-        tree &mdash; a manual step, and the honest rough edge in the system. But a manual export that always works
-        beats an automated pull that fails on the shift you needed it most, and moving the complexity out of data
-        acquisition left it available for the part that actually earns it.</p>
-        <p><strong>One graph, not two data structures.</strong> Routing and BOM are usually held separately and
-        reconciled by a human. <span class="mono">graph_allocator_V2</span> models both as a single directed
-        graph: nodes are <span class="mono">(part, operation)</span> pairs from the process routings, routing
-        edges join consecutive operations of a part, and component edges join a parent operation to the
-        components consumed at it, quantity-scaled from the exploded BOM. On-hand containers attach to the node
-        they are sitting at. The BOM is asserted to be a DAG, so the walk terminates.</p>
-        <p>Once it is one graph, &ldquo;what can run now&rdquo; stops being a question the planner re-derives and
-        becomes a traversal. Each release walks <strong>upstream</strong> from its part's final operation,
-        consuming on-hand stock at each step and exploding whatever demand is left into painted sub-components as
-        <em>internal releases</em>, stopping when the demand is met or the routing runs out.</p>
-
-        <p><strong>FIFO because old stock costs twice.</strong> Releases are processed in ship-date FIFO order,
-        and the reason is a process constraint rather than an administrative preference. Bare steel sitting in
-        inventory oxidises, so material ages toward scrap. It also <strong>gathers dust</strong> &mdash; and in a
-        coating process that is not cosmetic, it is time: every dusty part needs surface cleaning before it can
-        run, and a part that skips it risks <strong>contaminating the baths</strong>, which is a problem for
-        everything painted after it. Clearing the oldest material first avoids both, so the scheduling rule is
-        really a contamination-control rule.</p>
-        <p>When a push exceeds a release's balance, the surplus <strong>cascades to later releases of the same
-        part</strong> rather than being dropped &mdash; FIFO all the way down, so nothing falls out of the plan
-        silently.</p>
-
-        <p><strong>Refusing to allocate is most of the logic.</strong> Only Ecoat and Powdercoat material is
-        allocated; rework and MRB containers are set aside and never allocated at all. A push only takes
-        containers still <em>upstream</em> of the target paint operation, so the tool cannot schedule a repaint,
-        and anything ineligible is reported as skipped rather than quietly omitted. A Powdercoat push that
-        exceeds available e-coated feedstock auto-adds the EC items it implies, flagged amber for the planner to
-        acknowledge &mdash; the tool surfaces the dependency instead of allowing a run that would stall.</p>
-
-        <p><strong>Two audiences, two trust models.</strong> The planner dashboard is strictly read-only over ERP
-        data &mdash; it re-runs the pipeline in memory and writes only its own derived files. The floor view
-        reads one published <span class="mono">runlist_live.json</span>. Exactly one planner instance holds a
-        write lock, enforced by heartbeat; every other instance, planner or floor, is a read-only consumer. That
-        constraint came from experience: an earlier design allowed shared writable state and produced conflicts,
-        so the rebuild kept shared state but reduced it to a single writer.</p>
-
-        <p><strong>Suggests, does not decide.</strong> The engine proposes; the planner selects, adjusts
-        quantities and publishes. Coverage is shown per release &mdash; past-paint, paintable, pipeline or short
-        &mdash; so the planner can see <em>why</em> something is ranked where it is. A scheduler that overrides
-        the person who can see the floor gets switched off in a week; one that hides its reasoning never gets
-        trusted at all.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head"><h2 class="section-title">Where it stands</h2></div>
-      <div class="prose">
-        <p>The system runs entirely locally &mdash; PyInstaller executables on <span class="mono">127.0.0.1</span>,
-        no service and no database &mdash; and reads Plex reports exported into a shared folder tree. It is
-        versioned on SemVer and currently at <strong>V2.2.2</strong>, having grown from a read-only dashboard
-        through the floor runlist build to features like overdue detection and inventory-age warnings.</p>
-        <p>I architected the system and built the allocation engine, working from feedback with the planners
-        and production managers who use it. The front end was built with AI assistance; I have no frontend
-        background, and the interface was not the part of this problem worth learning on.</p>
-        <p>That feedback loop is also why iterating on a live line was practical &mdash; the people who would
-        catch a wrong answer fastest were the ones sitting next to me while it was built.</p>
-        <p><strong>It was validated in production, which the architecture made safe.</strong> There is no
-        automated test suite; the tool was tested by running it against live data with the planners who use it.
-        That is defensible here specifically because the allocation view is <em>read-only over ERP data</em>
-        &mdash; the worst case for a wrong answer is a suggestion the planner rejects, not a corrupted record.
-        The trust model was chosen for other reasons, but it is what kept that approach reasonable.</p>
-        <p>It is documented for handoff rather than for show: the repository carries a behaviour spec, a build log
-        and an IT-facing README explicit about the rough edges. The manual ERP export is a <em>choice</em> &mdash;
-        the automated alternative was tried, depended on browser automation, and was less reliable than the person
-        doing it by hand. The missing test suite is a genuine gap: production testing proves the behaviour today,
-        but it gives whoever inherits this no safety net against regressions tomorrow. That is the first thing I
-        would add if it outgrew being an internal tool.</p>
-      </div>
-      <div class="revnote">
-        <span class="rev-tag">Check before sending</span>
-        <p>Verify the 2025&ndash;2026 date range. Plex, P10 and the P6 supplier relationship are named with
-        your go-ahead; the rest of the site stays vendor-generic about employers, so this page is deliberately
-        the exception. The source link is off the page until the repository is consolidated onto
-        this account; add it back once that is done.</p>
-      </div>
+      <p class="footnote">The front end was built with AI assistance.</p>
     </section>
   </div>
 </main>

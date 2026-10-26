@@ -16,6 +16,7 @@
     <a class="wordmark" href="../index.html">Aaryan Desai</a>
     <nav>
       <a href="index.html">Work</a>
+      <a href="../index.html#playground">Playground</a>
       <a href="../index.html#experience">Experience</a>
       <a href="../index.html#skills">Skills</a>
       <a href="../index.html#contact">Contact</a>
@@ -45,7 +46,7 @@
       <a href="production-planning.html">Planning tool</a>
       <a href="vision-inspection.html">Vision inspection</a>
       <a href="weld-cell.html">Weld cell</a>
-      <a href="die-transfer.html">Die transfer</a>
+      <a href="die-transfer.html">E-coat transfer</a>
       <a href="plc-telemetry.html">PLC telemetry</a>
       <span aria-current="page">Straightener holder</span>
       <a href="tesla-internships.html">Tesla</a>
@@ -56,73 +57,40 @@
       <div class="hero-body">
         <p class="eyebrow">Modineer &middot; 2024 &middot; Tooling design</p>
         <h1>Roll Form Straightener Block Holder</h1>
-        <p class="lede">A four-axis adjustable holder for the straightener block on a roll forming line, with
-        every adjustment read off a scale instead of a paint mark. Setup went from 45 minutes to 15, and setup
-        scrap from 25+ parts to 5.</p>
+        <p class="lede">A four-axis adjustable holder for the straightener block on a roll forming line, with a readable setting on every axis. Setup went from 1.5 hours to 30 minutes, and setup scrap from 25+ parts to 5.</p>
       </div>
       <div class="titleblock">
-        <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Designed &amp; manufactured</span></div>
-        <div class="tb-cell"><span class="tb-label">Disciplines</span><span class="tb-value">Mechanical design, tooling</span></div>
-        <div class="tb-cell"><span class="tb-label">Setup time</span><span class="tb-value">45 &rarr; 15 min</span></div>
-        <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">In use on the line</span></div>
+        <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Designed; had it built</span></div>
+        <div class="tb-cell"><span class="tb-label">Setup time</span><span class="tb-value">1.5&nbsp;h &rarr; 30&nbsp;min</span></div>
+        <div class="tb-cell"><span class="tb-label">Setup scrap</span><span class="tb-value">25+ &rarr; 5 parts</span></div>
+        <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">In use</span></div>
       </div>
     </section>
-
     <section class="section">
-      <div class="section-head"><h2 class="section-title">The problem</h2></div>
+      <div class="section-head"><h2 class="section-title">Before</h2></div>
       <div class="prose">
-        <p>The straightener block makes the final corrections to a roll formed part, and its holder sets where
-        that block sits. The original holder was positioned by eye against paint-pen marks.</p>
-        <p>That works for one part. This was a shared tool, used across many different parts, each with its own
-        position &mdash; so the marks accumulated until nobody could tell which mark belonged to which part.
-        Every changeover turned into trial and error: about 45 minutes of adjusting, and 25 or more parts
-        scrapped before the line was running good product.</p>
+        <p>The holder was set by old, overwritten paint-pen marks, with no real process: adjust, measure the part, tweak whatever was out of spec. Four controls against many more ways for the part to measure out of spec made setup an underactuated problem.</p>
       </div>
     </section>
 
     <section class="section">
-      <div class="section-head"><h2 class="section-title">Results</h2></div>
-      <div class="metrics">
-        <div class="metric"><div class="metric-value">45 &rarr; 15 min</div><div class="metric-label">Setup time<br>per changeover</div></div>
-        <div class="metric"><div class="metric-value">25+ &rarr; 5</div><div class="metric-label">Parts scrapped<br>per setup</div></div>
-        <div class="metric"><div class="metric-value">4</div><div class="metric-label">Axes: y, z, about x, about y<br>each one measured</div></div>
-      </div>
-      <div class="prose" style="margin-top:22px">
-        <p>The saving repeats on every changeover of every part that runs through the tool, which is the point of
-        fixing a shared tool rather than a single job.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head"><h2 class="section-title">Approach</h2></div>
+      <div class="section-head"><h2 class="section-title">The design</h2></div>
       <div class="prose">
-        <p><strong>Four axes, chosen by what the block has to do.</strong> Taking the direction the part flows
-        as x, the holder moves the block linearly in y (across the line) and z (vertical), and rotates it about
-        x and about y. Those are the four adjustments a setup actually uses; everything else is fixed.</p>
-        <p><strong>Every adjustment gets a number.</strong> The two linear axes carry vernier scales and one
-        rotation has a vernier angle readout, all built into the holder. A setup stops being a mark someone has
-        to interpret and becomes a short set of readings that belong to a part and can be dialled straight back in.</p>
-        <p><strong>The fourth axis is measured, not marked.</strong> The remaining rotation has no scale of its
-        own, so the holder has predetermined measuring spots for a depth probe. The reading is always taken at
-        the same place, which is what makes it comparable from one setup to the next.</p>
-        <p><strong>Adjustable, but not delicate.</strong> A straightener works by bending the part, so the holder
-        sees the resultant of that bending load during final adjustments, and it lives on a shop floor where
-        forklifts hit things. The assembly was built to take both. An adjuster that shifts under load is not
-        repeatable, however fine its scale.</p>
+        <p>With x as the direction of part flow:</p>
+        <ul>
+          <li>Translation in y and z: regular scales.</li>
+          <li>Rotation about x: a vernier scale.</li>
+          <li>Rotation about y: a set spot for a depth gauge.</li>
+        </ul>
       </div>
       <figure class="plate">
         <img src="../assets/straightener-holder-cad.png" alt="Front view of the holder: a frame on two guide posts carrying a rotating block mount, with adjustment screws on the vertical and cross-line axes">
-        <figcaption>Holder assembly &mdash; the four adjustment axes and where each is read.</figcaption>
+        <figcaption>Holder assembly.</figcaption>
       </figure>
       <figure class="plate">
         <img src="../assets/straightener-holder-scales.png" alt="Close-up of the engraved vernier angle scale beside the rotating mount, reading plus and minus fifteen degrees">
-        <figcaption>Vernier angle readout &mdash; CAD close-up of the engraved scale.</figcaption>
+        <figcaption>Vernier scale for rotation about x.</figcaption>
       </figure>
-      <div class="revnote">
-        <span class="rev-tag">Fill in</span>
-        <p>Confirm the readouts: this page says the vernier scales are on y and z, one rotation has the angle
-        readout and the other is set by depth probe. Say which rotation is which and it can be named.</p>
-      </div>
     </section>
   </div>
 </main>

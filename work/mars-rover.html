@@ -16,6 +16,7 @@
     <a class="wordmark" href="../index.html">Aaryan Desai</a>
     <nav>
       <a href="index.html">Work</a>
+      <a href="../index.html#playground">Playground</a>
       <a href="../index.html#experience">Experience</a>
       <a href="../index.html#skills">Skills</a>
       <a href="../index.html#contact">Contact</a>
@@ -45,7 +46,7 @@
       <a href="production-planning.html">Planning tool</a>
       <a href="vision-inspection.html">Vision inspection</a>
       <a href="weld-cell.html">Weld cell</a>
-      <a href="die-transfer.html">Die transfer</a>
+      <a href="die-transfer.html">E-coat transfer</a>
       <a href="plc-telemetry.html">PLC telemetry</a>
       <a href="straightener-holder.html">Straightener holder</a>
       <a href="tesla-internships.html">Tesla</a>
@@ -54,69 +55,25 @@
     <section class="hero">
       <a class="backlink" href="index.html">&larr; Work</a>
       <div class="hero-body">
-        <p class="eyebrow">Purdue University &middot; 2023 &middot; Autonomy</p>
+        <p class="eyebrow">Purdue University &middot; Jan&ndash;May 2023 &middot; ME 588 Mechatronics</p>
         <h1>ME 588 Autonomous Mars Rover</h1>
-        <p class="lede">A team-built rover for autonomous navigation and object manipulation. I led electronics,
-        sensor integration and programming; 95% success on foam-cube detection, pickup and placement in arena trials.</p>
+        <p class="lede">A team rover that autonomously detected, picked up and placed foam cubes, with a 95% success rate in arena trials.</p>
       </div>
       <div class="titleblock">
-        <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Electronics, sensing &amp; software lead</span></div>
         <div class="tb-cell"><span class="tb-label">Course</span><span class="tb-value">ME 588 Mechatronics</span></div>
-        <div class="tb-cell"><span class="tb-label">Task</span><span class="tb-value">Detect, pick, place foam cubes</span></div>
-        <div class="tb-cell"><span class="tb-label">Trial result</span><span class="tb-value">95% success rate</span></div>
-        <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">Course project, completed</span></div>
+        <div class="tb-cell"><span class="tb-label">My role</span><span class="tb-value">Electronics, sensing &amp; programming lead</span></div>
+        <div class="tb-cell"><span class="tb-label">Result</span><span class="tb-value">95% success in arena trials</span></div>
+        <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">Completed</span></div>
       </div>
     </section>
-
     <section class="section">
-      <div class="section-head"><h2 class="section-title">The problem</h2></div>
+      <div class="section-head"><h2 class="section-title">What I did</h2></div>
       <div class="prose">
-        <p>An arena, a set of foam cubes, and a rover that had to find them, pick them up and place them &mdash;
-        with no operator in the loop. Fully autonomous operation was the requirement, not a stretch goal, which
-        meant every failure mode had to be handled on the rover rather than recovered by a human.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head"><h2 class="section-title">Results</h2></div>
-      <div class="metrics">
-        <div class="metric"><div class="metric-value">95%</div><div class="metric-label">Success rate<br>across arena trials</div></div>
-        <div class="metric"><div class="metric-value">0</div><div class="metric-label">Operator input<br>fully autonomous</div></div>
-        <div class="metric"><div class="metric-value">3</div><div class="metric-label">Stages chained<br>detect, pick, place</div></div>
-      </div>
-      <figure class="plate">
-        <div class="plate-empty">
-          <span class="slot">Plate 1</span>
-          <span class="hint">assets/rover-cad.png</span>
-        </div>
-        <figcaption>Rover assembly &mdash; chassis, manipulator and sensor placement.</figcaption>
-      </figure>
-      <div class="revnote">
-        <span class="rev-tag">Fill in</span>
-        <p>A short GIF of a completed pick-and-place would be the strongest asset on this site. If any teammate
-        has phone video from the trials, three seconds is enough &mdash; robotics recruiters watch those before
-        they read anything.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head"><h2 class="section-title">Approach</h2></div>
-      <div class="prose">
-        <p>I led electronics, sensor integration and the autonomy software; the mechanical design and control
-        system integration were collaborative, with the arm geometry and the software driving it developed
-        against each other rather than in sequence.</p>
         <ul>
-          <li><strong>Electronics.</strong> Power distribution, motor drive and the sensor wiring everything
-          else depended on.</li>
-          <li><strong>Sensor integration.</strong> Getting detection reliable enough that the autonomy above it
-          could trust its inputs &mdash; where most of the debugging time actually went.</li>
-          <li><strong>Autonomy.</strong> The detect, approach, grasp and place sequence, plus the recovery
-          behaviours around it.</li>
+          <li>Led electronics, sensor integration and programming for autonomous navigation and object manipulation.</li>
+          <li>Developed the autonomous algorithms for foam-cube detection, pickup and placement.</li>
+          <li>Collaborated on mechanical design and control system integration, delivering fully autonomous operation.</li>
         </ul>
-        <p><strong>The last 25 points came from failure handling, not from the happy path.</strong> A cube
-        detected at a bad angle, a grasp that slips, an approach that overshoots &mdash; each needs a defined
-        recovery rather than a stall. Enumerating those cases and giving each one a behaviour is what moved a
-        working pipeline to a 95% success rate.</p>
       </div>
     </section>
   </div>

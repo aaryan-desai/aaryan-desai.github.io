@@ -35,6 +35,8 @@
   --mx-line:     #3E5F4D;   /* discipline-box outlines; dark mode leaves this unset */
   --sim-enemy:   #8E5B2E;   /* Playground drone: tan pushed dark, the one warm mark; 4.8:1 on cream */
   --glass:       rgba(244, 235, 221, 0.80);   /* --surface at 80%: the sheet the backdrop shows through */
+  --tape:        #C08A2A;   /* work-in-progress caution tape: tan pushed to amber */
+  --tape-ink:    #1C2A23;
 
   --glow-a:      rgba(111, 143, 123, 0.34);
   --glow-b:      rgba(111, 143, 123, 0.00);
@@ -66,6 +68,8 @@
     --mx-line:     initial;
     --sim-enemy:   #FF6B4F;
     --glass:       rgba(20, 43, 60, 0.80);
+    --tape:        #F0B380;
+    --tape-ink:    #0C1A24;
 
     --glow-a:      rgba(249, 98, 86, 0.50);
     --glow-b:      rgba(249, 98, 86, 0.00);
@@ -96,6 +100,8 @@
   --mx-line:     initial;
   --sim-enemy:   #FF6B4F;
   --glass:       rgba(20, 43, 60, 0.80);
+  --tape:        #F0B380;
+  --tape-ink:    #0C1A24;
 
   --glow-a:      rgba(249, 98, 86, 0.50);
   --glow-b:      rgba(249, 98, 86, 0.00);
@@ -463,7 +469,6 @@ p { margin: 0; max-width: 68ch; }
 }
 .index-row:hover .index-title { color: var(--accent); }
 .index-row:hover .tile-thumb { border-color: var(--accent); }
-.index-row .index-thumb.is-empty { padding: 8px; }
 
 .index-main { display: grid; gap: 7px; }
 .index-title {
@@ -634,29 +639,88 @@ p { margin: 0; max-width: 68ch; }
 .plate { margin: 26px 0 0; }
 .plate img { border: 1px solid var(--rule-firm); background: var(--sunk); width: 100%; }
 
-.plate-empty {
-  border: 1px dashed var(--rule-firm);
+/* a set of small plates, two across */
+.plate-grid {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 18px;
+}
+.plate-grid .plate { margin: 0; }
+.plate-grid .plate img { aspect-ratio: 4 / 3; object-fit: contain; }
+@media (max-width: 560px) { .plate-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- work in progress ----------------------------- */
+/* Caution tape for anything still being made. .wip fills an image
+   slot; .wip-chip sits inline where a value is still coming. */
+.wip {
+  --stripes: repeating-linear-gradient(-45deg,
+               var(--tape) 0 14px, var(--tape-ink) 14px 28px);
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--rule-firm);
   background: var(--sunk);
   background-image: radial-gradient(ellipse 70% 90% at 50% 120%, var(--glow-a), var(--glow-b) 70%);
-  aspect-ratio: 16 / 9;
-  max-width: 100%;
   display: grid;
   place-content: center;
-  gap: 6px;
+  justify-items: center;
+  gap: 4px;
+  padding: 34px 20px;
   text-align: center;
-  padding: 20px;
+  overflow: hidden;
 }
-.plate-empty .slot {
+.wip::before, .wip::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: 14px;
+  background: var(--stripes);
+  background-size: 39.6px 100%;   /* one stripe pair across the diagonal: 28 * sqrt(2) */
+  animation: wip-tape 1.6s linear infinite;
+}
+.wip::before { top: 0; }
+.wip::after  { bottom: 0; animation-direction: reverse; }
+@keyframes wip-tape { to { background-position: 39.6px 0; } }
+
+.wip-cone {
+  width: 46px; height: 46px;
+  color: var(--tape);
+  transform-origin: 50% 100%;
+  margin-bottom: 4px;
+}
+.wip:hover .wip-cone { animation: wip-wobble 0.6s ease-in-out 2; }
+@keyframes wip-wobble {
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+.wip-tag {
+  font-family: var(--font-accent);
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.wip-what {
+  font-family: var(--font-head);
+  font-size: 1.28rem;
+  font-weight: 600;
+  color: var(--head);
+}
+
+.wip-chip {
+  display: inline-block;
+  padding: 1px 8px 1px 14px;
+  border: 1px solid var(--rule-firm);
+  background:   /* a short run of tape down the left edge, then the chip */
+    linear-gradient(90deg, transparent 0 7px, var(--sunk) 7px),
+    repeating-linear-gradient(-45deg, var(--tape) 0 4px, var(--tape-ink) 4px 8px);
   font-family: var(--font-accent);
   font-size: 15px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-faint);
-}
-.plate-empty .hint {
-  font-family: var(--font-accent);
-  font-size: 15.5px;
   color: var(--ink-soft);
+  white-space: nowrap;
 }
 
 .plate figcaption {
@@ -690,23 +754,16 @@ p { margin: 0; max-width: 68ch; }
 .spec th.mid { vertical-align: middle; }
 .table-scroll { overflow-x: auto; }
 
-/* revision note - the "you fill this in" marker */
-.revnote {
-  border-left: 2px solid var(--signal);
-  background: var(--sunk);
-  padding: 12px 15px;
-  margin-top: 20px;
-}
-.revnote .rev-tag {
+/* footnote under a page's last section */
+.footnote {
+  margin-top: 28px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
   font-family: var(--font-accent);
-  font-size: 15px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--signal-lift);
-  display: block;
-  margin-bottom: 4px;
+  font-size: 15.5px;
+  color: var(--ink-faint);
+  line-height: 1.5;
 }
-.revnote p { font-size: var(--text); color: var(--ink-soft); line-height: 1.55; }
 
 /* ---------- footer --------------------------------------- */
 
@@ -1091,23 +1148,6 @@ p { margin: 0; max-width: 68ch; }
   transition: border-color 120ms ease;
 }
 .tile-thumb img { width: 100%; height: 100%; object-fit: cover; }
-
-/* thumbnail slot - same language as .plate-empty */
-.tile-thumb.is-empty {
-  border-style: dashed;
-  background-image: radial-gradient(ellipse 70% 90% at 50% 120%, var(--glow-a), var(--glow-b) 70%);
-  display: grid;
-  place-content: center;
-  text-align: center;
-  padding: 14px;
-}
-.tile-thumb .hint {
-  font-family: var(--font-accent);
-  font-size: 15px;
-  line-height: 1.4;
-  color: var(--ink-soft);
-  overflow-wrap: anywhere;
-}
 
 .tile-title {
   font-family: var(--font-head);

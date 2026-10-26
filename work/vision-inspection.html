@@ -16,6 +16,7 @@
     <a class="wordmark" href="../index.html">Aaryan Desai</a>
     <nav>
       <a href="index.html">Work</a>
+      <a href="../index.html#playground">Playground</a>
       <a href="../index.html#experience">Experience</a>
       <a href="../index.html#skills">Skills</a>
       <a href="../index.html#contact">Contact</a>
@@ -45,7 +46,7 @@
       <a href="production-planning.html">Planning tool</a>
       <span aria-current="page">Vision inspection</span>
       <a href="weld-cell.html">Weld cell</a>
-      <a href="die-transfer.html">Die transfer</a>
+      <a href="die-transfer.html">E-coat transfer</a>
       <a href="plc-telemetry.html">PLC telemetry</a>
       <a href="straightener-holder.html">Straightener holder</a>
       <a href="tesla-internships.html">Tesla</a>
@@ -54,79 +55,37 @@
     <section class="hero">
       <a class="backlink" href="index.html">&larr; Work</a>
       <div class="hero-body">
-        <p class="eyebrow">Modineer &middot; 2025 &middot; Mechatronic design</p>
+        <p class="eyebrow">Modineer &middot; May&ndash;Aug 2025 &middot; Mechatronic design</p>
         <h1>Automated Vision Inspection System</h1>
-        <p class="lede">A multi-feature inspection station built from scratch &mdash; sensing stack, fixture,
-        control panel and relay logic &mdash; that cut inspection cycle time from 83 seconds to 47.</p>
+        <p class="lede">Automated multi-feature part inspection using vision, proximity and laser sensors. Cycle time went from 83&nbsp;s to 47&nbsp;s.</p>
       </div>
       <div class="titleblock">
-        <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Design &amp; build lead</span></div>
-        <div class="tb-cell"><span class="tb-label">Disciplines</span><span class="tb-value">Mechanical, controls, sensing</span></div>
-        <div class="tb-cell"><span class="tb-label">Cycle time</span><span class="tb-value">83s &rarr; 47s (&minus;43%)</span></div>
+        <div class="tb-cell"><span class="tb-label">Role</span><span class="tb-value">Solo, concept to floor</span></div>
+        <div class="tb-cell"><span class="tb-label">Sensing</span><span class="tb-value">Vision, proximity, laser</span></div>
+        <div class="tb-cell"><span class="tb-label">Cycle time</span><span class="tb-value">83&nbsp;s &rarr; 47&nbsp;s (&minus;43%)</span></div>
         <div class="tb-cell"><span class="tb-label">Status</span><span class="tb-value">Deployed in production</span></div>
       </div>
     </section>
-
     <section class="section">
-      <div class="section-head"><h2 class="section-title">The problem</h2></div>
+      <div class="section-head"><h2 class="section-title">What I did</h2></div>
       <div class="prose">
-        <p>Part inspection was manual and serial: an operator checked several features one at a time, which made
-        the station both the slowest step and the least repeatable one. Inspection quality varied by operator and
-        by shift, and the 83-second cycle set the ceiling for the whole line.</p>
-        <p>The goal was to check every feature in a single automated pass, with a result the line could trust
-        without a second look.</p>
+        <ul>
+          <li>Designed and built the whole system myself, from concept to the production floor.</li>
+          <li>Designed the fixture, the control panel and the relay-based automation.</li>
+          <li>Integrated the vision, proximity and laser sensors.</li>
+        </ul>
       </div>
-    </section>
-    <section class="section">
-      <div class="section-head"><h2 class="section-title">Results</h2></div>
-      <div class="metrics">
-        <div class="metric"><div class="metric-value">&minus;43%</div><div class="metric-label">Cycle time<br>83s &rarr; 47s</div></div>
-        <div class="metric"><div class="metric-value">3</div><div class="metric-label">Sensing modalities<br>vision / proximity / laser</div></div>
-        <div class="metric"><div class="metric-value">1</div><div class="metric-label">Automated pass<br>replacing serial manual check</div></div>
-      </div>
-      <div class="prose" style="margin-top:22px">
-        <p>Beyond the cycle time, the station removed operator-to-operator variation from the inspection result
-        and gave the line a consistent pass/fail record. It also served as a template: the fixture-plus-relay-panel
-        pattern is straightforward to replicate for other parts with similar feature sets.</p>
-      </div>
-    </section>
-    <section class="section">
-      <div class="section-head"><h2 class="section-title">Approach</h2></div>
-      <div class="prose">
-        <p><strong>Sensing stack.</strong> No single sensor covered every feature, so I combined three: machine
-        vision for presence and geometry checks, proximity sensing for seating and part-present confirmation, and
-        laser measurement for dimensional features where vision alone was not repeatable enough. Each feature was
-        assigned to the sensor with the best signal-to-noise for that geometry rather than forcing one modality
-        across the part.</p>
-        <p><strong>Fixture.</strong> The fixture had to locate the part repeatably enough that fixed-position
-        sensors stayed valid part to part &mdash; otherwise every sensor needs its own search routine and the cycle
-        time goes back up. I designed it around hard datums with positive part seating, so load position is
-        deterministic and sensor windows can be tight.</p>
-        <p><strong>Controls.</strong> The station runs on relay-based logic with a purpose-built control panel.
-        Relay logic was the right call here: the sequence is deterministic, the I/O count is modest, and the
-        maintenance team on the floor can troubleshoot it without a laptop and a software license.</p>
-        <p><strong>Parallelism.</strong> Most of the 43% cycle reduction came from checking features concurrently
-        rather than serially, which the fixed-sensor layout made possible.</p>
-      </div>
-
       <figure class="plate">
-        <div class="plate-empty">
-          <span class="slot">Plate 1</span>
-          <span class="hint">assets/vision-fixture.png</span>
+        <div class="wip" role="note">
+          <svg class="wip-cone" viewBox="0 0 48 48" aria-hidden="true"><path d="M19 6h10l11 34H8z" fill="currentColor"/><path d="M15.4 17h17.2l2.1 6.4H13.3zM12.2 27h23.6l2.1 6.4H10.1z" style="fill: var(--surface)"/><rect x="4" y="40" width="40" height="5" rx="1.5" fill="currentColor"/></svg>
+          <span class="wip-tag">Under construction</span>
+          <span class="wip-what">Fixture render</span>
         </div>
-        <figcaption>Inspection fixture &mdash; datum scheme and sensor mounting positions.</figcaption>
       </figure>
-
       <figure class="plate">
-        <img src="../assets/vision-panel.png" alt="Wiring diagram: a 24 volt supply and terminal strip on one DIN rail, four relays on a second, with labelled wires to two vision sensors, a push button and four red-green lights">
-        <figcaption>Control panel wiring &mdash; 24 V supply, terminal strip and four relays switching the red/green lights from the two vision sensors.</figcaption>
+        <img src="../assets/vision-panel.png" alt="Wiring drawing of the control panel: a 24 V supply, terminal strips and four relays on DIN rail">
+        <figcaption>Control panel wiring: 24&nbsp;V supply, terminal strips, and four relays driven by two cameras&rsquo; outputs, switching red/green lights.</figcaption>
       </figure>
-
-      <div class="revnote">
-        <span class="rev-tag">Fill in</span>
-        <p>Swap the two plates above for your CATIA or SOLIDWORKS renders. The fixture render is the highest-value
-        image on this page &mdash; it is the piece that proves the mechanical design, not just the integration.</p>
-      </div>
     </section>
   </div>
 </main>
